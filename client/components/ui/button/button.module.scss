@@ -1,0 +1,39 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 60px;
+  font-weight: 500;
+  width: 100%;
+  gap: 6px;
+}
+
+.contained {
+  background: #000;
+  color: #fff;
+}
+
+.outlined {
+  border: 1px solid #000;
+  color: #000;
+}
+
+.small {
+  padding: 8px 16px;
+}
+
+.medium {
+  padding: 14px 24px;
+}
+
+.large {
+  padding: 22px 28px;
+}
+
+.rounded {
+  border-radius: 16px;
+}
+
+.round {
+  border-radius: 9999px;
+}

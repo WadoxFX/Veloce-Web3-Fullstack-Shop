@@ -103,8 +103,8 @@ legend {
 }
 
 :root {
-  --scrollbar-track: #272934;
-  --scrollbar-thumb: #191926;
+  --scrollbar-track: #dddddd;
+  --scrollbar-thumb: #7b7b7c;
 }
 
 ::-webkit-scrollbar {

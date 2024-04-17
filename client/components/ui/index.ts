@@ -1,1 +1,5 @@
-export * from './inputs/Input'
+export * from './inputs/input/Input'
+export * from './inputs/inputSize/InputSize'
+export * from './inputs/inputFile/InputFile'
+export * from './textarea/TextArea'
+export * from './button/Button'
