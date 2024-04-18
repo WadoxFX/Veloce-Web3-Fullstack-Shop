@@ -7,6 +7,7 @@ import { useRecoilValue } from 'recoil'
 
 import { productSchema } from '@/@types/zod'
 import type { TProductSchema } from '@/@types/zod'
+import { createProduct } from '@/api/products'
 import { gender as activeGender } from '@/recoil'
 import style from '@/styles/productCreator.module.scss'
 
@@ -14,7 +15,7 @@ import GenderSelector from './GenderSelector'
 import { Button, Input, InputFile, InputSize, TextArea } from './ui'
 
 const ProductCreator = () => {
-  const gender = useRecoilValue(activeGender)
+  const gender: string | null = useRecoilValue(activeGender)
   const {
     register,
     handleSubmit,
@@ -30,7 +31,23 @@ const ProductCreator = () => {
     name: 'sizes',
   })
 
-  const onSubmit = handleSubmit(data => console.log({ ...data, gender }))
+  const onSubmit = handleSubmit(async data => {
+    const { files, sizes, ...productData } = data
+    const fd: FormData = new FormData()
+
+    fd.append('sizes', JSON.stringify(sizes))
+    fd.append('gender', gender || '')
+
+    for (const key in productData) {
+      if (Object.prototype.hasOwnProperty.call(productData, key)) {
+        fd.append(key, String(productData[key]))
+      }
+    }
+
+    for (let i = 0; files.length > i; i += 1) fd.append('file', files[i])
+
+    await createProduct({ params: fd })
+  })
 
   return (
     <form className={style.form_container} onSubmit={onSubmit}>

@@ -7,3 +7,11 @@ interface Params {
     id: string
   }
 }
+
+interface NavItem {
+  title: string
+  link: string
+  icon: string
+}
+
+type NavItems = NavItem[]

@@ -1,0 +1,8 @@
+.container {
+  display: grid;
+  grid-template-columns: 260px auto;
+
+  .content {
+    margin: 30px auto;
+  }
+}

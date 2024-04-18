@@ -29,6 +29,7 @@
   },
   "plugins": ["@next/eslint-plugin-next"],
   "rules": {
+    "@typescript-eslint/no-unsafe-assignment": 0,
     "@typescript-eslint/no-explicit-any": 0,
     "react/jsx-sort-props": 0,
     "@typescript-eslint/no-misused-promises": 0,

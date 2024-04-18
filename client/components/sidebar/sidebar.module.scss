@@ -1,0 +1,37 @@
+.container {
+  min-height: 100svh;
+  border-right: 1px solid #dbdbdb;
+
+  nav {
+    position: sticky;
+    height: max-content;
+    top: 0;
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      margin: 10px;
+      gap: 10px;
+
+      .active_item,
+      .nav_item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px;
+        border-radius: 8px;
+        cursor: pointer;
+
+        &.active_item {
+          background: #efefef;
+        }
+
+        .nav_title {
+          text-transform: capitalize;
+          width: 160px;
+          color: #000;
+        }
+      }
+    }
+  }
+}

@@ -17,6 +17,7 @@ export const productSchema = z.object({
     .min(1, 'Price must contain at least 1 characters')
     .max(99999, 'Price must contain at most 99999 characters'),
 
+  gender: z.string().optional(),
   files: z.custom<FileList>().refine(file => file?.length > 0, 'At least one file is required.'),
   discount: z.string().optional(),
   desc: z
@@ -25,9 +26,11 @@ export const productSchema = z.object({
     .max(500, 'Description must contain at most 500 characters'),
 
   sizes: z
-    .array(z.object({ id: z.string().optional(), size: z.string().min(1), quantity: z.string().min(1) }))
+    .array(
+      z.object({ id: z.string().optional(), size: z.string().min(1), quantity: z.string().min(1) }),
+    )
     .refine(sizes => sizes.length > 0, { message: 'At least one size is required.' }),
-    
+
   color: z
     .string()
     .min(1, 'Color must contain at least 1 characters')
