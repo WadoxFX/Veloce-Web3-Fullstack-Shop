@@ -3,13 +3,13 @@ import { HydratedDocument } from 'mongoose'
 
 export type SizeDocument = HydratedDocument<Size>
 
-@Schema()
+@Schema({ _id: false })
 export class Size {
   @Prop({ type: String, required: true, trim: true })
   size: string
 
-  @Prop({ type: String, required: true, trim: true })
-  quantity: string
+  @Prop({ type: Number, required: true, trim: true })
+  quantity: number
 }
 
 export const SizeSchema = SchemaFactory.createForClass(Size)

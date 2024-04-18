@@ -1,17 +1,15 @@
-import { Injectable } from '@nestjs/common'
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { ProductDto } from './dto/product.dto'
-import { ProductSize } from 'interfaces/product.interface'
+import { ProductSize, ProductType } from 'interfaces/product.interface'
 import { InjectModel } from '@nestjs/mongoose'
 import { Product } from 'src/utils/schemas/product.schema'
 import { Model } from 'mongoose'
 
 @Injectable()
 export class ProductsService {
-  constructor(
-    @InjectModel(Product.name) private productModel: Model<Product>,
-  ) {}
+  constructor(@InjectModel(Product.name) private productModel: Model<Product>) {}
 
-  async createProduct(productDto: ProductDto, files: Express.Multer.File[]) {
+  createProduct(productDto: ProductDto, files: Express.Multer.File[]): ProductType {
     const paths: string[] = files.map((file) => file.path)
     const sizes: ProductSize[] = JSON.parse(productDto.sizes)
 
@@ -23,6 +21,29 @@ export class ProductsService {
 
     newProduct.save()
 
-    return { message: 'Product created' }
+    return newProduct
+  }
+
+  async findProducts(): Promise<ProductType[]> {
+    const products = await this.productModel.find()
+
+    if (!products) {
+      throw new HttpException('No products found', HttpStatus.NOT_FOUND)
+    }
+
+    return products
+  }
+
+  async findProduct(id: string): Promise<ProductType> {
+    const product = await this.productModel.findById(id)
+
+    if (!product) {
+      throw new HttpException(
+        `Product id:${id} could not be found`,
+        HttpStatus.NOT_FOUND,
+      )
+    }
+
+    return product
   }
 }
