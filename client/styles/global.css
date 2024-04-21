@@ -103,8 +103,18 @@ legend {
 }
 
 :root {
+  --bask-color-w: #fff;
+  --bask-color-b: #000;
+  --font-color-w: #fff;
+  --font-color-b: #000;
+  --desc-color: #71717a;
+  --border-color: #dbdbdb;
   --scrollbar-track: #dddddd;
   --scrollbar-thumb: #7b7b7c;
+}
+
+main {
+  margin: 0 30px;
 }
 
 ::-webkit-scrollbar {

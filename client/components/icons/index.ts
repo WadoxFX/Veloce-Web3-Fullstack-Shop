@@ -1,1 +1,6 @@
 export * from './TrashIcon'
+export * from './FilterIcon'
+export * from './HeartIcon'
+export * from './BasketIcon'
+export * from './CloseIcon'
+export * from './CheckIcon'

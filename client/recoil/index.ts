@@ -5,7 +5,12 @@ export const gender = atom<string | null>({
   default: null,
 })
 
-export const profile = atom({
+export const profile = atom<Profile | null>({
   key: '',
   default: null,
+})
+
+export const basketProducts = atom<BasketProducts>({
+  key: 'basketProducts',
+  default: [],
 })

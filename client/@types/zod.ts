@@ -38,3 +38,8 @@ export const productSchema = z.object({
 
   collection: z.string(),
 })
+
+export type TProductSizeSchema = z.infer<typeof productSizeSchema>
+export const productSizeSchema = z.object({
+  size: z.string().min(1, 'You must choose your size'),
+})

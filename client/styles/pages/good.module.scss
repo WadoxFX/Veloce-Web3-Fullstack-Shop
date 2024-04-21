@@ -1,0 +1,134 @@
+.container {
+  display: grid;
+  margin: 30px 0;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+
+  .product_info {
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    .product_header {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      h1 {
+        font-weight: 500;
+        font-size: 24px;
+      }
+
+      .price {
+        font-weight: 500;
+
+        &.price {
+          margin-top: 10px;
+        }
+      }
+    }
+
+    .sizes_box {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .size_title {
+        font-weight: 500;
+      }
+
+      .sizes {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+
+        .error {
+          margin-top: 16px;
+          color: red;
+        }
+
+        .gender_sizes,
+        .unisex_sizes {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 10px;
+
+          &.gender_sizes {
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+          }
+
+          li {
+            position: relative;
+
+            input {
+              display: none;
+            }
+
+            label {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 14px;
+              border-radius: 8px;
+              border: 1px solid var(--border-color);
+            }
+
+            input[type='radio']:checked + label {
+              border: 1px solid #000;
+            }
+          }
+        }
+      }
+    }
+
+    p {
+      line-height: 1.6;
+      font-size: 16px;
+    }
+  }
+
+  .slider {
+    top: 30px;
+    position: sticky;
+    height: calc(100svh - 702px);
+    display: grid;
+    gap: 10px;
+    grid-template-columns: max-content auto;
+
+    ul {
+      height: max-content;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-radius: 12px;
+      gap: 10px;
+      overflow-y: auto;
+      height: 100%;
+      width: 100%;
+
+      &::-webkit-scrollbar {
+        height: 0;
+        width: 0;
+      }
+
+      .ii {
+        width: 76px;
+        height: 76px;
+        aspect-ratio: 1;
+        border-radius: 8px;
+        cursor: pointer;
+        object-fit: cover;
+      }
+    }
+
+    .current_image {
+      object-fit: cover;
+      width: 100%;
+      height: calc(100svh - 66px);
+      border-radius: 12px;
+    }
+  }
+}
