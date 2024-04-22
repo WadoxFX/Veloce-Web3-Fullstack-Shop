@@ -1,0 +1,21 @@
+.footer {
+  margin: 30px var(--body-padding);
+  display: grid;
+  align-items: end;
+  grid-template-columns: auto 240px 240px 40px;
+  gap: 20px;
+
+  .footer_title {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .footer_content {
+    font-size: 20px;
+    font-weight: 500;
+    color: #000;
+    display: flex;
+    white-space: nowrap;
+    justify-content: center;
+  }
+}

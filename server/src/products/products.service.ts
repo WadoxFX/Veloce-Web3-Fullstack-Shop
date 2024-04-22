@@ -34,6 +34,16 @@ export class ProductsService {
     return products
   }
 
+  async findNewProducts(): Promise<ProductType[]> {
+    const products = await this.productModel.find().limit(4)
+
+    if (!products) {
+      throw new HttpException('No products found', HttpStatus.NOT_FOUND)
+    }
+
+    return products
+  }
+
   async findProduct(id: string): Promise<ProductType> {
     const product = await this.productModel.findById(id)
 

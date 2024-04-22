@@ -111,10 +111,11 @@ legend {
   --border-color: #dbdbdb;
   --scrollbar-track: #dddddd;
   --scrollbar-thumb: #7b7b7c;
+  --body-padding: 30px;
 }
 
 main {
-  margin: 0 30px;
+  margin: 0 var(--body-padding);
 }
 
 ::-webkit-scrollbar {

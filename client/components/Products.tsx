@@ -5,7 +5,7 @@ import React from 'react'
 import { usePagination } from '@/hooks/usePagination'
 import style from '@/styles/pages/shop.module.scss'
 
-import ProductSchema from './ProductSchema'
+import { ProductSchema } from './ProductSchema'
 
 const Products = () => {
   const { data, ref } = usePagination(1)

@@ -1,0 +1,132 @@
+.container {
+  .banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100svh - 96px - 20px);
+    margin-bottom: 20px;
+
+    .title {
+      display: grid;
+      overflow: hidden;
+      margin-top: 20px;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+
+    .banner_content {
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+
+      p {
+        font-size: 46px;
+        font-weight: 500;
+        line-height: 1.2;
+      }
+
+      .fast_link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        font-size: 18px;
+        font-weight: 500;
+
+        a {
+          color: var(--font-color-b);
+          padding-bottom: 6px;
+          border-bottom: 1px solid #000;
+        }
+      }
+    }
+  }
+
+  .promo_video_container {
+    position: relative;
+    height: 140svh;
+
+    video {
+      width: 100%;
+      height: 70svh;
+      object-fit: cover;
+      position: sticky;
+      top: 76px;
+      border-radius: 20px;
+    }
+  }
+
+  .promo_desc {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 16px 0;
+    line-height: 1.6;
+  }
+
+  .about_us {
+    margin-top: 140px;
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 46px auto;
+
+    .about_us_content_container {
+      display: grid;
+      grid-template-rows: max-content max-content;
+      margin-right: 60px;
+      gap: 60px;
+
+      .card {
+        margin-left: 20px;
+        border-radius: 8px;
+        width: 128px;
+        height: auto;
+      }
+
+      h2 {
+        font-size: 64px;
+        font-weight: 500;
+        line-height: 1.2;
+      }
+
+      p {
+        font-size: 18px;
+        margin-right: 60px;
+        color: #808089;
+        line-height: 1.4;
+        max-width: 500px;
+        font-weight: 400;
+      }
+
+      .about_us_content {
+        display: grid;
+        margin-bottom: 60px;
+        grid-template-columns: minmax(100px, 300px) auto;
+
+        .about_us_min_title {
+          font-size: 18px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  .recommendations {
+    overflow-x: auto;
+    display: flex;
+    margin-bottom: 60px;
+    gap: 16px;
+
+    &::-webkit-scrollbar {
+      height: 0;
+    }
+
+    li {
+      a {
+        width: 480px;
+
+        p:nth-of-type(2) {
+          display: none;
+        }
+      }
+    }
+  }
+}

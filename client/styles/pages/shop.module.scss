@@ -34,33 +34,5 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: max-content;
     gap: 60px 12px;
-
-    .product {
-      display: flex;
-      flex-direction: column;
-      color: var(--bask-color-b);
-      gap: 12px;
-
-      h3 {
-        margin-top: 8px;
-        font-weight: 600;
-      }
-
-      p {
-        font-weight: 500;
-        color: var(--desc-color);
-      }
-
-      .price {
-        font-weight: 600;
-        margin-top: 12px;
-      }
-
-      img {
-        aspect-ratio: 1;
-        object-fit: cover;
-        background-size: cover;
-      }
-    }
   }
 }

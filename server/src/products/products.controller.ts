@@ -30,6 +30,12 @@ export class ProductsController {
     return this.productsService.findProducts()
   }
 
+  @Get('new/list')
+  @HttpCode(HttpStatus.OK)
+  newProductsList(): Promise<ProductType[]> {
+    return this.productsService.findNewProducts()
+  }
+
   @Post('create')
   @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(FilesInterceptor('file'))
