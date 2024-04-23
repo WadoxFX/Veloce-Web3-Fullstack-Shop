@@ -55,7 +55,8 @@ interface BasketProduct {
 }
 
 interface IconProps {
-  size: number
+  size?: number
+  color?: string
 }
 
 interface Profile {
@@ -64,4 +65,8 @@ interface Profile {
   surname: string
   email: string
   address: string
+}
+
+interface BasketAsideProps {
+  sum: number
 }

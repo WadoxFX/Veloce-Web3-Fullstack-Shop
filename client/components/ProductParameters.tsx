@@ -44,8 +44,8 @@ const ProductParameters: React.FC<ProductParametersProps> = ({ product }) => {
         <ul className={clsx(product.gender === 'Unisex' ? style.unisex_sizes : style.gender_sizes)}>
           {product.sizes.map((item, id) => (
             <li key={id}>
-              <input value={item.size} id={`size${id}`} type='radio' {...register('size')} />
-              <label htmlFor={`size${id}`}>{item.size}</label>
+              <input disabled={item.quantity <= 0} value={item.size} id={`size${id}`} type='radio' {...register('size')} />
+              <label className={clsx(item.quantity <= 0 && style.label_disabled)} htmlFor={`size${id}`}>{item.size}</label>
             </li>
           ))}
         </ul>

@@ -8,6 +8,7 @@
   position: sticky;
   align-items: center;
   grid-template-columns: auto max-content max-content;
+  backdrop-filter: saturate(180%) blur(5px);
   padding: 24px 0;
   gap: 24px;
   top: 0;

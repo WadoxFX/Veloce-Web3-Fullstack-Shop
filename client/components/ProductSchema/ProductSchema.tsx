@@ -22,4 +22,3 @@ export const ProductSchema: React.FC<{ product: Product }> = ({ product }) => (
     </Link>
   </li>
 )
-

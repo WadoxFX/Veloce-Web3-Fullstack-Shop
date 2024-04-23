@@ -56,7 +56,7 @@ export const InputSize: React.FC<InputSizeProps> = ({
                 className={style.remove}
                 onClick={() => remove(id)}
               >
-                <TrashIcon />
+                <TrashIcon color='#fff' size={24} />
               </button>
             </li>
           ))}

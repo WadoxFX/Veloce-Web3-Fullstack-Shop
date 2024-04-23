@@ -14,6 +14,8 @@ export const usePreview = (files: FileList | null) => {
         }
         fr.readAsDataURL(file)
       })
+    } else {
+      setPreview([])
     }
   }, [files])
 

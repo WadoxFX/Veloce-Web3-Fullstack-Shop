@@ -19,6 +19,7 @@ const ProductCreator = () => {
   const {
     register,
     handleSubmit,
+    resetField,
     watch,
     control,
     formState: { errors },
@@ -32,21 +33,26 @@ const ProductCreator = () => {
   })
 
   const onSubmit = handleSubmit(async data => {
-    const { files, sizes, ...productData } = data
-    const fd: FormData = new FormData()
+    try {
+      const { files, sizes, ...productData } = data
+      const fd: FormData = new FormData()
 
-    fd.append('sizes', JSON.stringify(sizes))
-    fd.append('gender', gender || '')
+      fd.append('sizes', JSON.stringify(sizes))
+      fd.append('gender', gender || '')
 
-    for (const key in productData) {
-      if (Object.prototype.hasOwnProperty.call(productData, key)) {
-        fd.append(key, String(productData[key]))
+      for (const key in productData) {
+        if (Object.prototype.hasOwnProperty.call(productData, key)) {
+          fd.append(key, String(productData[key]))
+        }
       }
+
+      for (let i = 0; files.length > i; i += 1) fd.append('file', files[i])
+
+      const res = await createProduct({ params: fd })
+      console.log(res.data)
+    } catch (error) {
+      console.log(error)
     }
-
-    for (let i = 0; files.length > i; i += 1) fd.append('file', files[i])
-
-    await createProduct({ params: fd })
   })
 
   return (
@@ -97,6 +103,7 @@ const ProductCreator = () => {
         accept='Image/*'
         files={watch('files')}
         register={register}
+        resetField={resetField}
         error={errors.files?.message}
         multiple
       />
@@ -115,6 +122,8 @@ const ProductCreator = () => {
           <option value='Air Max'>Air Max</option>
           <option value='Alpha Huarache'>Alpha Huarache</option>
           <option value='Blazer'>Blazer</option>
+          <option value='Nike Vomero'>Nike Vomero</option>
+          <option value='Converse'>Converse</option>
         </select>
       </div>
 

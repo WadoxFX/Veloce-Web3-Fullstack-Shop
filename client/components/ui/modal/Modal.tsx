@@ -9,6 +9,7 @@ import { Button } from '@/components/ui'
 import { useToggle } from '@/hooks/useToggle'
 
 import style from './modal.module.scss'
+import { useRouter } from 'next/navigation'
 
 interface ModalProps {
   children: React.ReactNode
@@ -23,6 +24,7 @@ interface ModalContentProps {
 
 const ModalContent: React.FC<ModalContentProps> = ({ state, product, close }) => {
   if (typeof window === 'undefined') return null
+  const router = useRouter()
   return createPortal(
     state && (
       <div role='button' onClick={close} onKeyDown={close} tabIndex={0} className={style.overlay}>
@@ -57,7 +59,7 @@ const ModalContent: React.FC<ModalContentProps> = ({ state, product, close }) =>
             </div>
           </div>
           <div className={style.controlers}>
-            <Button size='medium' variant='outlined'>
+            <Button onClick={() => router.push('/basket')} size='medium' variant='outlined'>
               View Bag
             </Button>
             <Button size='medium' variant='contained'>

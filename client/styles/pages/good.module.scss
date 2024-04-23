@@ -76,6 +76,12 @@
               border: 1px solid var(--border-color);
             }
 
+            .label_disabled {
+              opacity: 0.55;
+              background: #eee;
+              cursor: auto;
+            }
+
             input[type='radio']:checked + label {
               border: 1px solid #000;
             }

@@ -1,5 +1,10 @@
-.header {
+.header,
+.header_fixed {
   padding: 16px 30px;
+
+  &.header_fixed {
+    border-bottom: 1px solid #dbdbdb;
+  }
 
   nav {
     display: flex;

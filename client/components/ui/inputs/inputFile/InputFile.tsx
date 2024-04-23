@@ -2,7 +2,8 @@
 
 import Image from 'next/image'
 import React from 'react'
-import type { UseFormRegister } from 'react-hook-form'
+import { Button } from '@/components/ui'
+import type { UseFormRegister, UseFormResetField } from 'react-hook-form'
 
 import { usePreview } from '@/hooks/usePreview'
 
@@ -11,19 +12,23 @@ import style from './inputFile.module.scss'
 interface InputFileProps {
   name: string
   multiple?: boolean
+  resetField: UseFormResetField<any>
   register: UseFormRegister<any>
   error?: string
   accept?: string
   files: FileList | null
 }
 
-export const InputFile: React.FC<InputFileProps> = ({ name, files, register, error, ...props }) => {
+export const InputFile: React.FC<InputFileProps> = ({ name, files, register, resetField, error, ...props }) => {  
   const { preview } = usePreview(files)
   return (
     <div>
       <div className={style.container}>
         <div className={style.selector_files}>
-          <div>{!files?.length && <p>You have not selected files</p>}</div>
+          <div>{!files?.length 
+            ? <p>You have not selected files</p> 
+            : <Button onClick={() => resetField(name)} variant='text'>Clear</Button>}
+          </div>
           <label htmlFor='file'>
             {files?.length ? 'Upload more' : 'Upload'}
             <input id='file' type='file' {...(register && register(name))} {...props} />
