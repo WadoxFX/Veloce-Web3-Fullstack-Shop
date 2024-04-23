@@ -43,3 +43,8 @@ export type TProductSizeSchema = z.infer<typeof productSizeSchema>
 export const productSizeSchema = z.object({
   size: z.string().min(1, 'You must choose your size'),
 })
+
+export type TPromoCodeSchema = z.infer<typeof promoCodeSchema>
+export const promoCodeSchema = z.object({
+  promocode: z.string().optional(),
+})

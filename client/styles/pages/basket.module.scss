@@ -13,30 +13,34 @@ $aside: 400px;
     aside {
       top: 20px;
       position: sticky;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
 
       form {
-        display: grid;
-        grid-template-columns: auto max-content;
-        gap: 10px;
-      }
-
-      .exorbitant_price {
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 24px;
 
-        .product_price,
-        .delivery_price {
+        .promo_code {
+          display: grid;
+          grid-template-columns: auto max-content;
+          gap: 10px;
+        }
+
+        .exorbitant_price {
           display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 20px;
+          flex-direction: column;
+          gap: 12px;
 
-          .meaning {
-            color: var(--desc-color);
+          .promo_code_discount,
+          .product_price,
+          .delivery_price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+
+            .meaning {
+              color: var(--desc-color);
+            }
           }
         }
       }

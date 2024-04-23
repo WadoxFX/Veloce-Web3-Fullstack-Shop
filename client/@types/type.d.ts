@@ -70,3 +70,8 @@ interface Profile {
 interface BasketAsideProps {
   sum: number
 }
+
+interface PromoCode {
+  code: string
+  discount: number
+}

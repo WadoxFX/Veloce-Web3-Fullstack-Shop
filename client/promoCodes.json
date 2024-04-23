@@ -1,0 +1,9 @@
+{
+  "codes": [
+    { "code": "WELCOME24", "discount": 24 },
+    { "code": "FREESHIP", "discount": 10 },
+    { "code": "SALE25", "discount": 25 },
+    { "code": "GET5GFF", "discount": 5 },
+    { "code": "HOLIDAY45", "discount": 45 }
+  ]
+}
