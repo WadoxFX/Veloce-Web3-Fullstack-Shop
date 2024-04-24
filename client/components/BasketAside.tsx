@@ -1,15 +1,17 @@
 'use client'
 
-import React, { useState } from 'react'
-
-import style from '@/styles/pages/basket.module.scss'
-import { Button, Input } from './ui'
-import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/navigation'
-import { TPromoCodeSchema, promoCodeSchema } from '@/@types/zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
+
+import { promoCodeSchema } from '@/@types/zod'
+import type { TPromoCodeSchema } from '@/@types/zod'
 import promoCodes from '@/promoCodes.json'
+import style from '@/styles/pages/basket.module.scss'
+
 import { totalPriceCalc } from './totalPriceCalc'
+import { Button, Input } from './ui'
 
 const BasketAside: React.FC<BasketAsideProps> = ({ sum }) => {
   const [promoCode, setPromoCode] = useState<PromoCode | null>(null)

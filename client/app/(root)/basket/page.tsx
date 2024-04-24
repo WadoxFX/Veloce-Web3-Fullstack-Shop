@@ -1,22 +1,21 @@
 'use client'
 
+import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
-import { useLocalStorage } from '@/hooks/useLocalStorage'
-
-import style from '@/styles/pages/basket.module.scss'
-import Link from 'next/link'
-import Image from 'next/image'
-import { Button } from '@/components/ui'
-import { TrashIcon } from '@/components/icons'
 import BasketAside from '@/components/BasketAside'
+import { TrashIcon } from '@/components/icons'
+import { Button } from '@/components/ui'
+import { useLocalStorage } from '@/hooks/useLocalStorage'
+import style from '@/styles/pages/basket.module.scss'
 
 const Basket = () => {
   const { data, loading, clear } = useLocalStorage('basket')
   if (loading) return <p>Loading...</p>
 
   let sum: number = 0
-  for (let i = 0; data.length > i; i++) {
+  for (let i = 0; data.length > i; i += 1) {
     sum += data[i].price
   }
 

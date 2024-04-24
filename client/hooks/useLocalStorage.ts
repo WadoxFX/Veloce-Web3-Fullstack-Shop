@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 export const useLocalStorage = (key: string) => {
   const [loading, setLoading] = useState<boolean>(true)
-  const [data, setData] = useState<any[]>([])
+  const [data, setData] = useState<BasketProducts>([])
 
   useEffect(() => {
     const localData = localStorage.getItem(key)

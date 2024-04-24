@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 import { createPortal } from 'react-dom'
 
@@ -9,7 +10,6 @@ import { Button } from '@/components/ui'
 import { useToggle } from '@/hooks/useToggle'
 
 import style from './modal.module.scss'
-import { useRouter } from 'next/navigation'
 
 interface ModalProps {
   children: React.ReactNode
@@ -23,8 +23,8 @@ interface ModalContentProps {
 }
 
 const ModalContent: React.FC<ModalContentProps> = ({ state, product, close }) => {
-  if (typeof window === 'undefined') return null
   const router = useRouter()
+  if (typeof window === 'undefined') return null
   return createPortal(
     state && (
       <div role='button' onClick={close} onKeyDown={close} tabIndex={0} className={style.overlay}>

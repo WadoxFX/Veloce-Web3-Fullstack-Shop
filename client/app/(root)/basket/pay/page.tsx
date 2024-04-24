@@ -1,7 +1,5 @@
 import React from 'react'
 
-const Pay = () => {
-  return <div>Pay</div>
-}
+const Pay = () => <div>Pay</div>
 
 export default Pay

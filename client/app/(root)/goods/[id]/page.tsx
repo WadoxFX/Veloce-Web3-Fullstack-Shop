@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { getProduct } from '@/api/products'
-import ProductParameters from '@/components/ProductParameters'
 import Slider from '@/components/Slider'
+import ProductParameters from '@/components/forms/ProductParameters'
 import { HeartIcon } from '@/components/icons'
 import { Button } from '@/components/ui'
 import style from '@/styles/pages/good.module.scss'

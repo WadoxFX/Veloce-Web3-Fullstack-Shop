@@ -1,6 +1,8 @@
 'use client'
 
+import clsx from 'clsx'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import React from 'react'
 
 import { BasketIcon } from '../icons'
@@ -8,8 +10,6 @@ import { BasketIcon } from '../icons'
 import Account from './Account'
 import Navigate from './Navigate'
 import style from './header.module.scss'
-import { usePathname } from 'next/navigation'
-import clsx from 'clsx'
 
 const Header = () => {
   const path = usePathname()  

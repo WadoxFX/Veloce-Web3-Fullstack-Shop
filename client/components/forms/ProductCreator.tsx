@@ -11,8 +11,8 @@ import { createProduct } from '@/api/products'
 import { gender as activeGender } from '@/recoil'
 import style from '@/styles/productCreator.module.scss'
 
-import GenderSelector from './GenderSelector'
-import { Button, Input, InputFile, InputSize, TextArea } from './ui'
+import GenderSelector from '../GenderSelector'
+import { Button, Input, InputFile, InputSize, TextArea } from '../ui'
 
 const ProductCreator = () => {
   const gender: string | null = useRecoilValue(activeGender)
@@ -48,10 +48,9 @@ const ProductCreator = () => {
 
       for (let i = 0; files.length > i; i += 1) fd.append('file', files[i])
 
-      const res = await createProduct({ params: fd })
-      console.log(res.data)
+      await createProduct({ params: fd })
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   })
 

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ProductCreator from '@/components/ProductCreator'
+import ProductCreator from '@/components/forms/ProductCreator'
 
 import style from '../profile.module.scss'
 

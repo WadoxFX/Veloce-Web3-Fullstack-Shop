@@ -2,9 +2,9 @@
 
 import Image from 'next/image'
 import React from 'react'
-import { Button } from '@/components/ui'
 import type { UseFormRegister, UseFormResetField } from 'react-hook-form'
 
+import { Button } from '@/components/ui'
 import { usePreview } from '@/hooks/usePreview'
 
 import style from './inputFile.module.scss'
