@@ -75,3 +75,7 @@ interface PromoCode {
   code: string
   discount: number
 }
+
+interface FiltersProps {
+  state: boolean
+}

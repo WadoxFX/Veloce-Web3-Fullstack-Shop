@@ -3,7 +3,8 @@ import React from 'react'
 import { useRecoilState } from 'recoil'
 
 import { gender } from '@/recoil'
-import style from '@/styles/productCreator.module.scss'
+
+import style from './productCreator.module.scss'
 
 const genders: string[] = ["Men's", "Women's", 'Unisex']
 

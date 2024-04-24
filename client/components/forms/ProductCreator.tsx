@@ -9,10 +9,11 @@ import { productSchema } from '@/@types/zod'
 import type { TProductSchema } from '@/@types/zod'
 import { createProduct } from '@/api/products'
 import { gender as activeGender } from '@/recoil'
-import style from '@/styles/productCreator.module.scss'
 
-import GenderSelector from '../GenderSelector'
 import { Button, Input, InputFile, InputSize, TextArea } from '../ui'
+
+import GenderSelector from './GenderSelector'
+import style from './productCreator.module.scss'
 
 const ProductCreator = () => {
   const gender: string | null = useRecoilValue(activeGender)

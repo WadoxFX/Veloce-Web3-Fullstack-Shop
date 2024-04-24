@@ -1,0 +1,174 @@
+$purple: #8d429f;
+$black: #000000;
+$red: #e7352b;
+$orange: #f36b26;
+$blue: #1790c8;
+$white: #f4f4f4;
+$brown: #825d41;
+$green: #7bba3c;
+$yellow: #fed533;
+$multi-start: rgba(148, 187, 233, 1);
+$multi-end: rgba(238, 174, 202, 1);
+$grey: #cacaca;
+$pink: #f0728f;
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #cacacb;
+  padding: 16px 0 24px;
+  gap: 20px;
+
+  button {
+    width: 100%;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  li {
+    white-space: nowrap;
+
+    input {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      cursor: pointer;
+    }
+  }
+}
+
+.select {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    input[type='checkbox'] {
+      min-width: 20px;
+      min-height: 20px;
+      border-radius: 4px;
+      outline: none;
+      border: solid 1px #cacacb;
+      transition: 0.05s ease-in-out;
+    }
+
+    input[type='checkbox']:checked {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    input[type='checkbox']:checked::before {
+      content: '';
+      width: 12px;
+      height: 12px;
+      background-image: url(../../../public/checkMark.svg);
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+.size {
+  display: grid;
+  grid-template-columns: 74px 74px 74px;
+  gap: 12px;
+
+  input {
+    display: none;
+  }
+
+  label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    height: 42px;
+    width: 100%;
+    border: 1px solid #cacacb;
+  }
+
+  input:checked + label {
+    border: 1px solid #000;
+  }
+}
+
+.color {
+  display: grid;
+  grid-template-columns: 66px 66px 66px;
+  gap: 24px;
+
+  li {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+
+    input[type='checkbox'] {
+      width: 32px;
+      height: 32px;
+      border-radius: 9999px;
+    }
+
+    input[type='checkbox']:checked {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    input[type='checkbox']:checked::before {
+      content: '';
+      margin-top: 2px;
+      width: 14px;
+      height: 14px;
+      background-image: url(../../../public/checkMark.svg);
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    .purple {
+      background: $purple;
+    }
+    .black {
+      background: $black;
+    }
+    .red {
+      background: $red;
+    }
+    .orange {
+      background: $orange;
+    }
+    .blue {
+      background: $blue;
+    }
+    .white {
+      background: $white;
+    }
+    .brown {
+      background: $brown;
+    }
+    .green {
+      background: $green;
+    }
+    .yellow {
+      background: $yellow;
+    }
+    .multi {
+      background: linear-gradient(24deg, $multi-start 0%, $multi-end 100%);
+    }
+    .grey {
+      background: $grey;
+    }
+    .pink {
+      background: $pink;
+    }
+  }
+}

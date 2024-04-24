@@ -15,9 +15,7 @@ const Basket = () => {
   if (loading) return <p>Loading...</p>
 
   let sum: number = 0
-  for (let i = 0; data.length > i; i += 1) {
-    sum += data[i].price
-  }
+  for (let i = 0; data.length > i; i += 1) sum += data[i].price
 
   return (
     <div className={style.container}>

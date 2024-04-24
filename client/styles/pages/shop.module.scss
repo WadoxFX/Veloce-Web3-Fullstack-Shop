@@ -10,6 +10,7 @@
   grid-template-columns: auto max-content max-content;
   backdrop-filter: saturate(180%) blur(5px);
   padding: 24px 0;
+  z-index: 2;
   gap: 24px;
   top: 0;
 
@@ -26,9 +27,43 @@
 }
 
 .container {
-  height: 400vh;
   display: grid;
   grid-template-columns: max-content auto;
+
+  .filters {
+    height: 100%;
+
+    .filter_list {
+      top: 72px;
+      margin-right: 14px;
+      padding-right: 8px;
+      height: calc(100svh - 72px);
+      max-height: calc(100svh - 72px);
+      position: sticky;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      border-radius: 50px;
+      background: none;
+    }
+
+    &:hover {
+      ::-webkit-scrollbar-thumb {
+        border-radius: 50px;
+        background: #989898;
+      }
+    }
+
+    ::-webkit-scrollbar-track {
+      background: none;
+    }
+  }
 
   .products_list {
     display: grid;
