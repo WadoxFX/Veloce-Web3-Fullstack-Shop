@@ -79,3 +79,10 @@ interface PromoCode {
 interface FiltersProps {
   state: boolean
 }
+
+interface FiltersList {
+  gender?: string[]
+  size?: string[]
+  color?: string[]
+  collection?: string[]
+}

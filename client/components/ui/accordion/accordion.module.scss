@@ -16,7 +16,7 @@ $pink: #f0728f;
   display: flex;
   flex-direction: column;
   border-top: 1px solid #cacacb;
-  padding: 16px 0 24px;
+  padding: 18px 0 22px;
   gap: 20px;
 
   button {
@@ -35,6 +35,11 @@ $pink: #f0728f;
       -moz-appearance: none;
       appearance: none;
       cursor: pointer;
+    }
+
+    input:disabled,
+    label {
+      user-select: none;
     }
   }
 }

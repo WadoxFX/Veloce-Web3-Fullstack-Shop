@@ -10,6 +10,11 @@ export const profile = atom<Profile | null>({
   default: null,
 })
 
+export const filters = atom<FiltersList>({
+  key: 'filters',
+  default: {},
+})
+
 export const basketProducts = atom<BasketProducts>({
   key: 'basketProducts',
   default: [],

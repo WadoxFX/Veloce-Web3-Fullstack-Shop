@@ -78,6 +78,7 @@
 
             .label_disabled {
               opacity: 0.55;
+              user-select: none;
               background: #eee;
               cursor: auto;
             }

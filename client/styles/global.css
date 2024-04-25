@@ -118,6 +118,10 @@ main {
   margin: 0 var(--body-padding);
 }
 
+img {
+  user-select: none;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
