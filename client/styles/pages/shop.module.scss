@@ -29,6 +29,7 @@
 .container {
   display: grid;
   grid-template-columns: max-content auto;
+  margin-bottom: 120px;
 
   .filters {
     height: 100%;
