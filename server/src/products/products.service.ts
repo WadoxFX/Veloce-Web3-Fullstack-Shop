@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { ProductDto } from './dto/product.dto'
-import { ProductSize, ProductType } from 'interfaces/product.interface'
+import { FiltersType, ProductSize, ProductType } from 'interfaces/product.interface'
 import { InjectModel } from '@nestjs/mongoose'
 import { Product } from 'src/utils/schemas/product.schema'
 import { Model } from 'mongoose'
@@ -24,9 +24,14 @@ export class ProductsService {
     return newProduct
   }
 
-  async findProducts(): Promise<ProductType[]> {
-    const products = await this.productModel.find()
+  async findProducts(page: number, limit: number, filters: FiltersType): Promise<ProductType[]> {
+    let queryFilters = {}
+    
+    if (filters?.color) queryFilters['color'] = { $in: filters.color }
+    if (filters?.gender) queryFilters['gender'] = { $in: filters.gender }
+    if (filters?.collection) queryFilters['collection'] = { $in: filters.collection }
 
+    const products = await this.productModel.find(queryFilters).limit(limit).skip((page - 1) * limit)
     if (!products) {
       throw new HttpException('No products found', HttpStatus.NOT_FOUND)
     }

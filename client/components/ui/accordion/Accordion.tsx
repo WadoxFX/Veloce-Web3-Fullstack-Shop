@@ -16,7 +16,13 @@ interface AccordionProps {
   variant: AccordionVariant
 }
 
-export const Accordion: React.FC<AccordionProps> = ({ title, open, filterType, elements, variant }) => {
+export const Accordion: React.FC<AccordionProps> = ({
+  title,
+  open,
+  filterType,
+  elements,
+  variant,
+}) => {
   const [filters, setFilters] = useRecoilState<FiltersList>(filterList)
   const [isOn, toggle] = useToggle(open)
   const uuid: string = useId()
@@ -29,10 +35,18 @@ export const Accordion: React.FC<AccordionProps> = ({ title, open, filterType, e
   }
 
   const removeFilter = (element: string) => {
-    setFilters((prev: FiltersList) => ({
-      ...prev,
-      [filterType]: (prev[filterType] || []).filter((item: string) => item !== element),
-    }))
+    setFilters((prev: FiltersList) => {
+      const updated = {
+        ...prev,
+        [filterType]: (prev[filterType] || []).filter((item: string) => item !== element),
+      }
+
+      if (updated[filterType]?.length === 0) {
+        delete updated[filterType]
+      }
+
+      return updated
+    })
   }
 
   return (
@@ -50,7 +64,7 @@ export const Accordion: React.FC<AccordionProps> = ({ title, open, filterType, e
                 id={uuid + item}
                 type='checkbox'
                 checked={(filters[filterType] || []).includes(item)}
-                onChange={e => e.target.checked ? addNewFilter(item) : removeFilter(item)}
+                onChange={e => (e.target.checked ? addNewFilter(item) : removeFilter(item))}
               />
               <label htmlFor={uuid + item}>{item}</label>
             </li>

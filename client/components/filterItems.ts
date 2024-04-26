@@ -13,7 +13,7 @@ const colors: string[] = [
   'Pink',
 ]
 
-const genders: string[] = ['Men', 'Women', 'Unisex']
+const genders: string[] = ["Men's", "Women's", 'Unisex']
 const collections: string[] = [
   'Air Max',
   'Air Force 1',

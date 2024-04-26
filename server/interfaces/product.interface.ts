@@ -5,6 +5,19 @@ export interface ProductSize {
   quantity: number
 }
 
+export interface FiltersType {
+  gender: string[]
+  collection: string[]
+  color: string[]
+  size: string[]
+}
+
+export interface ProductOption {
+  limit: number
+  page: number
+  filters?: FiltersType
+}
+
 export interface ProductType {
   _id: Types.ObjectId
   title: string

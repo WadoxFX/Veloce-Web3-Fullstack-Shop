@@ -6,13 +6,14 @@ import {
   HttpStatus,
   Param,
   Post,
+  Query,
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common'
 import { FilesInterceptor } from '@nestjs/platform-express'
 import { ProductDto } from './dto/product.dto'
 import { ProductsService } from './products.service'
-import { ProductType } from 'interfaces/product.interface'
+import { ProductOption, ProductType } from 'interfaces/product.interface'
 
 @Controller('products')
 export class ProductsController {
@@ -26,8 +27,14 @@ export class ProductsController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  productsList(): Promise<ProductType[]> {
-    return this.productsService.findProducts()
+  productsList(@Query() prams: ProductOption): Promise<ProductType[]> {
+    console.log('page', prams.page);
+    
+    return this.productsService.findProducts(
+      prams.page,
+      prams.limit,
+      prams.filters,
+    )
   }
 
   @Get('new/list')
