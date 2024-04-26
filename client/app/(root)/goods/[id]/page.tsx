@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import React from 'react'
 
 import { getProduct } from '@/api/products'
@@ -7,8 +8,18 @@ import { HeartIcon } from '@/components/icons'
 import { Button } from '@/components/ui'
 import style from '@/styles/pages/good.module.scss'
 
+export async function generateMetadata({ params: { id } }: Params): Promise<Metadata> {
+  const product: Product = await getProduct({ params: { id } }).then(res => res.data)
+
+  return {
+    title: product.title,
+    keywords: `${product.title}, sneakers $${product.price} shoes, sneakers`,
+    description: product.desc,
+  }
+}
+
 const Product: React.FC<Params> = async ({ params: { id } }) => {
-  const product: Product = await getProduct({ params: { id } }).then(data => data.data)
+  const product: Product = await getProduct({ params: { id } }).then(res => res.data)
   return (
     <div className={style.container}>
       <Slider images={product.images} />

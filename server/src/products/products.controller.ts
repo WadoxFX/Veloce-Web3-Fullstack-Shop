@@ -28,8 +28,6 @@ export class ProductsController {
   @Get()
   @HttpCode(HttpStatus.OK)
   productsList(@Query() prams: ProductOption): Promise<ProductType[]> {
-    console.log('page', prams.page);
-    
     return this.productsService.findProducts(
       prams.page,
       prams.limit,
