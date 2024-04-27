@@ -1,4 +1,4 @@
-import { Types } from 'mongoose'
+import { Date, Types } from 'mongoose'
 
 export interface ProductSize {
   size: string
@@ -30,4 +30,5 @@ export interface ProductType {
   collection: string
   images: string[]
   sizes: ProductSize[]
+  createdAt: Date
 }

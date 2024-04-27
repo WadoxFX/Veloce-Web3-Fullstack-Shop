@@ -40,7 +40,7 @@ export class ProductsService {
   }
 
   async findNewProducts(): Promise<ProductType[]> {
-    const products = await this.productModel.find().limit(4)
+    const products = await this.productModel.find().sort({ createdAt: -1 }).limit(6)
 
     if (!products) {
       throw new HttpException('No products found', HttpStatus.NOT_FOUND)

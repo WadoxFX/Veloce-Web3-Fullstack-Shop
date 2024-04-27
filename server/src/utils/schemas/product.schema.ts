@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { HydratedDocument } from 'mongoose'
+import { Date, HydratedDocument } from 'mongoose'
 
 export type SizeDocument = HydratedDocument<Size>
 
@@ -44,6 +44,9 @@ export class Product {
 
   @Prop({ type: [String], required: true, trim: true })
   images: string[]
+
+  @Prop({ type: Date, default: Date.now })
+  createdAt: Date
 
   @Prop({ type: [SizeSchema], required: true, trim: true })
   sizes: Size[]

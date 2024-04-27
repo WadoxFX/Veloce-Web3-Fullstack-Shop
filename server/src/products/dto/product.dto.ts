@@ -1,3 +1,5 @@
+import { Date } from 'mongoose'
+
 export class ProductDto {
   sizes: string
   gender: string
@@ -8,4 +10,5 @@ export class ProductDto {
   desc: string
   color: string
   collection: string
+  createdAt: Date
 }

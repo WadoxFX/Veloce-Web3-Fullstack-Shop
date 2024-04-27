@@ -8,7 +8,6 @@ import { useRecoilValue } from 'recoil'
 
 import type { TProductSizeSchema } from '@/@types/zod'
 import { productSizeSchema } from '@/@types/zod'
-import { addToBasket } from '@/api/products/action/addToBasket'
 import { profile as profileStorage } from '@/recoil'
 import style from '@/styles/pages/good.module.scss'
 
@@ -31,11 +30,8 @@ const ProductParameters: React.FC<ProductParametersProps> = ({ product }) => {
 
   const onSubmit = handleSubmit(size => {
     const { sizes, images, ...currentProduct } = product
-    if (profile?._id) {
-      addToBasket()
-    } else {
-      basketLocalStorage({ ...currentProduct, ...size, image: images[0] })
-    }
+    if (profile?._id) return null
+    else return basketLocalStorage({ ...currentProduct, ...size, image: images[0] })
   })
 
   return (
