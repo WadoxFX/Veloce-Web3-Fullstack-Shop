@@ -3,6 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import style from './productSchema.module.scss'
+import { priceCalc } from '../priceCalc'
 
 export const ProductSchema: React.FC<{ product: Product }> = ({ product }) => (
   <li>
@@ -18,7 +19,17 @@ export const ProductSchema: React.FC<{ product: Product }> = ({ product }) => (
       <p>{product.gender} Shoes</p>
       <p>Color: {product.color}</p>
 
-      <div className={style.price}>${product.price}</div>
+      <div className={style.price}>
+        {product.discount ? (
+          <>
+            <div>${priceCalc(product.price, product.discount || 0)}</div>
+            <s className={style.old_price}>${product.price}</s>
+            <div className={style.discount}>-{product.discount}%</div>
+          </>
+        ) : (
+          <>${product.price}</>
+        )}
+      </div>
     </Link>
   </li>
 )

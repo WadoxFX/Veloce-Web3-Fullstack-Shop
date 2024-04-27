@@ -9,13 +9,14 @@ import { TrashIcon } from '@/components/icons'
 import { Button } from '@/components/ui'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import style from '@/styles/pages/basket.module.scss'
+import { priceCalc } from '@/components/priceCalc'
 
 const Basket = () => {
   const { data, loading, clear } = useLocalStorage('basket')
   if (loading) return <p>Loading...</p>
 
   let sum: number = 0
-  for (let i = 0; data.length > i; i += 1) sum += data[i].price
+  for (let i = 0; data.length > i; i += 1) sum += priceCalc(data[i].price, data[i].discount || 0)
 
   return (
     <div className={style.container}>
@@ -36,7 +37,7 @@ const Basket = () => {
               <div className={style.product_stats}>
                 <div className={style.product_header}>
                   <h3>{product.title}</h3>
-                  <div>${product.price}</div>
+                  <div>${priceCalc(product.price, product.discount || 0)}</div>
                 </div>
                 <p>{product.gender} Shoes</p>
                 <p>Size: {product.size}</p>

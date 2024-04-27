@@ -10,6 +10,7 @@ import { Button } from '@/components/ui'
 import { useToggle } from '@/hooks/useToggle'
 
 import style from './modal.module.scss'
+import { priceCalc } from '@/components/priceCalc'
 
 interface ModalProps {
   children: React.ReactNode
@@ -55,7 +56,17 @@ const ModalContent: React.FC<ModalContentProps> = ({ state, product, close }) =>
               <div>{product.title}</div>
               <div className={style.greey}>{product.gender} Shoes</div>
               <div className={style.greey}>Size: {product.size}</div>
-              <div>${product.price}</div>
+              <div className={style.price}>
+                {product.discount ? (
+                  <>
+                    <div>${priceCalc(product.price, product.discount || 0)}</div>
+                    <s className={style.old_price}>${product.price}</s>
+                    <div className={style.discount}>-{product.discount}%</div>
+                  </>
+                ) : (
+                  <>${product.price}</>
+                )}
+              </div>
             </div>
           </div>
           <div className={style.controlers}>

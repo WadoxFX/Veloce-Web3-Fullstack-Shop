@@ -23,10 +23,23 @@
       }
 
       .price {
-        font-weight: 500;
+        display: grid;
+        justify-items: end;
+        grid-template-columns: max-content max-content auto;
+        font-weight: 600;
+        margin-top: 12px;
+        gap: 12px;
 
-        &.price {
-          margin-top: 10px;
+        .old_price {
+          font-weight: 500;
+          color: var(--desc-color);
+        }
+
+        .discount {
+          color: green;
+          background: rgba(0, 128, 0, 0.189);
+          border-radius: 4px;
+          padding: 2px 6px;
         }
       }
     }
