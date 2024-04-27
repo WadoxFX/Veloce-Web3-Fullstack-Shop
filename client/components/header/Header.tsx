@@ -12,9 +12,16 @@ import Navigate from './Navigate'
 import style from './header.module.scss'
 
 const Header = () => {
-  const path = usePathname()  
+  const path = usePathname()
+
   return (
-    <header className={clsx(path.startsWith('/profile') ? style.header_fixed : style.header)}>
+    <header
+      className={clsx(
+        path.startsWith('/profile') ? style.header_border : style.header,
+        path === '/' && style.header_fixed,
+        path === '/basket' && style.header_fixed,
+      )}
+    >
       <nav>
         <Link className={style.title} href='/'>
           Veloce

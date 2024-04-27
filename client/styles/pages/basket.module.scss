@@ -5,13 +5,13 @@ $aside: 400px;
   grid-template-columns: auto $aside;
   gap: 20px;
   padding-top: 20px;
-  min-height: 100svh;
+  min-height: calc(100svh - 72px - 30px);
 
   .statistic {
     width: $aside;
 
     aside {
-      top: 20px;
+      top: 92px;
       position: sticky;
 
       form {
@@ -69,6 +69,24 @@ $aside: 400px;
     max-width: 800px;
     width: 100%;
     gap: 20px;
+
+    .message {
+      display: flex;
+      flex-direction: column;
+      background: rgba(255, 222, 173, 0.585);
+      padding: 20px;
+      border-radius: 12px;
+      gap: 12px;
+
+      h2 {
+        font-weight: 500;
+        font-size: 18px;
+      }
+
+      p {
+        font-style: italic;
+      }
+    }
 
     .product {
       gap: 20px;

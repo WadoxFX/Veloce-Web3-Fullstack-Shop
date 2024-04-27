@@ -12,7 +12,7 @@ const PromoVideo = () => {
     offset: ['0 1', '1.33 1'],
   })
 
-  const scaleProgress = useTransform(scrollYProgress, [0.04, 0.45], [0.7, 1])
+  const scaleProgress = useTransform(scrollYProgress, [0.04, 0.35], [0.65, 1])
 
   return (
     <motion.div

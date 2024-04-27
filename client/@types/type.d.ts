@@ -86,3 +86,9 @@ interface FiltersList {
   color?: string[]
   collection?: string[]
 }
+
+interface BasketItemProps {
+  product: BasketProduct
+  id: number
+  clear: (id: number) => void
+}

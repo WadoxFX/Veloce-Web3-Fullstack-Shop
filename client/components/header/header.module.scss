@@ -1,9 +1,18 @@
 .header,
+.header_border,
 .header_fixed {
+  max-height: 72px;
   padding: 16px 30px;
 
-  &.header_fixed {
+  &.header_border {
     border-bottom: 1px solid #dbdbdb;
+  }
+
+  &.header_fixed {
+    top: 0;
+    z-index: 1;
+    backdrop-filter: saturate(180%) blur(5px);
+    position: sticky;
   }
 
   nav {
