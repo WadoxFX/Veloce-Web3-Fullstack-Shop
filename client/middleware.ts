@@ -7,5 +7,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: '/basket/pay',
+  matcher: '/profile/:path*',
 }

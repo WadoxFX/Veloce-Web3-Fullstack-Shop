@@ -17,7 +17,7 @@ interface InputProps {
 
 export const Input: React.FC<InputProps> = ({ register, name, desc, title, error, ...props }) => (
   <div className={style.container}>
-    {title && <div className={style.title}>{title}</div>}
+    {title && <h3>{title}</h3>}
     {desc && <p>{desc}</p>}
     <input
       className={clsx(clsx(style.input, { [style.error_input]: !!error }))}

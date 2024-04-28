@@ -1,0 +1,128 @@
+.container {
+  display: grid;
+  margin-top: 20px;
+  grid-template-columns: auto 400px;
+  min-height: calc(100svh - 72px - 30px);
+
+  .statistic_container {
+    height: 100%;
+
+    .statistic {
+      top: 92px;
+      position: sticky;
+      display: flex;
+      flex-direction: column;
+      height: max-content;
+      gap: 24px;
+
+      .statistic_infos {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .products_price,
+      .products_promo_code,
+      .products_delivery,
+      .products_total,
+      .products_number {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .meaning {
+          color: var(--desc-color);
+        }
+
+        &.products_total {
+          .meaning {
+            color: #000;
+          }
+        }
+      }
+
+      hr {
+        border-bottom: 1px solid #dbdbdb;
+      }
+
+      ul {
+        display: flex;
+        overflow-y: auto;
+        gap: 10px;
+        width: 100%;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 12px;
+
+        &::-webkit-scrollbar {
+          height: 0;
+        }
+
+        li {
+          min-height: 100px;
+          width: 100px;
+          height: 100%;
+          aspect-ratio: 1;
+
+          img {
+            width: 100px;
+            min-height: 100px;
+            height: 100px;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 6px;
+          }
+        }
+      }
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 800px;
+
+    .delivery_address,
+    .contact_details {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      h1,
+      h2 {
+        padding: 20px;
+        border-radius: 8px;
+        background: rgba(173, 255, 203, 0.264);
+        border: 1px solid rgb(173, 255, 203);
+      }
+
+      .aaa {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .delivery_address_inputs,
+      .contact_details_inputs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+
+        input {
+          color: #000;
+        }
+
+        h3 {
+          font-size: 14px;
+          font-weight: 400;
+        }
+      }
+    }
+
+    button {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+}

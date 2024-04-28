@@ -19,7 +19,7 @@ const Header = () => {
       className={clsx(
         path.startsWith('/profile') ? style.header_border : style.header,
         path === '/' && style.header_fixed,
-        path === '/basket' && style.header_fixed,
+        path.startsWith('/basket') && style.header_fixed,
       )}
     >
       <nav>
