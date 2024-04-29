@@ -1,15 +1,17 @@
 'use client'
 
 import React from 'react'
-
-import style from '@/styles/pages/payment.module.scss'
-import { Button, Input, TextArea } from '@/components/ui'
 import { useForm } from 'react-hook-form'
+
+import { Button, Input, TextArea } from '@/components/ui'
+import style from '@/styles/pages/payment.module.scss'
 
 const Pay = () => {
   const { register, handleSubmit } = useForm()
+  const onSubmit = () => {}
+
   return (
-    <form onSubmit={handleSubmit(data => console.log(data))}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className={style.contact_details}>
         <h1>Contact details</h1>
         <div className={style.contact_details_inputs}>

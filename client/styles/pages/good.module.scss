@@ -50,7 +50,15 @@
       gap: 10px;
 
       .size_title {
+        display: flex;
+        align-items: center;
         font-weight: 500;
+        gap: 12px;
+
+        hr {
+          width: 16px;
+          border-bottom: 1px solid #000;
+        }
       }
 
       .sizes {
@@ -104,14 +112,32 @@
       }
     }
 
-    p {
-      line-height: 1.6;
-      font-size: 16px;
+    .description {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .desc_title {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        gap: 12px;
+
+        hr {
+          width: 16px;
+          border-bottom: 1px solid #000;
+        }
+      }
+
+      p {
+        line-height: 1.6;
+        font-size: 16px;
+      }
     }
   }
 
   .slider {
-    top: 30px;
+    top: 72px;
     position: sticky;
     height: calc(100svh - 72px);
     display: grid;
@@ -134,13 +160,18 @@
         width: 0;
       }
 
-      .ii {
-        width: 76px;
+      li {
         height: 76px;
         aspect-ratio: 1;
-        border-radius: 8px;
-        cursor: pointer;
-        object-fit: cover;
+
+        .min_image {
+          width: 76px;
+          height: 76px;
+          aspect-ratio: 1;
+          border-radius: 8px;
+          cursor: pointer;
+          object-fit: cover;
+        }
       }
     }
 
@@ -149,6 +180,83 @@
       width: 100%;
       height: calc(100svh - 66px);
       border-radius: 12px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1180px) {
+  .container {
+    .slider {
+      ul,
+      .current_image {
+        max-height: 600px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1064px) {
+  .container {
+    .product_info {
+      max-width: 440px;
+    }
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  .container {
+    margin: 0;
+    height: auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto max-content;
+
+    .product_info {
+      max-width: 100%;
+    }
+
+    .slider {
+      top: 0px;
+      height: auto;
+      position: static;
+      grid-template-columns: auto;
+
+      ul {
+        order: 2;
+        flex-direction: row;
+      }
+
+      .current_image {
+        height: 60svh;
+        min-height: 460px;
+        order: 1;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .container {
+    .product_info {
+      .sizes_box {
+        .sizes {
+          .gender_sizes,
+          .unisex_sizes {
+            grid-template-columns: 1fr 1fr;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 376px) {
+  .container {
+    .slider {
+      .current_image {
+        height: 40svh;
+        min-height: 360px;
+        order: 1;
+      }
     }
   }
 }

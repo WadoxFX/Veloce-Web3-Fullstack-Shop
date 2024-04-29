@@ -3,10 +3,10 @@
 import React from 'react'
 
 import BasketAside from '@/components/BasketAside'
+import BasketItem from '@/components/BasketItem'
+import { priceCalc } from '@/components/priceCalc'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import style from '@/styles/pages/basket.module.scss'
-import { priceCalc } from '@/components/priceCalc'
-import BasketItem from '@/components/BasketItem'
 
 const Basket = () => {
   const { data, loading, clear } = useLocalStorage('basket')
@@ -21,7 +21,7 @@ const Basket = () => {
         {!data.length && (
           <div className={style.message}>
             <h2>No added products</h2>
-            <p>You don't have any saved products in your cart!</p>
+            <p>You don&apos;t have any saved products in your cart!</p>
           </div>
         )}
         {data.map((product: BasketProduct, id: number) => (

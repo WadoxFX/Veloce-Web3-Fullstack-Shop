@@ -3,9 +3,10 @@ import Link from 'next/link'
 import React from 'react'
 
 import style from '@/styles/pages/basket.module.scss'
+
+import { TrashIcon } from './icons'
 import { priceCalc } from './priceCalc'
 import { Button } from './ui'
-import { TrashIcon } from './icons'
 
 const BasketItem: React.FC<BasketItemProps> = ({ product, id, clear }) => (
   <li className={style.product}>

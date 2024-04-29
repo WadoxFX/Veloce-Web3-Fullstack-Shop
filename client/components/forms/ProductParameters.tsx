@@ -31,7 +31,7 @@ const ProductParameters: React.FC<ProductParametersProps> = ({ product }) => {
   const onSubmit = handleSubmit(size => {
     const { sizes, images, ...currentProduct } = product
     if (profile?._id) return null
-    else return basketLocalStorage({ ...currentProduct, ...size, image: images[0] })
+    return basketLocalStorage({ ...currentProduct, ...size, image: images[0] })
   })
 
   return (

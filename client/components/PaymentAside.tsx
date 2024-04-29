@@ -1,14 +1,15 @@
 'use client'
 
+import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import React from 'react'
-import data from '@/promoCodes.json'
-import { useLocalStorage } from '@/hooks/useLocalStorage'
-import { totalPriceCalc } from './totalPriceCalc'
-import { priceCalc } from './priceCalc'
-import Image from 'next/image'
 
+import { useLocalStorage } from '@/hooks/useLocalStorage'
+import data from '@/promoCodes.json'
 import style from '@/styles/pages/payment.module.scss'
+
+import { priceCalc } from './priceCalc'
+import { totalPriceCalc } from './totalPriceCalc'
 
 let promoCode: PromoCode | undefined
 

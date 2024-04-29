@@ -17,9 +17,10 @@ const Header = () => {
   return (
     <header
       className={clsx(
-        path.startsWith('/profile') ? style.header_border : style.header,
         path === '/' && style.header_fixed,
+        path.startsWith('/profile') ? style.header_border : style.header,
         path.startsWith('/basket') && style.header_fixed,
+        path.startsWith('/goods') && style.header_fixed,
       )}
     >
       <nav>
@@ -29,7 +30,7 @@ const Header = () => {
         <Navigate />
         <div className={style.account_container}>
           <Account />
-          <Link href='/basket'>
+          <Link href='/basket' aria-label='Your added items to cart'>
             <BasketIcon />
           </Link>
         </div>

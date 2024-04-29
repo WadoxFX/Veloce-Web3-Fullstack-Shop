@@ -11,19 +11,21 @@ const Slider: React.FC<{ images: string[] }> = ({ images }) => {
     <div className={style.slider}>
       <ul>
         {images.map((image: string, id: number) => (
-          <Image
-            key={id}
-            className={style.ii}
-            src={process.env.SERVER_URL + image}
-            width={76}
-            height={76}
-            alt={`image ${id}`}
-            onMouseOver={() => setImage(image)}
-            priority
-          />
+          <li key={id}>
+            <Image
+              key={id}
+              className={style.min_image}
+              src={process.env.SERVER_URL + image}
+              width={76}
+              height={76}
+              alt={`image ${id}`}
+              onMouseOver={() => setImage(image)}
+              priority
+            />
+          </li>
         ))}
       </ul>
-      
+
       <Image
         className={style.current_image}
         src={process.env.SERVER_URL + image}

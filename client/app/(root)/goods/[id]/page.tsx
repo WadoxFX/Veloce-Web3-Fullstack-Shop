@@ -5,9 +5,9 @@ import { getProduct } from '@/api/products'
 import Slider from '@/components/Slider'
 import ProductParameters from '@/components/forms/ProductParameters'
 import { HeartIcon } from '@/components/icons'
+import { priceCalc } from '@/components/priceCalc'
 import { Button } from '@/components/ui'
 import style from '@/styles/pages/good.module.scss'
-import { priceCalc } from '@/components/priceCalc'
 
 export async function generateMetadata({ params: { id } }: Params): Promise<Metadata> {
   const product: Product = await getProduct({ params: { id } }).then(res => res.data)
@@ -42,7 +42,11 @@ const Product: React.FC<Params> = async ({ params: { id } }) => {
         </div>
 
         <div className={style.sizes_box}>
-          <div className={style.size_title}>Select Size</div>
+          <div className={style.size_title}>
+            <hr />
+            <h3>Select Size</h3>
+            <hr />
+          </div>
           <ProductParameters product={product} />
 
           <Button size='large' variant='outlined'>
@@ -50,7 +54,14 @@ const Product: React.FC<Params> = async ({ params: { id } }) => {
           </Button>
         </div>
 
-        <p>{product.desc}</p>
+        <div className={style.description}>
+          <div className={style.desc_title}>
+            <hr />
+            <h3>Description</h3>
+            <hr />
+          </div>
+          <p>{product.desc}</p>
+        </div>
       </div>
     </div>
   )

@@ -2,8 +2,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-import style from './productSchema.module.scss'
 import { priceCalc } from '../priceCalc'
+
+import style from './productSchema.module.scss'
 
 export const ProductSchema: React.FC<{ product: Product }> = ({ product }) => (
   <li>

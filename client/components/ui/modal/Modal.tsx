@@ -6,11 +6,11 @@ import React from 'react'
 import { createPortal } from 'react-dom'
 
 import { CheckIcon, CloseIcon } from '@/components/icons'
+import { priceCalc } from '@/components/priceCalc'
 import { Button } from '@/components/ui'
 import { useToggle } from '@/hooks/useToggle'
 
 import style from './modal.module.scss'
-import { priceCalc } from '@/components/priceCalc'
 
 interface ModalProps {
   children: React.ReactNode

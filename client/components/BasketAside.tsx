@@ -68,7 +68,7 @@ const BasketAside: React.FC<BasketAsideProps> = ({ sum }) => {
           </div>
           <Button
             size='large'
-            disabled={sum == 0}
+            disabled={sum === 0}
             variant='contained'
             onClick={() =>
               router.push(`/basket/payment${promoCode ? `?promocode=${promoCode.code}` : ''}`)
