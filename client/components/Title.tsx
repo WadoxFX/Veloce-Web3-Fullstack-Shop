@@ -37,7 +37,7 @@ const Title = () => (
         xmlns='http://www.w3.org/2000/svg'
       >
         <text
-          x={[-1, 4, 7, -6, 4, 10][id]}
+          x={[-1, 4, 7, -4, 4, 10][id]}
           y='92'
           fontFamily='Arial'
           fontSize='130'

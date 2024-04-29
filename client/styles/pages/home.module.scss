@@ -63,7 +63,7 @@
   }
 
   .about_us {
-    margin-top: 140px;
+    margin: 130px 0 80px;
     display: grid;
     justify-content: space-between;
     grid-template-columns: 46px auto;
@@ -125,6 +125,283 @@
 
         p:nth-of-type(2) {
           display: none;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1400px) {
+  .container {
+    .promo_video_container {
+      video {
+        height: 65svh;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 1300px) {
+  .container {
+    .about_us {
+      margin: 100px 0 40px;
+
+      .about_us_content_container {
+        margin-right: 30px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .container {
+    .about_us {
+      .about_us_content_container {
+        margin-right: 0;
+
+        h2 {
+          font-size: 56px;
+        }
+
+        p {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .recommendations {
+      li {
+        a {
+          width: 420px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .container {
+    .promo_video_container {
+      video {
+        height: 52svh;
+      }
+    }
+
+    .about_us {
+      .about_us_content_container {
+        gap: 24px;
+
+        .card {
+          width: 100px;
+        }
+
+        .about_us_content {
+          grid-template-columns: minmax(100px, 220px) auto;
+        }
+      }
+    }
+
+    .recommendations {
+      li {
+        a {
+          width: 370px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 946px) {
+  .container {
+    .about_us {
+      .about_us_content_container {
+        .about_us_content {
+          grid-template-columns: minmax(100px, 220px) auto;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 925px) {
+  .container {
+    .about_us {
+      grid-template-columns: auto;
+      gap: 24px;
+
+      svg {
+        rotate: 90deg;
+      }
+
+      .about_us_content_container {
+        h2 {
+          font-size: 48px;
+          max-width: 700px;
+
+          br {
+            display: none;
+          }
+        }
+
+        .about_us_content {
+          grid-template-columns: 1fr;
+          gap: 24px;
+
+          .about_us_min_title {
+            order: 2;
+          }
+
+          p {
+            order: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    .promo_video_container {
+      video {
+        height: 50svh;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 720px) {
+  .container {
+    .about_us {
+      .about_us_content_container {
+        gap: 36px;
+
+        h2 {
+          font-size: 36px;
+          max-width: 500px;
+        }
+
+        .card {
+          width: 76px;
+          margin-left: 12px;
+        }
+
+        .about_us_content {
+          gap: 36px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .container {
+    .about_us {
+      margin: 72px 0 24px;
+    }
+  }
+}
+
+@media only screen and (max-width: 560px) {
+  .container {
+    .promo_video_container {
+      video {
+        height: 60svh;
+        border-radius: 10px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .container {
+    .banner {
+      .banner_content {
+        p {
+          font-size: 38px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .container {
+    .banner {
+      height: calc(100svh - 96px - 0px);
+
+      .banner_content {
+        gap: 160px;
+        p {
+          br {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .promo_video_container {
+      video {
+        height: 80svh;
+      }
+    }
+
+    .recommendations {
+      li {
+        a {
+          width: 386px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 412px) {
+  .container {
+    .recommendations {
+      li {
+        a {
+          width: 372px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .container {
+    .recommendations {
+      li {
+        a {
+          width: 354px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 376px) {
+  .container {
+    .banner {
+      .banner_content {
+        gap: 120px;
+      }
+    }
+    
+    .recommendations {
+      li {
+        a {
+          width: 336px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .container {
+    .recommendations {
+      li {
+        a {
+          width: 280px;
         }
       }
     }

@@ -17,7 +17,7 @@ const PaymentAside = () => {
   const searchParams = useSearchParams()
 
   let sum: number = 0
-  const delivery = sum <= 200 ? null : 20
+  const delivery = sum >= 200 ? null : 20
 
   for (let i = 0; products.length > i; i += 1)
     sum += priceCalc(products[i].price, products[i].discount || 0)

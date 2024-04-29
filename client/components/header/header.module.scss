@@ -2,7 +2,7 @@
 .header_border,
 .header_fixed {
   max-height: 72px;
-  padding: 16px 30px;
+  padding: 16px var(--body-padding);
 
   &.header_border {
     border-bottom: 1px solid #dbdbdb;
@@ -30,7 +30,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-left: 130px;
+      // margin-left: 130px;
 
       a {
         color: #000;
@@ -53,5 +53,22 @@
         border-radius: 9999px;
       }
     }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .header,
+  .header_border,
+  .header_fixed {
+    nav {
+      .nav_list {
+        display: none;
+      }
+
+      .account_container {
+        gap: 8px;
+      }
+    }
+
   }
 }

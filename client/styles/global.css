@@ -133,3 +133,9 @@ img {
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb);
 }
+
+@media only screen and (max-width: 426px) {
+  :root {
+    --body-padding: 20px;
+  }
+}
