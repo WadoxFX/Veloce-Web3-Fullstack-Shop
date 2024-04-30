@@ -1,6 +1,6 @@
 .container {
   display: grid;
-  margin: 30px 0;
+  margin: 20px 0;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 
@@ -137,7 +137,7 @@
   }
 
   .slider {
-    top: 72px;
+    top: 92px;
     position: sticky;
     height: calc(100svh - 72px);
     display: grid;

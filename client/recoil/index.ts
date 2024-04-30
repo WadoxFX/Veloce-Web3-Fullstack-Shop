@@ -10,6 +10,14 @@ export const profile = atom<Profile | null>({
   default: null,
 })
 
+export const filterAsideState = atom<FilterAsideState>({
+  key: 'filterAsideState',
+  default: {
+    isOn: false,
+    delay: false,
+  },
+})
+
 export const filters = atom<FiltersList>({
   key: 'filters',
   default: {},

@@ -1,41 +1,32 @@
 'use client'
 
+import clsx from 'clsx'
 import React from 'react'
+import { useRecoilValue } from 'recoil'
 
-import Filters from '@/components/Filters'
-import Products from '@/components/Products'
-import { FilterIcon } from '@/components/icons'
-import { Button } from '@/components/ui'
-import { useToggle } from '@/hooks/useToggle'
+import { ProductSchema } from '@/components/ProductSchema'
+import { usePagination } from '@/hooks/usePagination'
+import { filters } from '@/recoil'
 import style from '@/styles/pages/shop.module.scss'
 
-const Shop = () => {
-  const [isOn, toggle] = useToggle(false)
-  return (
-    <>
-      <div className={style.line} />
-      <div className={style.products_contoler}>
-        <h2>New Releases</h2>
-        <Button variant='text' onClick={toggle}>
-          {isOn ? 'Hide Filters' : 'Show Filters'}
-          <FilterIcon />
-        </Button>
-        <div>
-          Sort By
-          <select>
-            <option>Featured</option>
-            <option>Newest</option>
-            <option>High-Low</option>
-            <option>Low-High</option>
-          </select>
-        </div>
-      </div>
+import { Skeleton } from './Skeleton'
 
-      <div className={style.container}>
-        <Filters state={isOn} />
-        <Products />
-      </div>
-    </>
+const Shop = () => {
+  const value = useRecoilValue<FiltersList>(filters)
+  const { data, isLoading, ref } = usePagination(6, value)
+
+  if (isLoading) return <Skeleton preloader={ref} />
+
+  return (
+    <div className={style.product_container}>
+      <ul className={style.products_list}>
+        {data.map((product: Product) => (
+          <ProductSchema product={product} key={product._id} />
+        ))}
+      </ul>
+
+      <div className={clsx(!data.length && style.preloader)} ref={ref} />
+    </div>
   )
 }
 

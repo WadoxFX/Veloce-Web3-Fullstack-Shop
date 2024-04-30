@@ -76,8 +76,9 @@ interface PromoCode {
   discount: number
 }
 
-interface FiltersProps {
-  state: boolean
+interface FilterAsideState {
+  isOn: boolean
+  delay: boolean
 }
 
 interface FiltersList {

@@ -1,9 +1,11 @@
+'use client'
+
 import clsx from 'clsx'
 import React, { useId } from 'react'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import { useToggle } from '@/hooks/useToggle'
-import { filters as filterList } from '@/recoil'
+import { filterAsideState, filters as filterList } from '@/recoil'
 
 import style from './accordion.module.scss'
 
@@ -23,8 +25,9 @@ export const Accordion: React.FC<AccordionProps> = ({
   elements,
   variant,
 }) => {
-  const [filters, setFilters] = useRecoilState<FiltersList>(filterList)
   const [isOn, toggle] = useToggle(open)
+  const [filters, setFilters] = useRecoilState<FiltersList>(filterList)
+  const setState = useSetRecoilState<FilterAsideState>(filterAsideState)
   const uuid: string = useId()
 
   const addNewFilter = (element: string) => {
@@ -32,6 +35,10 @@ export const Accordion: React.FC<AccordionProps> = ({
       ...prev,
       [filterType]: [...(prev[filterType] || []), element],
     }))
+    setState(prev => ({ ...prev, delay: true }))
+    setTimeout(() => {
+      setState(prev => ({ ...prev, delay: false }))
+    }, 1000)
   }
 
   const removeFilter = (element: string) => {
@@ -47,6 +54,11 @@ export const Accordion: React.FC<AccordionProps> = ({
 
       return updated
     })
+    
+    setState(prev => ({ ...prev, delay: true }))
+    setTimeout(() => {
+      setState(prev => ({ ...prev, delay: false }))
+    }, 1000)
   }
 
   return (

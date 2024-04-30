@@ -1,0 +1,16 @@
+.sceleton_list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+
+  .item {
+    background: var(--sceleton-back);
+    aspect-ratio: 1;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  .sceleton_list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
