@@ -1,9 +1,26 @@
 $aside: 400px;
 
+.preloader {
+  display: grid;
+  grid-template-columns: auto 400px;
+  gap: 60px;
+
+  .item {
+    background: var(--sceleton-back);
+    height: calc(100svh - 72px - 20px);
+    border-radius: 12px;
+  }
+
+  .item:nth-child(2) {
+    height: 40vh;
+    min-height: 200px;
+  }
+}
+
 .container {
   display: grid;
   grid-template-columns: auto $aside;
-  gap: 20px;
+  gap: 60px;
   padding-top: 20px;
   min-height: calc(100svh - 72px - 30px);
 
@@ -23,6 +40,10 @@ $aside: 400px;
           display: grid;
           grid-template-columns: auto max-content;
           gap: 10px;
+
+          input {
+            width: 100%;
+          }
         }
 
         .exorbitant_price {
@@ -94,15 +115,17 @@ $aside: 400px;
 
       .product_image {
         aspect-ratio: 1;
-        border-radius: 8px;
         width: 200px;
-        height: auto;
+        border-radius: 8px;
+        height: -webkit-fill-available;
         object-fit: cover;
       }
 
       .product_info {
         width: 100%;
+        height: max-content;
         display: flex;
+        gap: 10px;
         flex-direction: column;
         justify-content: space-between;
 
@@ -118,8 +141,76 @@ $aside: 400px;
           width: 100%;
           color: #000;
           display: flex;
+          gap: 12px;
           align-items: center;
           justify-content: space-between;
+
+          h3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  $aside: 100%;
+
+  .preloader,
+  .container {
+    gap: 56px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    &.preloader {
+      gap: 24px;
+    }
+
+    .item:nth-child(1) {
+      order: 2;
+    }
+
+    .item:nth-child(2) {
+      order: 1;
+    }
+
+    .statistic {
+      width: $aside;
+      order: 1;
+
+      aside {
+        top: 0;
+        position: static;
+      }
+    }
+
+    .products_list {
+      order: 2;
+
+      .product {
+        .product_info {
+          .product_stats {
+            gap: 6px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .container {
+    .products_list {
+      .product {
+        .product_info {
+          .product_stats {
+            font-size: 14px;
+          }
         }
       }
     }

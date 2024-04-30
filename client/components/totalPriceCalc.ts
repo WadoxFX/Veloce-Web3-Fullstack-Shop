@@ -1,5 +1,5 @@
-export const totalPriceCalc = (sum: number, delivery: number | null, discount?: number): number => {
+export const totalPriceCalc = (sum: number, delivery: number | null, discount?: number) => {
   const total = sum + (delivery || 0)
   const difference = (total * (discount || 0)) / 100
-  return total - difference
+  return (total - difference).toFixed(2)
 }

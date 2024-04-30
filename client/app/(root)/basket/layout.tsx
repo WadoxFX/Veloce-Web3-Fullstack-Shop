@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Your basket',
+  title: 'Basket',
   keywords: 'Basket, Veloce basket',
   description: 'List of goods given by you for payment',
 }
