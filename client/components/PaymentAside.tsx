@@ -44,7 +44,7 @@ const PaymentAside = () => {
 
           <div className={style.products_delivery}>
             <div>Delivery:</div>
-            <div className={style.meaning}>{delivery ? `$${delivery}` : 'Free'}</div>
+            <div className={style.meaning}>{sum <= 200 ? `$${delivery}` : 'Free'}</div>
           </div>
 
           <div className={style.products_number}>
@@ -52,12 +52,11 @@ const PaymentAside = () => {
             <div className={style.meaning}>{products.length}</div>
           </div>
         </div>
-
         <hr />
 
         <div className={style.products_total}>
           <div>Total:</div>
-          <div className={style.meaning}>${totalPriceCalc(sum, delivery, promoCode?.discount)}</div>
+          <div className={style.meaning}>${totalPriceCalc(sum, sum >= 200 ? null : 20, promoCode?.discount)}</div>
         </div>
 
         {!!products.length && (

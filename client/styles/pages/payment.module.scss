@@ -1,6 +1,7 @@
 .container {
   display: grid;
   margin-top: 20px;
+  gap: 60px;
   grid-template-columns: auto 400px;
   min-height: calc(100svh - 72px - 30px);
 
@@ -81,7 +82,8 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
-    width: 800px;
+    width: 100%;
+    max-width: 800px;
 
     .delivery_address,
     .contact_details {
@@ -93,8 +95,8 @@
       h2 {
         padding: 20px;
         border-radius: 8px;
-        background: rgba(173, 255, 203, 0.264);
-        border: 1px solid rgb(173, 255, 203);
+        background: rgba(173, 206, 255, 0.245);
+        border: 1px solid #00a6ff;
       }
 
       .aaa {
@@ -110,6 +112,7 @@
         gap: 18px;
 
         input {
+          width: 100%;
           color: #000;
         }
 
@@ -123,6 +126,34 @@
     button {
       width: 100%;
       max-width: 300px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1180px) {
+  .container {
+    gap: 32px;
+    grid-template-columns: auto 340px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .container {
+    gap: 32px;
+    display: flex;
+    flex-direction: column;
+
+    .statistic_container {
+      order: 1;
+    }
+
+    form {
+      max-width: 100%;
+      order: 2;
+
+      button {
+        max-width: 100%;
+      }
     }
   }
 }

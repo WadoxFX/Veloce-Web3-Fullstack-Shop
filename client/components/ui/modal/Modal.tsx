@@ -53,7 +53,7 @@ const ModalContent: React.FC<ModalContentProps> = ({ state, product, close }) =>
               alt={product.title}
             />
             <div className={style.product_info}>
-              <div>{product.title}</div>
+              <div className={style.title}>{product.title}</div>
               <div className={style.greey}>{product.gender} Shoes</div>
               <div className={style.greey}>Size: {product.size}</div>
               <div className={style.price}>
@@ -73,7 +73,7 @@ const ModalContent: React.FC<ModalContentProps> = ({ state, product, close }) =>
             <Button onClick={() => router.push('/basket')} size='medium' variant='outlined'>
               View Bag
             </Button>
-            <Button size='medium' variant='contained'>
+            <Button onClick={() => router.push('/basket/payment')} size='medium' variant='contained'>
               Checkout
             </Button>
           </div>
