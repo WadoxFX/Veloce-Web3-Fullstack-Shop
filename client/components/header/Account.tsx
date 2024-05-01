@@ -6,22 +6,14 @@ import { useRecoilValue } from 'recoil'
 
 import { profile as profileAtom } from '@/recoil'
 
-import style from './header.module.scss'
+import { UserIcon } from '../icons'
 
 const Account = () => {
   const profile = useRecoilValue(profileAtom)
-  return profile ? (
-    'profile'
-  ) : (
-    <>
-      <Link className={style.login} href='/login'>
-        Login
-      </Link>
-      <Link className={style.signup} href='/signup'>
-        Sign Up
-      </Link>
-    </>
+  return (
+    <Link href={`/profile/${profile?._id}`}>
+      <UserIcon size={24} />
+    </Link>
   )
 }
-
 export default Account

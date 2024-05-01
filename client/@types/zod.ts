@@ -1,3 +1,4 @@
+import { email, text } from '@/components/pattern'
 import { z } from 'zod'
 
 export type TProductSchema = z.infer<typeof productSchema>
@@ -47,4 +48,46 @@ export const productSizeSchema = z.object({
 export type TPromoCodeSchema = z.infer<typeof promoCodeSchema>
 export const promoCodeSchema = z.object({
   promocode: z.string().optional(),
+})
+
+export type TPaymentSchema = z.infer<typeof paymentSchema>
+export const paymentSchema = z.object({
+  phone: z.string().min(10, 'Must contain at least 10 digits').max(99, 'Must not exceed 99 digits'),
+  city: z
+    .string()
+    .min(1, 'City must contain at least 1 characters')
+    .max(99, 'City must contain at most 99 characters')
+    .regex(text),
+
+  country: z
+    .string()
+    .min(1, 'Country must contain at least 1 characters')
+    .max(99, 'Country must contain at most 99 characters')
+    .regex(text),
+
+  email: z
+    .string()
+    .min(4, 'Email must contain at least 1 characters')
+    .max(99, 'Email must contain at most 99 characters')
+    .regex(email),
+
+  post: z
+    .string()
+    .min(4, 'Post must contain at least 6 characters')
+    .max(99, 'Post must contain at most 99 characters')
+    .regex(text),
+
+  surname: z
+    .string()
+    .min(1, 'Enter a valid surname')
+    .max(99, 'Enter a valid surname, no more than 99 characters')
+    .regex(text),
+
+  username: z
+    .string()
+    .min(1, 'Enter a valid username')
+    .max(99, 'Enter a valid username, no more than 99 characters')
+    .regex(text),
+
+  comment: z.string().max(99).optional(),
 })

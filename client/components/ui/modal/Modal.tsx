@@ -26,6 +26,10 @@ interface ModalContentProps {
 const ModalContent: React.FC<ModalContentProps> = ({ state, product, close }) => {
   const router = useRouter()
   if (typeof window === 'undefined') return null
+
+  if (state) document.body.setAttribute('no_scroll', '')
+  else document.body.removeAttribute('no_scroll')
+
   return createPortal(
     state && (
       <div role='button' onClick={close} onKeyDown={close} tabIndex={0} className={style.overlay}>
@@ -73,7 +77,11 @@ const ModalContent: React.FC<ModalContentProps> = ({ state, product, close }) =>
             <Button onClick={() => router.push('/basket')} size='medium' variant='outlined'>
               View Bag
             </Button>
-            <Button onClick={() => router.push('/basket/payment')} size='medium' variant='contained'>
+            <Button
+              size='medium'
+              variant='contained'
+              onClick={() => router.push('/basket/payment')}
+            >
               Checkout
             </Button>
           </div>

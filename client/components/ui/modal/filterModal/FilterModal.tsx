@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useRecoilState } from 'recoil'
@@ -24,21 +24,31 @@ export const FilterModal = () => {
   }, [])
 
   if (typeof window === 'undefined') return null
+
+  if (state.isOn && innerWidth <= 960) document.body.setAttribute('no_scroll', '')
+  else document.body.removeAttribute('no_scroll')
+
   return createPortal(
-    !!state.isOn && innerWidth <= 960 && (
-      <motion.div className={style.overlay}>
-        <div className={style.content}>
+    <AnimatePresence>
+      {!!state.isOn && innerWidth <= 960 && (
+        <motion.div
+          className={style.content}
+          initial={{ translateY: window.innerHeight }}
+          animate={{ translateY: 0 }}
+          exit={{ translateY: window.innerHeight }}
+          transition={{ damping: 30, duration: 0.3 }}
+        >
           <button
             aria-label='Close modal'
             className={style.close}
             onClick={() => setState(prev => ({ ...prev, isOn: !prev.isOn }))}
           >
-            <CloseIcon size={20} />
+            <CloseIcon size={24} />
           </button>
           <Filters />
-        </div>
-      </motion.div>
-    ),
+        </motion.div>
+      )}
+    </AnimatePresence>,
     document.body,
   )
 }
