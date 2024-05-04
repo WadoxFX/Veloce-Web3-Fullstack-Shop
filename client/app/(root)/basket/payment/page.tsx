@@ -4,8 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-import { paymentSchema } from '@/@types/zod'
-import type { TPaymentSchema } from '@/@types/zod'
+import { aboutMeSchema } from '@/@types/zod'
+import type { TAboutMeSchema } from '@/@types/zod'
 import { Button, Input, TextArea } from '@/components/ui'
 import style from '@/styles/pages/payment.module.scss'
 
@@ -14,8 +14,8 @@ const Payment = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TPaymentSchema>({
-    resolver: zodResolver(paymentSchema),
+  } = useForm<TAboutMeSchema>({
+    resolver: zodResolver(aboutMeSchema),
   })
 
   const onSubmit = handleSubmit(() => {})
@@ -24,28 +24,23 @@ const Payment = () => {
     <form onSubmit={onSubmit}>
       <div className={style.contact_details}>
         <h1>Contact details</h1>
-        <div className={style.contact_details_inputs}>
-          <Input
-            name='username'
-            placeholder='Username*'
-            title='Username'
-            register={register}
-            error={errors.username?.message}
-          />
-          <Input
-            name='surname'
-            placeholder='Surname*'
-            title='Surname'
-            register={register}
-            error={errors.surname?.message}
-          />
-          <Input
-            name='email'
-            placeholder='Email*'
-            title='Email'
-            register={register}
-            error={errors.email?.message}
-          />
+        <div className={style.contact_inputs}>
+          <div className={style.contact_details_inputs}>
+            <Input
+              name='username'
+              placeholder='Username*'
+              title='Username'
+              register={register}
+              error={errors.username?.message}
+            />
+            <Input
+              name='surname'
+              placeholder='Surname*'
+              title='Surname'
+              register={register}
+              error={errors.surname?.message}
+            />
+          </div>
           <Input
             name='phone'
             placeholder='Phone*'
@@ -58,7 +53,7 @@ const Payment = () => {
 
       <div className={style.delivery_address}>
         <h2>Delivery address</h2>
-        <div className={style.aaa}>
+        <div className={style.delivery_inputs}>
           <div className={style.delivery_address_inputs}>
             <Input
               name='country'

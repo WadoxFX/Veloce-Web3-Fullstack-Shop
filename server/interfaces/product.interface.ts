@@ -1,4 +1,4 @@
-import { Date, Types } from 'mongoose'
+import { Date, ObjectId, Types } from 'mongoose'
 
 export interface ProductSize {
   size: string
@@ -29,6 +29,12 @@ export interface ProductType {
   discount?: number | null
   collection: string
   images: string[]
+  addedToFavorite: ObjectId[]
   sizes: ProductSize[]
   createdAt: Date
+}
+
+export interface ProductFavorite {
+  productId: Types.ObjectId
+  userId: Types.ObjectId
 }

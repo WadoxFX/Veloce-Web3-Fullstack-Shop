@@ -2,15 +2,15 @@ import type { Metadata } from 'next'
 import React from 'react'
 
 import { getProduct } from '@/api/products'
+import FavoriteButton from '@/components/FavoriteButton'
 import Slider from '@/components/Slider'
 import ProductParameters from '@/components/forms/ProductParameters'
-import { HeartIcon } from '@/components/icons'
 import { priceCalc } from '@/components/priceCalc'
-import { Button } from '@/components/ui'
-import style from '@/styles/pages/good.module.scss'
+import style from '@/styles/pages/products.module.scss'
 
 export async function generateMetadata({ params: { id } }: Params): Promise<Metadata> {
   const product: Product = await getProduct({ params: { id } }).then(res => res.data)
+
   return {
     title: product.title,
     keywords: `${product.title}, sneakers $${product.price} shoes, sneakers`,
@@ -19,7 +19,8 @@ export async function generateMetadata({ params: { id } }: Params): Promise<Meta
 }
 
 const Product: React.FC<Params> = async ({ params: { id } }) => {
-  const product: Product = await getProduct({ params: { id } }).then(res => res.data)
+  const res = await fetch(`${process.env.SERVER_URL}products/${id}`, { cache: 'no-cache' })
+  const product: Product = await res.json()
   return (
     <div className={style.container}>
       <Slider images={product.images} />
@@ -48,10 +49,7 @@ const Product: React.FC<Params> = async ({ params: { id } }) => {
             <hr />
           </div>
           <ProductParameters product={product} />
-
-          <Button size='large' variant='outlined'>
-            Favorite <HeartIcon />
-          </Button>
+          <FavoriteButton productId={product._id} favoriteList={product.addedToFavorite} />
         </div>
 
         <div className={style.description}>

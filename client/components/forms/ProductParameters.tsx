@@ -9,7 +9,7 @@ import { useRecoilValue } from 'recoil'
 import type { TProductSizeSchema } from '@/@types/zod'
 import { productSizeSchema } from '@/@types/zod'
 import { profile as profileStorage } from '@/recoil'
-import style from '@/styles/pages/good.module.scss'
+import style from '@/styles/pages/products.module.scss'
 
 import { basketLocalStorage } from '../basketLocalStorage'
 import { Modal } from '../ui'

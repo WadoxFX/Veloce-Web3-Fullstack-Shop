@@ -10,7 +10,7 @@ import { Button } from './ui'
 
 const BasketItem: React.FC<BasketItemProps> = ({ product, id, clear }) => (
   <li className={style.product}>
-    <Link href={`/goods/${product._id}`}>
+    <Link href={`/products/${product._id}`}>
       <Image
         className={style.product_image}
         src={process.env.SERVER_URL + product.image}

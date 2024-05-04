@@ -6,7 +6,7 @@ import { FilterModal } from '@/components/ui'
 import style from '@/styles/pages/shop.module.scss'
 
 export const metadata: Metadata = {
-  title: 'Veloce - Shop',
+  title: 'Shop - Veloce',
   keywords: 'sneakers, shoes, Veloce, sports, sports shoe store, Nike, Adidas, Puma',
   description: 'Sports shoe store, original products from famous brands - Veloce',
 }

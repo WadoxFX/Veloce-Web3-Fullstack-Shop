@@ -1,4 +1,4 @@
-import { Date } from 'mongoose'
+import { Date, ObjectId, Types } from 'mongoose'
 
 export class ProductDto {
   sizes: string
@@ -10,5 +10,6 @@ export class ProductDto {
   desc: string
   color: string
   collection: string
+  addedToFavorite: ObjectId[]
   createdAt: Date
 }

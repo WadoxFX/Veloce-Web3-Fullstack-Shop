@@ -1,17 +1,34 @@
 'use client'
 
 import Link from 'next/link'
-import React from 'react'
-import { useRecoilValue } from 'recoil'
+import React, { useEffect, useState } from 'react'
+import { useRecoilRefresher_UNSTABLE, useRecoilState, useRecoilValueLoadable } from 'recoil'
 
-import { profile as profileAtom } from '@/recoil'
+import { fetchProfile, profile } from '@/recoil'
 
 import { UserIcon } from '../icons'
 
 const Account = () => {
-  const profile = useRecoilValue(profileAtom)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [value, setValue] = useRecoilState<UserProfile | null>(profile)
+  const dataLoadable = useRecoilValueLoadable(fetchProfile)
+  const refreshUserData = useRecoilRefresher_UNSTABLE(fetchProfile)
+
+  useEffect(() => {
+    refreshUserData()
+  }, [])
+
+  useEffect(() => {
+    if (dataLoadable.state === 'hasValue') {
+      setIsLoading(false)
+      setValue(dataLoadable.contents)
+    }
+  }, [dataLoadable])
+
+  if (isLoading) return <div>...</div>
+
   return (
-    <Link href={`/profile/${profile?._id}`}>
+    <Link href={`/profile/${value?._id}`}>
       <UserIcon size={24} />
     </Link>
   )

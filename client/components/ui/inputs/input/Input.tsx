@@ -7,6 +7,7 @@ import style from './input.module.scss'
 type InputTypes = 'email' | 'password' | 'text' | 'number'
 interface InputProps {
   name: string
+  defaultValue?: string
   register: UseFormRegister<any>
   title?: string
   type?: InputTypes

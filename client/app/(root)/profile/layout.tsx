@@ -5,7 +5,7 @@ import style from './profile.module.scss'
 const ProfileLayout = ({ children }: Children) => (
   <div className={style.container}>
     <Sidebar />
-    {children}
+    <div className={style.content}>{children}</div>
   </div>
 )
 

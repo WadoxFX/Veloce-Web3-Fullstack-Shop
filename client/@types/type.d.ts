@@ -15,6 +15,9 @@ interface NavItem {
   icon: string
 }
 
+type LikedProducts = LikedProduct[]
+type LikedProduct = Omit<Product, 'collection' | 'discount' | 'sizes'>
+
 type Products = Product[]
 interface Product {
   _id: string
@@ -28,6 +31,7 @@ interface Product {
   collection: string
   images: string[]
   sizes: Size[]
+  addedToFavorite: string[]
 }
 
 interface Size {
@@ -54,17 +58,29 @@ interface BasketProduct {
   collection: string
 }
 
+type IconVariant = 'outlined' | 'contained'
 interface IconProps {
   size?: number
   color?: string
+  contained?: boolean
 }
 
-interface Profile {
+type UserRole = 'User' | 'Admin'
+type User = UserProfile & {}
+interface UserInfos {
+  city: string
+  country: string
+  phone: string
+}
+
+interface UserProfile {
   _id: string
+  role: UserRole
   username: string
   surname: string
-  email: string
-  address: string
+  phone: string
+  likedList: string[]
+  infos: UserInfos
 }
 
 interface BasketAsideProps {

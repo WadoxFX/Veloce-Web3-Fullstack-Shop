@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 
-import style from '@/styles/pages/good.module.scss'
+import style from '@/styles/pages/products.module.scss'
 
 const Slider: React.FC<{ images: string[] }> = ({ images }) => {
   const [image, setImage] = useState(images[0])

@@ -1,13 +1,25 @@
-import { atom } from 'recoil'
+import { profile as getProfileData } from '@/api/auth'
+import { atom, selector } from 'recoil'
 
 export const gender = atom<string | null>({
   key: 'gender',
   default: null,
 })
 
-export const profile = atom<Profile | null>({
+export const profile = atom<UserProfile | null>({
   key: '',
-  default: null,
+  default: undefined,
+})
+
+export const fetchProfile = selector<UserProfile>({
+  key: 'fetchProfile',
+  get: async () => {
+    try {
+      return await getProfileData().then(res => res.data)
+    } catch (error) {
+      return {}
+    }
+  },
 })
 
 export const filterAsideState = atom<FilterAsideState>({

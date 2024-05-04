@@ -5,19 +5,25 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
+import { useRecoilValue } from 'recoil'
 
+import heardIcon from '@/public/heard.svg'
 import plusIcon from '@/public/plus.svg'
 import userIcon from '@/public/user.svg'
+import { profile } from '@/recoil'
 
 import style from './sidebar.module.scss'
 
-const navItams: NavItems = [
-  { title: 'About me', link: '/profile/123', icon: userIcon },
-  { title: 'New Product', link: '/profile/create', icon: plusIcon },
-]
-
 const Sidebar = () => {
+  const data = useRecoilValue(profile)
   const path: string = usePathname()
+
+  const navItams: NavItems = [
+    { title: 'About me', link: `/profile/${data?._id || '/'}`, icon: userIcon },
+    { title: 'Liked List', link: '/profile/liked', icon: heardIcon },
+    { title: 'New Product', link: '/profile/create', icon: plusIcon },
+  ]
+
   return (
     <aside className={style.container}>
       <nav>

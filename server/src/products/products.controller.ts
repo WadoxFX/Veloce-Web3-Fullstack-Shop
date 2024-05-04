@@ -6,14 +6,20 @@ import {
   HttpStatus,
   Param,
   Post,
+  Put,
   Query,
+  Req,
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common'
 import { FilesInterceptor } from '@nestjs/platform-express'
 import { ProductDto } from './dto/product.dto'
 import { ProductsService } from './products.service'
-import { ProductOption, ProductType } from 'interfaces/product.interface'
+import {
+  ProductFavorite,
+  ProductOption,
+  ProductType,
+} from 'interfaces/product.interface'
 
 @Controller('products')
 export class ProductsController {
@@ -44,7 +50,28 @@ export class ProductsController {
   @Post('create')
   @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(FilesInterceptor('file'))
-  create(@UploadedFiles() files: Express.Multer.File[], @Body() productDto: ProductDto): ProductType {
+  create(
+    @UploadedFiles() files: Express.Multer.File[],
+    @Body() productDto: ProductDto,
+  ): ProductType {
     return this.productsService.createProduct(productDto, files)
+  }
+
+  @Put('addInFavorite')
+  @HttpCode(HttpStatus.OK)
+  addInFavorite(@Body() ids: ProductFavorite) {
+    return this.productsService.addInFavorite(ids)
+  }
+
+  @Put('removeFromFavorites')
+  @HttpCode(HttpStatus.OK)
+  removeFromFavorites(@Body() ids: ProductFavorite) {
+    return this.productsService.removeFromFavorites(ids)
+  }
+
+  @Get('liked/list')
+  @HttpCode(HttpStatus.OK)
+  likedList(@Query('token') token: string): Promise<Omit<ProductType, 'collection' | 'discount' | 'sizes'>[]> {
+    return this.productsService.getUserLikedProducts(token)
   }
 }

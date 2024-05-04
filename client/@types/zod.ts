@@ -1,4 +1,4 @@
-import { email, text } from '@/components/pattern'
+import { email, password, text } from '@/components/pattern'
 import { z } from 'zod'
 
 export type TProductSchema = z.infer<typeof productSchema>
@@ -50,9 +50,9 @@ export const promoCodeSchema = z.object({
   promocode: z.string().optional(),
 })
 
-export type TPaymentSchema = z.infer<typeof paymentSchema>
-export const paymentSchema = z.object({
-  phone: z.string().min(10, 'Must contain at least 10 digits').max(99, 'Must not exceed 99 digits'),
+export type TAboutMeSchema = z.infer<typeof aboutMeSchema>
+export const aboutMeSchema = z.object({
+  phone: z.string().min(8, 'Must contain at least 10 digits').max(99, 'Must not exceed 99 digits'),
   city: z
     .string()
     .min(1, 'City must contain at least 1 characters')
@@ -65,17 +65,12 @@ export const paymentSchema = z.object({
     .max(99, 'Country must contain at most 99 characters')
     .regex(text),
 
-  email: z
-    .string()
-    .min(4, 'Email must contain at least 1 characters')
-    .max(99, 'Email must contain at most 99 characters')
-    .regex(email),
-
   post: z
     .string()
-    .min(4, 'Post must contain at least 6 characters')
+    .min(1, 'Post must contain at least 1 characters')
     .max(99, 'Post must contain at most 99 characters')
-    .regex(text),
+    .regex(text)
+    .optional(),
 
   surname: z
     .string()
@@ -90,4 +85,38 @@ export const paymentSchema = z.object({
     .regex(text),
 
   comment: z.string().max(99).optional(),
+})
+
+export type TLogInSchema = z.infer<typeof logInSchema>
+export const logInSchema = z.object({
+  email: z
+    .string()
+    .email()
+    .max(56, 'Email a valid username, no more than 99 characters')
+    .regex(email),
+
+  password: z
+    .string()
+    .min(6, 'Password must contain at least 6 characters')
+    .max(99, 'Password a valid username, no more than 99 characters')
+    .regex(password),
+})
+
+export type TSignUpSchema = z.infer<typeof signUpSchema>
+export const signUpSchema = z.object({
+  username: z.string().min(2, 'Min 2 characters').max(99, 'Min 99 characters').regex(text),
+
+  surname: z.string().min(2, 'Min 2 characters').max(99, 'Min 99 characters').regex(text),
+
+  email: z
+    .string()
+    .email()
+    .max(56, 'Email a valid username, no more than 99 characters')
+    .regex(email),
+
+  password: z
+    .string()
+    .min(6, 'Password must contain at least 6 characters')
+    .max(99, 'Password a valid username, no more than 99 characters')
+    .regex(password),
 })
