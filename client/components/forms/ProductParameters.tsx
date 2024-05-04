@@ -4,18 +4,15 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { useRecoilValue } from 'recoil'
 
 import type { TProductSizeSchema } from '@/@types/zod'
 import { productSizeSchema } from '@/@types/zod'
-import { profile as profileStorage } from '@/recoil'
 import style from '@/styles/pages/products.module.scss'
 
 import { basketLocalStorage } from '../basketLocalStorage'
 import { Modal } from '../ui'
 
 const ProductParameters: React.FC<ProductParametersProps> = ({ product }) => {
-  const profile = useRecoilValue(profileStorage)
   const {
     register,
     handleSubmit,
@@ -30,8 +27,8 @@ const ProductParameters: React.FC<ProductParametersProps> = ({ product }) => {
 
   const onSubmit = handleSubmit(size => {
     const { sizes, images, ...currentProduct } = product
-    if (profile?._id) return null
-    return basketLocalStorage({ ...currentProduct, ...size, image: images[0] })
+
+    basketLocalStorage({ ...currentProduct, ...size, image: images[0] })
   })
 
   return (

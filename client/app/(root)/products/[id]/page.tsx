@@ -10,7 +10,6 @@ import style from '@/styles/pages/products.module.scss'
 
 export async function generateMetadata({ params: { id } }: Params): Promise<Metadata> {
   const product: Product = await getProduct({ params: { id } }).then(res => res.data)
-
   return {
     title: product.title,
     keywords: `${product.title}, sneakers $${product.price} shoes, sneakers`,

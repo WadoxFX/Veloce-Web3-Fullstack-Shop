@@ -20,11 +20,13 @@ const PaymentAside = () => {
   let sum: number = 0
   const delivery = sum >= 200 ? null : 20
 
-  for (let i = 0; products.length > i; i += 1)
+  for (let i = 0; products.length > i; i += 1) {
     sum += priceCalc(products[i].price, products[i].discount || 0)
+  }
 
-  if (searchParams)
+  if (searchParams) {
     promoCode = data.codes.find((item: PromoCode) => item.code === searchParams.get('promocode'))
+  }
 
   return (
     <div className={style.statistic_container}>
@@ -56,7 +58,9 @@ const PaymentAside = () => {
 
         <div className={style.products_total}>
           <div>Total:</div>
-          <div className={style.meaning}>${totalPriceCalc(sum, sum >= 200 ? null : 20, promoCode?.discount)}</div>
+          <div className={style.meaning}>
+            ${totalPriceCalc(sum, sum >= 200 ? null : 20, promoCode?.discount)}
+          </div>
         </div>
 
         {!!products.length && (

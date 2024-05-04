@@ -5,16 +5,48 @@
   grid-template-columns: auto 400px;
   min-height: calc(100svh - 72px - 30px);
 
+  form {
+    display: flex;
+    flex-direction: column;
+    max-width: 700px;
+    width: 100%;
+    gap: 46px;
+
+    .contact_details,
+    .delivery_address {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+
+      h1,
+      h2 {
+        padding: 20px;
+        font-weight: 400;
+        border-radius: 8px;
+        background: linear-gradient(
+          24deg,
+          rgba(148, 188, 233, 0.34) 0%,
+          rgba(238, 174, 202, 0.34) 100%
+        );
+      }
+
+      .inputs_group {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+    }
+  }
+
   .statistic_container {
-    height: 100%;
+    width: 100%;
 
     .statistic {
       top: 92px;
-      position: sticky;
+      gap: 20px;
       display: flex;
       flex-direction: column;
-      height: max-content;
-      gap: 24px;
+      position: sticky;
 
       .statistic_infos {
         display: flex;
@@ -22,11 +54,15 @@
         gap: 12px;
       }
 
-      .products_price,
+      hr {
+        border-bottom: 1px solid var(--border-color);
+      }
+
       .products_promo_code,
       .products_delivery,
-      .products_total,
-      .products_number {
+      .products_number,
+      .products_price,
+      .products_total {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -34,16 +70,6 @@
         .meaning {
           color: var(--desc-color);
         }
-
-        &.products_total {
-          .meaning {
-            color: #000;
-          }
-        }
-      }
-
-      hr {
-        border-bottom: 1px solid #dbdbdb;
       }
 
       ul {
@@ -60,10 +86,10 @@
         }
 
         li {
-          min-height: 100px;
+          aspect-ratio: 1;
           width: 100px;
           height: 100%;
-          aspect-ratio: 1;
+          min-height: 100px;
 
           img {
             width: 100px;
@@ -75,57 +101,6 @@
           }
         }
       }
-    }
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    width: 100%;
-    max-width: 800px;
-
-    .delivery_address,
-    .contact_details {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-
-      h1,
-      h2 {
-        padding: 20px;
-        border-radius: 8px;
-        background: rgba(173, 206, 255, 0.245);
-        border: 1px solid #00a6ff;
-      }
-
-      .aaa {
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-      }
-
-      .delivery_address_inputs,
-      .contact_details_inputs {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 18px;
-
-        input {
-          width: 100%;
-          color: #000;
-        }
-
-        h3 {
-          font-size: 14px;
-          font-weight: 400;
-        }
-      }
-    }
-
-    button {
-      width: 100%;
-      max-width: 300px;
     }
   }
 }
@@ -152,6 +127,7 @@
       order: 2;
 
       button {
+        margin-top: -20px;
         max-width: 100%;
       }
     }

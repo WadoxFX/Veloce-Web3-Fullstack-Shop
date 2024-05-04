@@ -2,6 +2,6 @@
 
 import { revalidatePath } from 'next/cache'
 
-export function revalidateProduct() {
+export async function revalidateProduct() {
   revalidatePath('/products/[id]')
 }

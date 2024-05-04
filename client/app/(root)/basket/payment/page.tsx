@@ -1,95 +1,20 @@
-'use client'
+import { cookies } from 'next/headers'
 
-import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
-import { useForm } from 'react-hook-form'
 
-import { aboutMeSchema } from '@/@types/zod'
-import type { TAboutMeSchema } from '@/@types/zod'
-import { Button, Input, TextArea } from '@/components/ui'
-import style from '@/styles/pages/payment.module.scss'
+import PaymentForm from './PaymentForm'
 
-const Payment = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<TAboutMeSchema>({
-    resolver: zodResolver(aboutMeSchema),
-  })
+const Payment = async () => {
+  const cookie = cookies().get('token')
+  let data
 
-  const onSubmit = handleSubmit(() => {})
+  if (cookie) {
+    const url = `${process.env.SERVER_URL}auth/profile?token=${cookie?.value}`
+    const res = await fetch(url, { cache: 'no-cache' })
+    data = await res.json()
+  }
 
-  return (
-    <form onSubmit={onSubmit}>
-      <div className={style.contact_details}>
-        <h1>Contact details</h1>
-        <div className={style.contact_inputs}>
-          <div className={style.contact_details_inputs}>
-            <Input
-              name='username'
-              placeholder='Username*'
-              title='Username'
-              register={register}
-              error={errors.username?.message}
-            />
-            <Input
-              name='surname'
-              placeholder='Surname*'
-              title='Surname'
-              register={register}
-              error={errors.surname?.message}
-            />
-          </div>
-          <Input
-            name='phone'
-            placeholder='Phone*'
-            title='Phone'
-            register={register}
-            error={errors.phone?.message}
-          />
-        </div>
-      </div>
-
-      <div className={style.delivery_address}>
-        <h2>Delivery address</h2>
-        <div className={style.delivery_inputs}>
-          <div className={style.delivery_address_inputs}>
-            <Input
-              name='country'
-              placeholder='Country*'
-              title='Country'
-              register={register}
-              error={errors.country?.message}
-            />
-            <Input
-              name='city'
-              placeholder='City*'
-              title='City'
-              register={register}
-              error={errors.city?.message}
-            />
-          </div>
-          <Input
-            name='post'
-            placeholder='Post office*'
-            register={register}
-            error={errors.post?.message}
-          />
-          <TextArea
-            name='comment'
-            placeholder='Your comment...'
-            register={register}
-            error={errors.comment?.message}
-          />
-        </div>
-      </div>
-
-      <Button size='medium' variant='contained'>
-        Order
-      </Button>
-    </form>
-  )
+  return <PaymentForm userData={data || null} />
 }
 
 export default Payment
