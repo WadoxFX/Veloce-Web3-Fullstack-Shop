@@ -8,6 +8,7 @@ import style from '@/styles/pages/shop.module.scss'
 
 import { FilterIcon } from './icons'
 import { Button } from './ui'
+import RibbonOption from './RibbonOption'
 
 const FiltersRibbon = () => {
   const [state, setState] = useRecoilState<FilterAsideState>(filterAsideState)
@@ -20,15 +21,7 @@ const FiltersRibbon = () => {
           {state.isOn ? 'Hide Filters' : 'Show Filters'}
           <FilterIcon />
         </Button>
-        <div className={style.ribbon_options}>
-          Sort By
-          <select>
-            <option>Featured</option>
-            <option>Newest</option>
-            <option>High-Low</option>
-            <option>Low-High</option>
-          </select>
-        </div>
+        <RibbonOption />
       </div>
     </>
   )

@@ -25,6 +25,12 @@
       outline: none;
       color: var(--desc-color);
     }
+
+    select[aria-disabled='true'] {
+      pointer-events: none;
+      opacity: 0.6;
+      transition: 0.2s;
+    }
   }
 }
 

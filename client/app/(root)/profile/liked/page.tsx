@@ -1,12 +1,11 @@
 import { cookies } from 'next/headers'
+import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 import { getLikedProducts } from '@/api/products'
-import Link from 'next/link'
-import Image from 'next/image'
-
-import style from '@/styles/pages/liked.module.scss'
 import { priceCalc } from '@/components/priceCalc'
+import style from '@/styles/pages/liked.module.scss'
 
 const Liked = async () => {
   const token = cookies().get('token')!.value

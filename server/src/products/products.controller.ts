@@ -33,11 +33,12 @@ export class ProductsController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  productsList(@Query() prams: ProductOption): Promise<ProductType[]> {
+  productsList(@Query() params: ProductOption): Promise<ProductType[]> {    
     return this.productsService.findProducts(
-      prams.page,
-      prams.limit,
-      prams.filters,
+      params.page,
+      params.limit,
+      params.filters,
+      params.filters?.option,
     )
   }
 
@@ -71,7 +72,9 @@ export class ProductsController {
 
   @Get('liked/list')
   @HttpCode(HttpStatus.OK)
-  likedList(@Query('token') token: string): Promise<Omit<ProductType, 'collection' | 'color' | 'sizes'>[]> {
+  likedList(
+    @Query('token') token: string,
+  ): Promise<Omit<ProductType, 'collection' | 'color' | 'sizes'>[]> {
     return this.productsService.getUserLikedProducts(token)
   }
 }

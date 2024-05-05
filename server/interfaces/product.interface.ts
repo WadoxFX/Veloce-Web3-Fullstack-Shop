@@ -5,11 +5,13 @@ export interface ProductSize {
   quantity: number
 }
 
+export type OptionType = 'High-Low' | 'Low-High' | 'Newest' | 'Featured'
 export interface FiltersType {
   gender: string[]
   collection: string[]
   color: string[]
   size: string[]
+  option?: OptionType
 }
 
 export interface ProductOption {

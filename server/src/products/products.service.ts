@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { ProductDto } from './dto/product.dto'
 import {
   FiltersType,
+  OptionType,
   ProductFavorite,
   ProductSize,
   ProductType,
@@ -42,6 +43,7 @@ export class ProductsService {
     page: number,
     limit: number,
     filters: FiltersType,
+    option: OptionType,
   ): Promise<ProductType[]> {
     const queryFilters = {}
 
@@ -49,11 +51,40 @@ export class ProductsService {
     if (filters?.gender) queryFilters['gender'] = { $in: filters.gender }
     if (filters?.collection)
       queryFilters['collection'] = { $in: filters.collection }
+    if (filters?.size) {
+      queryFilters['sizes'] = {
+        $elemMatch: {
+          size: filters.size,
+          quantity: { $gt: 0 },
+        },
+      }
+    }
+
+    let sortOption = {}
+    if (option) {
+      switch (option) {
+        case 'High-Low':
+          sortOption = { price: -1 }
+          break
+        case 'Low-High':
+          sortOption = { price: 1 }
+          break
+        case 'Newest':
+          sortOption = { createdAt: -1 }
+          break
+
+        default:
+          sortOption = {}
+          break
+      }
+    }
 
     const products = await this.productModel
       .find(queryFilters)
       .limit(limit)
+      .sort(sortOption)
       .skip((page - 1) * limit)
+
     if (!products) {
       throw new HttpException('No products found', HttpStatus.NOT_FOUND)
     }
@@ -123,7 +154,8 @@ export class ProductsService {
     const user = await this.usersService.findById(data.id)
     if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND)
 
-    const likedProducts = await this.productModel.find({ _id: user.likedList })
+    const likedProducts = await this.productModel
+      .find({ _id: user.likedList })
       .select('title price desc gender discount images addedToFavorite')
     return likedProducts
   }
