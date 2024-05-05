@@ -6,9 +6,10 @@ import React, { useRef } from 'react'
 import style from '@/styles/pages/home.module.scss'
 
 const PromoVideo = () => {
-  const ref = useRef<HTMLImageElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
+    layoutEffect: false,
     offset: ['0 1', '1.33 1'],
   })
 

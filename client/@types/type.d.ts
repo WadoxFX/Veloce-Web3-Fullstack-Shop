@@ -16,7 +16,7 @@ interface NavItem {
 }
 
 type LikedProducts = LikedProduct[]
-type LikedProduct = Omit<Product, 'collection' | 'discount' | 'sizes'>
+type LikedProduct = Omit<Product, 'collection' | 'sizes' | 'color'>
 
 type Products = Product[]
 interface Product {

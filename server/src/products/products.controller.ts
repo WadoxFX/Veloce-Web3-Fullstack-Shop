@@ -71,7 +71,7 @@ export class ProductsController {
 
   @Get('liked/list')
   @HttpCode(HttpStatus.OK)
-  likedList(@Query('token') token: string): Promise<Omit<ProductType, 'collection' | 'discount' | 'sizes'>[]> {
+  likedList(@Query('token') token: string): Promise<Omit<ProductType, 'collection' | 'color' | 'sizes'>[]> {
     return this.productsService.getUserLikedProducts(token)
   }
 }

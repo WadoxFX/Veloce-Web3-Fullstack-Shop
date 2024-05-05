@@ -19,7 +19,7 @@ const Sidebar = () => {
   const path: string = usePathname()
 
   const navItams: NavItems = [
-    { title: 'About me', link: `/profile/${data?._id || '/'}`, icon: userIcon },
+    { title: 'About me', link: `/profile/${data?._id || '../'}`, icon: userIcon },
     { title: 'Liked List', link: '/profile/liked', icon: heardIcon },
     { title: 'New Product', link: '/profile/create', icon: plusIcon },
   ]

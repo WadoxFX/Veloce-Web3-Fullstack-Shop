@@ -124,7 +124,7 @@ export class ProductsService {
     if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND)
 
     const likedProducts = await this.productModel.find({ _id: user.likedList })
-      .select('title price desc gender color collection images addedToFavorite')
+      .select('title price desc gender discount images addedToFavorite')
     return likedProducts
   }
 }

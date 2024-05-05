@@ -1,5 +1,4 @@
 import { cookies } from 'next/headers'
-
 import React from 'react'
 
 import PaymentForm from './PaymentForm'

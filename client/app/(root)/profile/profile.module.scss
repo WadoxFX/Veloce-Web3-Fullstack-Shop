@@ -17,3 +17,17 @@
     }
   }
 }
+
+@media only screen and (max-width: 960px) {
+  .container {
+    margin: 0;
+    border-bottom: none;
+    grid-template-columns: 100%;
+    gap: 0;
+
+    .content {
+      margin: 12px 0 0;
+      max-width: -webkit-fill-available;
+    }
+  }
+}
