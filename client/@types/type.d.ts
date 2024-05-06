@@ -13,6 +13,7 @@ interface NavItem {
   title: string
   link: string
   icon: string
+  alt?: string
 }
 
 type LikedProducts = LikedProduct[]

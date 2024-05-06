@@ -30,7 +30,7 @@ const FavoriteButton: React.FC<FavoriteProps> = ({ productId, favoriteList }) =>
   useEffect(() => {
     if (dataLoadable.state === 'hasValue') {
       setIsLoading(false)
-      setValue(dataLoadable.contents)
+      setValue(dataLoadable.contents as UserProfile)
     }
   }, [dataLoadable])
 

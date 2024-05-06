@@ -7,6 +7,8 @@ import LogInForm from './LogInForm'
 
 export const metadata: Metadata = {
   title: 'Log In - Veloce',
+  keywords: 'Log In, login, authorization, Veloce, auth, shop auth',
+  description: 'Authorization to log into your account',
 }
 
 const LogIn = () => (

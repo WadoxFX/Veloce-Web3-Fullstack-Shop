@@ -11,12 +11,14 @@ export const profile = atom<UserProfile | null>({
   default: undefined,
 })
 
-export const fetchProfile = selector<UserProfile>({
+export const fetchProfile = selector<UserProfile | {}>({
   key: 'fetchProfile',
-  get: async () => {
+  get: async ({ get }) => {
     try {
-      return await getProfileData().then(res => res.data)
+      const res = await getProfileData()
+      return res.data as UserProfile
     } catch (error) {
+      console.error('Error fetching profile:', error)
       return {}
     }
   },

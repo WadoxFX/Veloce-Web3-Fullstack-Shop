@@ -1,12 +1,12 @@
 import React from 'react'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
-import style from '@/styles/pages/shop.module.scss'
-import { useRecoilState } from 'recoil'
 import { filterAsideState, filters } from '@/recoil'
+import style from '@/styles/pages/shop.module.scss'
 
 const RibbonOption = () => {
   const [state, setState] = useRecoilState<FilterAsideState>(filterAsideState)
-  const [_, setOption] = useRecoilState<FiltersList>(filters)
+  const setOption = useSetRecoilState<FiltersList>(filters)
 
   const addOption = (option: string) => {
     setOption(prev => ({ ...prev, option }))

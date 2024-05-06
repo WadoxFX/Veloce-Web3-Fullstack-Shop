@@ -7,6 +7,8 @@ import SignUpForm from './SignUpForm'
 
 export const metadata: Metadata = {
   title: 'Sign Up - Veloce',
+  keywords: 'Sign Up, login, registration, Veloce, auth, shop auth',
+  description: 'Register to create an account',
 }
 
 const SignUp = () => (

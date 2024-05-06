@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { cookies } from 'next/headers'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -6,6 +7,12 @@ import React from 'react'
 import { getLikedProducts } from '@/api/products'
 import { priceCalc } from '@/components/priceCalc'
 import style from '@/styles/pages/liked.module.scss'
+
+export const metadata: Metadata = {
+  title: 'Favorite List ❤️ - Veloce',
+  keywords: 'Favorite List, liked, veloce',
+  description: 'Your list of products you like',
+}
 
 const Liked = async () => {
   const token = cookies().get('token')!.value

@@ -1,7 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import React from 'react'
+import React, { useState } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { useRecoilValue } from 'recoil'
 
@@ -16,6 +16,7 @@ import GenderSelector from './GenderSelector'
 import style from './productCreator.module.scss'
 
 const ProductCreator = () => {
+  const [error, setError] = useState<string>('')
   const gender: string | null = useRecoilValue(activeGender)
   const {
     register,
@@ -50,8 +51,8 @@ const ProductCreator = () => {
       for (let i = 0; files.length > i; i += 1) fd.append('file', files[i])
 
       await createProduct({ params: fd })
-    } catch (error) {
-      console.error(error)
+    } catch (error: any) {
+      setError(String(error.response.data.message))
     }
   })
 
@@ -127,11 +128,11 @@ const ProductCreator = () => {
         </select>
       </div>
 
-      <div>
-        <Button size='medium' radius='round' variant='contained'>
-          Create
-        </Button>
-      </div>
+      {error && <p className={style.error}>{error}</p>}
+
+      <Button size='medium' radius='round' variant='contained'>
+        Create
+      </Button>
     </form>
   )
 }

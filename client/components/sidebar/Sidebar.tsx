@@ -19,9 +19,9 @@ const Sidebar = () => {
   const path: string = usePathname()
 
   const navItams: NavItems = [
-    { title: 'About me', link: `/profile/${data?._id || '../'}`, icon: userIcon },
-    { title: 'Liked List', link: '/profile/liked', icon: heardIcon },
-    { title: 'New Product', link: '/profile/create', icon: plusIcon },
+    { title: 'About Me', link: `/profile/${data?._id || '../'}`, icon: userIcon, alt: 'About me icon' },
+    { title: 'Liked List', link: '/profile/liked', icon: heardIcon, alt: 'Liked list icon' },
+    { title: 'New Product', link: '/profile/create', icon: plusIcon, alt: 'New product icon' },
   ]
 
   return (
@@ -34,7 +34,7 @@ const Sidebar = () => {
                 className={clsx(path === item.link ? style.active_item : style.nav_item)}
                 href={item.link}
               >
-                <Image src={item.icon} width={24} height={24} alt={item.title} />
+                <Image src={item.icon} width={24} height={24} alt={item.alt || item.title} />
                 <div className={style.nav_title}>{item.title}</div>
               </Link>
             </li>

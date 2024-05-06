@@ -6,9 +6,9 @@ import { useRecoilState } from 'recoil'
 import { filterAsideState } from '@/recoil'
 import style from '@/styles/pages/shop.module.scss'
 
+import RibbonOption from './RibbonOption'
 import { FilterIcon } from './icons'
 import { Button } from './ui'
-import RibbonOption from './RibbonOption'
 
 const FiltersRibbon = () => {
   const [state, setState] = useRecoilState<FilterAsideState>(filterAsideState)

@@ -17,6 +17,13 @@
       outline: none;
     }
   }
+
+  .error {
+    background: rgba(255, 0, 0, 0.349);
+    border: 1px solid red;
+    padding: 16px;
+    border-radius: 12px;
+  }
 }
 
 .gender_list {
