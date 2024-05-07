@@ -1,4 +1,4 @@
-import { Date, ObjectId, Types } from 'mongoose'
+import { Date, ObjectId } from 'mongoose'
 
 export class ProductDto {
   sizes: string

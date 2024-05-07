@@ -61,7 +61,7 @@ const Header = () => {
         path === '/' && style.header_fixed,
         path.startsWith('/profile') ? style.header_border : style.header,
         path.startsWith('/basket') && style.header_fixed,
-        path.startsWith('/goods') && style.header_fixed,
+        path.startsWith('/products') && style.header_fixed,
       )}
     >
       <Link className={style.title} href='/'>

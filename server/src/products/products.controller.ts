@@ -8,18 +8,14 @@ import {
   Post,
   Put,
   Query,
-  Req,
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common'
 import { FilesInterceptor } from '@nestjs/platform-express'
 import { ProductDto } from './dto/product.dto'
 import { ProductsService } from './products.service'
-import {
-  ProductFavorite,
-  ProductOption,
-  ProductType,
-} from 'interfaces/product.interface'
+import { CommentType, ProductFavorite, ProductOption, ProductType } from 'interfaces/product.interface'
+import { CommentDto, DeleteCommentDto } from './dto/comment.dto'
 
 @Controller('products')
 export class ProductsController {
@@ -33,7 +29,7 @@ export class ProductsController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  productsList(@Query() params: ProductOption): Promise<ProductType[]> {    
+  productsList(@Query() params: ProductOption): Promise<ProductType[]> {
     return this.productsService.findProducts(
       params.page,
       params.limit,
@@ -74,7 +70,21 @@ export class ProductsController {
   @HttpCode(HttpStatus.OK)
   likedList(
     @Query('token') token: string,
-  ): Promise<Omit<ProductType, 'collection' | 'color' | 'sizes'>[]> {
+  ): Promise<
+    Omit<ProductType, 'collection' | 'color' | 'sizes' | 'comments'>[]
+  > {
     return this.productsService.getUserLikedProducts(token)
+  }
+
+  @Put('addComment')
+  @HttpCode(HttpStatus.OK)
+  addComment(@Body() commentDto: CommentDto): Promise<CommentType> {
+    return this.productsService.addComment(commentDto)
+  }
+
+  @Put('deleteComment')
+  @HttpCode(HttpStatus.OK)
+  deleteComment(@Body() deleteCommentDto: DeleteCommentDto) {
+    return this.productsService.deleteComment(deleteCommentDto)
   }
 }

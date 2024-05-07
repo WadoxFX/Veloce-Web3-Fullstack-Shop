@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 
 import type { TProductSizeSchema } from '@/@types/zod'
 import { productSizeSchema } from '@/@types/zod'
-import style from '@/styles/pages/products.module.scss'
+import style from '@/styles/pages/product.module.scss'
 
 import { basketLocalStorage } from '../basketLocalStorage'
 import { Modal } from '../ui'
@@ -57,7 +57,7 @@ const ProductParameters: React.FC<ProductParametersProps> = ({ product }) => {
       </div>
 
       <Modal product={{ ...product, image: product.images[0], size: watch('size') }}>
-        Add to Bag
+        Add To Bag
       </Modal>
     </form>
   )

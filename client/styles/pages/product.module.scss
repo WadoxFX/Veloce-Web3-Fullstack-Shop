@@ -44,11 +44,15 @@
       }
     }
 
+    .comments,
+    .description,
     .sizes_box {
       display: flex;
       flex-direction: column;
       gap: 10px;
 
+      .coments_title,
+      .desc_title,
       .size_title {
         display: flex;
         align-items: center;
@@ -59,6 +63,11 @@
           width: 16px;
           border-bottom: 1px solid #000;
         }
+      }
+
+      p {
+        line-height: 1.6;
+        font-size: 16px;
       }
 
       .sizes {
@@ -111,35 +120,12 @@
         }
       }
     }
-
-    .description {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-
-      .desc_title {
-        display: flex;
-        align-items: center;
-        font-weight: 500;
-        gap: 12px;
-
-        hr {
-          width: 16px;
-          border-bottom: 1px solid #000;
-        }
-      }
-
-      p {
-        line-height: 1.6;
-        font-size: 16px;
-      }
-    }
   }
 
   .slider {
-    top: 42px;
+    top: 72px;
     position: sticky;
-    height: calc(100svh - 72px);
+    height: calc(100svh - 72px - 20px);
     display: grid;
     gap: 10px;
     grid-template-columns: max-content auto;
@@ -178,7 +164,7 @@
     .current_image {
       object-fit: cover;
       width: 100%;
-      height: calc(100svh - 66px);
+      height: calc(100svh - 86px);
       border-radius: 12px;
     }
   }

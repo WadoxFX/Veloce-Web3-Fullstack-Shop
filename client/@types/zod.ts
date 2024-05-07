@@ -120,3 +120,12 @@ export const signUpSchema = z.object({
     .max(99, 'Password a valid username, no more than 99 characters')
     .regex(password),
 })
+
+export type TCommentSchema = z.infer<typeof commentSchema>
+export const commentSchema = z.object({
+  comment: z
+    .string()
+    .min(6, 'Comment must contain at least 6 characters')
+    .max(250, 'Comment must contain at most 250 characters'),
+  grade: z.string(),
+})

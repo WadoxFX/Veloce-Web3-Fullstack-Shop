@@ -1,6 +1,25 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import { Date, HydratedDocument, ObjectId, Types } from 'mongoose'
 
+export type CommentDocument = HydratedDocument<Size>
+
+@Schema()
+export class Comment {
+  @Prop({ type: Number })
+  grade: number
+
+  @Prop({ type: Types.ObjectId, ref: 'User' })
+  creator: ObjectId
+
+  @Prop({ type: String, trim: true })
+  content: string
+
+  @Prop({ type: Date, default: Date.now })
+  createdAt: Date
+}
+
+export const CommentSchema = SchemaFactory.createForClass(Comment)
+
 export type SizeDocument = HydratedDocument<Size>
 
 @Schema({ _id: false })
@@ -47,6 +66,9 @@ export class Product {
 
   @Prop({ type: [Types.ObjectId], ref: 'User' })
   addedToFavorite: [ObjectId]
+
+  @Prop({ type: [CommentSchema], required: false })
+  comments?: Comment[]
 
   @Prop({ type: Date, default: Date.now })
   createdAt: Date

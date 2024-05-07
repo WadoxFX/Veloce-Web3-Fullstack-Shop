@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { ProductDto } from './dto/product.dto'
 import {
+  CommentType,
   FiltersType,
   OptionType,
   ProductFavorite,
@@ -12,6 +13,7 @@ import { Product } from 'src/utils/schemas/product.schema'
 import { Model } from 'mongoose'
 import { UsersService } from 'src/users/users.service'
 import { JwtService } from '@nestjs/jwt'
+import { CommentDto, DeleteCommentDto } from './dto/comment.dto'
 
 @Injectable()
 export class ProductsService {
@@ -106,7 +108,10 @@ export class ProductsService {
   }
 
   async findProduct(id: string): Promise<ProductType> {
-    const product = await this.productModel.findById(id)
+    const product = await this.productModel.findById(id).populate({
+      path: 'comments',
+      options: { sort: { createdAt: 1 } },
+    })
 
     if (!product) {
       throw new HttpException(
@@ -158,5 +163,35 @@ export class ProductsService {
       .find({ _id: user.likedList })
       .select('title price desc gender discount images addedToFavorite')
     return likedProducts
+  }
+
+  async addComment(commentDto: CommentDto): Promise<CommentType> {
+    const { productId, ...comment } = commentDto
+
+    const product = await this.productModel.findByIdAndUpdate(
+      productId,
+      { $push: { comments: comment } },
+      { new: true },
+    )
+
+    if (!product) {
+      throw new HttpException('Product not found', HttpStatus.NOT_FOUND)
+    }
+
+    return comment
+  }
+
+  async deleteComment(deleteCommentDto: DeleteCommentDto) {
+    const { commentId, productId, userId } = deleteCommentDto
+
+    const product = await this.productModel.findByIdAndUpdate(productId, {
+      $pull: { comments: { _id: commentId, creator: userId } },
+    })
+
+    if (!product) {
+      throw new HttpException('Product not found', HttpStatus.NOT_FOUND)
+    }
+
+    return { success: true }
   }
 }

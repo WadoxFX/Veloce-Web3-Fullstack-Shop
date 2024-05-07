@@ -18,7 +18,6 @@ export const fetchProfile = selector<UserProfile | {}>({
       const res = await getProfileData()
       return res.data as UserProfile
     } catch (error) {
-      console.error('Error fetching profile:', error)
       return {}
     }
   },

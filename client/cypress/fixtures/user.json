@@ -1,0 +1,12 @@
+{
+  "role": "User",
+  "username": "Qwerty",
+  "surname": "TestAccount",
+  "infos": {
+    "city": "Rivne",
+    "country": "Ukraine",
+    "phone": 980735324,
+    "post": 1
+  },
+  "comment": "I would like to ask for better packaging of the parcel to reduce the likelihood of damage to the goods"
+}

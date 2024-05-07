@@ -4,12 +4,14 @@ import React from 'react'
 import { getProduct } from '@/api/products'
 import FavoriteButton from '@/components/FavoriteButton'
 import Slider from '@/components/Slider'
+import Comments from '@/components/comments/Comments'
 import ProductParameters from '@/components/forms/ProductParameters'
 import { priceCalc } from '@/components/priceCalc'
-import style from '@/styles/pages/products.module.scss'
+import style from '@/styles/pages/product.module.scss'
 
 export async function generateMetadata({ params: { id } }: Params): Promise<Metadata> {
   const product: Product = await getProduct({ params: { id } }).then(res => res.data)
+
   return {
     title: product.title,
     keywords: `${product.title}, sneakers $${product.price} shoes, sneakers`,
@@ -58,6 +60,15 @@ const Product: React.FC<Params> = async ({ params: { id } }) => {
             <hr />
           </div>
           <p>{product.desc}</p>
+        </div>
+
+        <div className={style.comments}>
+          <div className={style.coments_title}>
+            <hr />
+            <h4>Comments</h4>
+            <hr />
+          </div>
+          <Comments productId={id} comments={product.comments} />
         </div>
       </div>
     </div>

@@ -19,9 +19,9 @@ interface FavoriteProps {
 const FavoriteButton: React.FC<FavoriteProps> = ({ productId, favoriteList }) => {
   const [value, setValue] = useRecoilState<UserProfile | null>(profile)
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const router = useRouter()
   const dataLoadable = useRecoilValueLoadable(fetchProfile)
   const refreshUserData = useRecoilRefresher_UNSTABLE(fetchProfile)
+  const router = useRouter()
 
   useEffect(() => {
     refreshUserData()

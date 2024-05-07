@@ -1,0 +1,98 @@
+.comments_accordeon {
+  border-top: 1px solid #dbdbdb;
+  border-bottom: 1px solid #dbdbdb;
+
+  button {
+    padding: 20px 0;
+    font-size: 18px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .stars {
+      font-size: 16px;
+      gap: 12px;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .worning {
+    padding: 16px;
+    border-radius: 8px;
+    background: rgba(255, 222, 173, 0.585);
+    margin-bottom: 20px;
+
+    a {
+      color: #000;
+      font-weight: 500;
+    }
+  }
+
+  form {
+    display: grid;
+    align-items: start;
+    grid-template-columns: max-content auto max-content;
+    margin-bottom: 20px;
+    gap: 12px;
+
+    .select_grade {
+      height: 48px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      select {
+        outline: none;
+      }
+    }
+
+    input {
+      width: 100%;
+    }
+
+    button {
+      max-height: 48px;
+    }
+  }
+
+  .comments {
+    display: flex;
+    flex-direction: column;
+    gap: 42px;
+    padding-bottom: 20px;
+
+    .comment {
+      display: flex;
+      flex-direction: column;
+      overflow-wrap: anywhere;
+      gap: 12px;
+
+      .comment_title {
+        display: grid;
+        grid-template-columns: auto max-content;
+        align-items: center;
+        justify-content: space-between;
+
+        button {
+          padding: 0;
+          transition: 0.2s;
+
+          &:hover {
+            scale: 1.2;
+          }
+        }
+      }
+
+      .statistics {
+       display: flex;
+       align-items: center;
+       gap: 8px;
+       font-size: 14px;
+       color: #71717A;
+      }
+    }
+  }
+}

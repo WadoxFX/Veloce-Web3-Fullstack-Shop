@@ -21,6 +21,7 @@ export const Input: React.FC<InputProps> = ({ register, name, desc, title, error
     {title && <h3>{title}</h3>}
     {desc && <p>{desc}</p>}
     <input
+      id={name}
       className={clsx(clsx(style.input, { [style.error_input]: !!error }))}
       {...(register && register(name))}
       {...props}

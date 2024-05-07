@@ -6,8 +6,12 @@ import style from './header.module.scss'
 const Navigate = () => (
   <nav>
     <ul className={style.nav_list}>
-      <li><Link href='/'>Home</Link></li>
-      <li><Link href='/shop'>Shop</Link></li>
+      <li>
+        <Link href='/'>Home</Link>
+      </li>
+      <li>
+        <Link href='/shop'>Shop</Link>
+      </li>
     </ul>
   </nav>
 )

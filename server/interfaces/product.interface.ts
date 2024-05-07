@@ -20,6 +20,15 @@ export interface ProductOption {
   filters?: FiltersType
 }
 
+export type Comments = Comment[]
+export type CommentType = Omit<Comment, 'createdAt'>
+export interface Comment {
+  creator: Object
+  grade: number
+  content: string
+  createdAt: Date
+}
+
 export interface ProductType {
   _id: Types.ObjectId
   title: string
@@ -33,6 +42,7 @@ export interface ProductType {
   images: string[]
   addedToFavorite: ObjectId[]
   sizes: ProductSize[]
+  comments?: Comments
   createdAt: Date
 }
 

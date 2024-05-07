@@ -19,6 +19,15 @@ interface NavItem {
 type LikedProducts = LikedProduct[]
 type LikedProduct = Omit<Product, 'collection' | 'sizes' | 'color'>
 
+type ProductComments = ProductComment[]
+interface ProductComment {
+  _id: string
+  creator: string
+  grade: number
+  content: string
+  createdAt: Date
+}
+
 type Products = Product[]
 interface Product {
   _id: string
@@ -32,6 +41,7 @@ interface Product {
   collection: string
   images: string[]
   sizes: Size[]
+  comments?: Comments
   addedToFavorite: string[]
 }
 
@@ -109,4 +119,38 @@ interface BasketItemProps {
   product: BasketProduct
   id: number
   clear: (id: number) => void
+}
+
+type Prices = Price[]
+interface Price {
+  min: number
+  max?: number
+}
+
+interface DrawStarsProps {
+  quantity: number
+  grade: number
+  size: number
+}
+
+interface CreateCommentProps {
+  productId: string
+}
+
+interface CommentSchema {
+  content: string
+  productId: string
+  grade: string
+  creator: string
+}
+
+interface CommentItem {
+  comment: ProductComment
+  productId: string
+}
+
+interface deleteComment {
+  productId: string
+  commentId: string
+  userId: string
 }
