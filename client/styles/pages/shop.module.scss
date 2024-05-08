@@ -3,6 +3,28 @@
   background: linear-gradient(90deg, rgba(148, 187, 233, 1) 0%, rgba(238, 174, 202, 1) 100%);
 }
 
+.no_data_container {
+  display: flex;
+  height: calc(100svh - 164px);
+
+  .no_data_message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    gap: 16px;
+
+    h2 {
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    p {
+      text-align: center;
+    }
+  }
+}
+
 .products_contoler {
   display: grid;
   position: sticky;
@@ -108,6 +130,7 @@
 
   .container {
     grid-template-columns: auto;
+    margin-bottom: 0;
 
     .filters {
       display: none;

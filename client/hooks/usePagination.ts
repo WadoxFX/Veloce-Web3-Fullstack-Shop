@@ -5,12 +5,14 @@ import { useInView } from 'react-intersection-observer'
 export const usePagination = (limit: number, filters: FiltersList) => {
   const [data, setData] = useState<Products>([])
   const [page, setPage] = useState<number>(1)
+  const [blocker, setBlocker] = useState(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const { inView, ref } = useInView({ threshold: 0 })
 
   useEffect(() => {
     setPage(1)
     setData([])
+    setBlocker(false)
   }, [filters])
 
   const fetchProducts = useCallback(async () => {
@@ -20,13 +22,14 @@ export const usePagination = (limit: number, filters: FiltersList) => {
     setData(prev => [...prev, ...products])
     setIsLoading(false)
     setPage(page + 1)
+    if (!products.length) setBlocker(true)
   }, [limit, page, filters])
 
   useEffect(() => {
-    if (inView) {
+    if (inView && !blocker) {
       fetchProducts()
     }
   }, [inView, fetchProducts])
 
-  return { data, isLoading, ref }
+  return { data, isLoading, blocker, ref }
 }

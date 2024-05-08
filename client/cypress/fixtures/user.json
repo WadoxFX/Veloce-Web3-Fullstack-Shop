@@ -2,6 +2,8 @@
   "role": "User",
   "username": "Qwerty",
   "surname": "TestAccount",
+  "email": "TestVeloceEmail@gmail.com",
+  "password": "f813TEzReq5gcgdqM3Jv",
   "infos": {
     "city": "Rivne",
     "country": "Ukraine",

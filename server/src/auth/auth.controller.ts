@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -23,7 +24,7 @@ export class AuthController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  logIn(@Body() userDto: Omit<UserDto, 'username' | 'surname'>, @Res({ passthrough: true }) res: Response) {
+  logIn(@Body() userDto: Omit<UserDto, 'username' | 'surname'>, @Res({ passthrough: true }) res: Response ) {
     return this.authService.logIn(userDto.email, userDto.password, res)
   }
 
@@ -36,7 +37,13 @@ export class AuthController {
   @Get('profile')
   @UseGuards(AuthGuard)
   @HttpCode(HttpStatus.OK)
-  async profile(@UserId() id: string): Promise<UserType> {    
+  async profile(@UserId() id: string): Promise<UserType> {
     return this.authService.profile(id)
+  }
+
+  @Delete('deleteAccount')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  deleteAccount(@Body() userDto: Omit<UserDto, 'username' | 'surname'>) {
+    return this.authService.deleteAccount(userDto)
   }
 }

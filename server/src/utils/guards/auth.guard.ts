@@ -19,10 +19,10 @@ export class AuthGuard implements CanActivate {
     if (!token) throw new HttpException('Token is missing', HttpStatus.OK)
 
     const validToken = await this.jwtService.verifyAsync(token)
-    if (!validToken) throw new HttpException('Token is invalid',  HttpStatus.OK)
+    if (!validToken) throw new UnauthorizedException('Token is invalid')
 
     request['user'] = validToken
-    
+
     return true
   }
 }

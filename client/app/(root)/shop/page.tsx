@@ -10,12 +10,14 @@ import { filters } from '@/recoil'
 import style from '@/styles/pages/shop.module.scss'
 
 import { Skeleton } from './Skeleton'
+import NoData from './NoData'
 
 const Shop = () => {
   const value = useRecoilValue<FiltersList>(filters)
-  const { data, isLoading, ref } = usePagination(6, value)
+  const { data, isLoading, blocker, ref } = usePagination(4, value)
 
   if (isLoading) return <Skeleton preloader={ref} />
+  if (!data.length && blocker) return <NoData />
 
   return (
     <div className={style.product_container}>

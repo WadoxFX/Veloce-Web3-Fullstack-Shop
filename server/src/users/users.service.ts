@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { UserType } from 'interfaces/user.interface'
-import { Model } from 'mongoose'
+import { Model, ObjectId, Types } from 'mongoose'
 import { User } from 'src/utils/schemas/user.schema'
 import { UserDto, UserProfileEditDto } from './dto/user.dto'
 import { hashSync } from 'bcrypt'
@@ -29,6 +29,10 @@ export class UsersService {
 
     const newUser = new this.userModel({ ...userData, password: hashPassword })
     return newUser.save()
+  }
+
+  async delete(id: Types.ObjectId) {
+    return await this.userModel.findByIdAndDelete(id)
   }
 
   async editProfile(userProfileDto: UserProfileEditDto) {

@@ -57,9 +57,22 @@ export class AuthService {
 
   async profile(id: string): Promise<UserType> {
     const user = await this.usersService.findById(id)
-    
+
     if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND)
 
     return user
+  }
+
+  async deleteAccount(userDto: Omit<UserDto, 'username' | 'surname'>) {
+    const { _id, password } = await this.usersService.findOne(userDto.email)
+
+    if (!_id) throw new HttpException('User not found', HttpStatus.NOT_FOUND)
+
+    const validPassword = compareSync(userDto.password, password)
+    if (!validPassword) {
+      throw new HttpException('Incorrect password', HttpStatus.CONFLICT)
+    }
+
+    return await this.usersService.delete(_id)
   }
 }

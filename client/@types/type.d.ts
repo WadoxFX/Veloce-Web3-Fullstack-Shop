@@ -154,3 +154,20 @@ interface deleteComment {
   commentId: string
   userId: string
 }
+
+interface CyTestUser {
+  role: string
+  username: string
+  surname: string
+  email: string
+  password: string
+  infos: TestUserInfos
+  comment: string
+}
+
+interface TestUserInfos {
+  city: string
+  country: string
+  phone: string
+  post: string
+}

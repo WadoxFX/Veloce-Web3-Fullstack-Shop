@@ -71,7 +71,6 @@ const Header = () => {
 
       <div className={style.account_container}>
         <Account />
-
         <Link href='/basket' aria-label='Your added items to cart'>
           <BasketIcon />
         </Link>

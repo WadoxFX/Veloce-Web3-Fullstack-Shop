@@ -16,7 +16,7 @@ describe('Buy product', () => {
     cy.contains('Checkout').click()
 
     cy.url().should('include', '/basket/payment')
-    cy.fixture('user.json').then(user => {
+    cy.fixture('user.json').then((user: CyTestUser) => {
       const { city, country, phone, post } = user.infos
 
       cy.get('input#username').type(user.username)
