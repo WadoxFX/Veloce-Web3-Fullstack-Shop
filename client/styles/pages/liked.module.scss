@@ -34,6 +34,10 @@
       flex-direction: column;
       gap: 12px;
 
+      .product_title {
+        color: var(--font-color-b);
+      }
+
       p {
         font-size: 14px;
         color: var(--desc-color);

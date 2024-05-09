@@ -87,11 +87,15 @@
       }
 
       .statistics {
-       display: flex;
-       align-items: center;
-       gap: 8px;
-       font-size: 14px;
-       color: #71717A;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: #71717a;
+      }
+
+      .comment_content {
+        color: var(--font-color-b);
       }
     }
   }

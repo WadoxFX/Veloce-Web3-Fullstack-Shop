@@ -1,18 +1,18 @@
 describe('Sign Up', () => {
-  let fixtureUser: CyTestUser
+  let user: CyTestUser
 
   beforeEach(() => {
-    cy.fixture('user.json').then((user: CyTestUser) => (fixtureUser = user))
+    cy.fixture('user.json').then((userData: CyTestUser) => (user = userData))
     cy.visit('/signup')
 
     cy.intercept('POST', '/auth/signup').as('ReqRegister')
   })
 
   it('Registration', () => {
-    cy.get('input#username').type(fixtureUser.username)
-    cy.get('input#surname').type(fixtureUser.surname)
-    cy.get('input#email').type(fixtureUser.email)
-    cy.get('input#password').type(fixtureUser.password)
+    cy.get('input#username').type(user.username)
+    cy.get('input#surname').type(user.surname)
+    cy.get('input#email').type(user.email)
+    cy.get('input#password').type(user.password)
     cy.contains('Log In').click()
 
     cy.wait('@ReqRegister').then(xhr => {
@@ -24,14 +24,9 @@ describe('Sign Up', () => {
 
     cy.get('a#userIcon').click()
     cy.url().should('include', '/profile')
-    cy.get('input#username').should('include.value', fixtureUser.username)
-    cy.get('input#surname').should('include.value', fixtureUser.surname)
+    cy.get('input#username').should('include.value', user.username)
+    cy.get('input#surname').should('include.value', user.surname)
   })
 
-  after(() => {
-    cy.wait(1000)
-    cy.request('DELETE', 'http://localhost:8080/auth/deleteAccount', { ...fixtureUser }).then(res =>
-      expect(res.status).to.eq(204),
-    )
-  })
+  after(() => cy.deleteAccount(user.email, user.password))
 })

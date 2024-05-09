@@ -1,12 +1,11 @@
 'use client'
 
-import notFoundicon from '@/public/404.svg'
-
-import React from 'react'
-
-import style from '@/styles/pages/404.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
+import React from 'react'
+
+import notFoundicon from '@/public/404.svg'
+import style from '@/styles/pages/404.module.scss'
 
 const Error = () => (
   <div className={style.container}>

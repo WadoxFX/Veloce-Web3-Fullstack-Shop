@@ -36,7 +36,7 @@ const Liked = async () => {
                 />
               </Link>
               <div className={style.liked_product_info}>
-                <div>{product.title}</div>
+                <div className={style.product_title}>{product.title}</div>
                 <div>{product.gender} Shoes</div>
                 <p>{product.desc}</p>
                 <div>${priceCalc(product.price, product.discount || 0)}</div>

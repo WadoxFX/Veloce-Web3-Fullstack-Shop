@@ -5,7 +5,6 @@ import style from '@/styles/pages/home.module.scss'
 
 import { ProductSchema } from './ProductSchema'
 
-
 const NewProductSlider = async () => {
   const products = await getNewProducts().then(data => data.data)
   return (

@@ -10,10 +10,11 @@ import {
 } from 'interfaces/product.interface'
 import { InjectModel } from '@nestjs/mongoose'
 import { Product } from 'src/utils/schemas/product.schema'
-import { Model } from 'mongoose'
+import { Model, ObjectId } from 'mongoose'
 import { UsersService } from 'src/users/users.service'
 import { JwtService } from '@nestjs/jwt'
 import { CommentDto, DeleteCommentDto } from './dto/comment.dto'
+import * as fs from 'fs'
 
 @Injectable()
 export class ProductsService {
@@ -39,6 +40,22 @@ export class ProductsService {
     newProduct.save()
 
     return newProduct
+  }
+
+  async deleteproduct(id: ObjectId) {
+    const product: ProductType = await this.productModel.findById(id)
+
+    if (!product) {
+      throw new HttpException('Product not found', HttpStatus.NOT_FOUND)
+    }
+
+    if (product.images.length) {
+      for (let i = 0; product.images.length > i; i++) {
+        await fs.promises.unlink(product.images[i])
+      }
+    }
+
+    return await this.productModel.findByIdAndDelete(id)
   }
 
   async findProducts(

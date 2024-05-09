@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { UserType } from 'interfaces/user.interface'
-import { Model, ObjectId, Types } from 'mongoose'
+import { Model, Types } from 'mongoose'
 import { User } from 'src/utils/schemas/user.schema'
 import { UserDto, UserProfileEditDto } from './dto/user.dto'
 import { hashSync } from 'bcrypt'

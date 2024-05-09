@@ -6,14 +6,12 @@ import {
   HttpCode,
   HttpStatus,
   Post,
-  Query,
-  Req,
   Res,
   UseGuards,
 } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { UserDto } from 'src/users/dto/user.dto'
-import { Request, Response } from 'express'
+import { Response } from 'express'
 import { AuthGuard } from 'src/utils/guards/auth.guard'
 import { UserId } from 'src/utils/decorators/userId.decorator'
 import { Token, UserType } from 'interfaces/user.interface'

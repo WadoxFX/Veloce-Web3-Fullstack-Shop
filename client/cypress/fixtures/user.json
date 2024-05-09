@@ -2,7 +2,7 @@
   "role": "User",
   "username": "Qwerty",
   "surname": "TestAccount",
-  "email": "TestVeloceEmail@gmail.com",
+  "email": "qwerty123@gmail.com",
   "password": "f813TEzReq5gcgdqM3Jv",
   "infos": {
     "city": "Rivne",
@@ -10,5 +10,6 @@
     "phone": 980735324,
     "post": 1
   },
-  "comment": "I would like to ask for better packaging of the parcel to reduce the likelihood of damage to the goods"
+  "comment": "I would like to ask for better packaging of the parcel to reduce the likelihood of damage to the goods.",
+  "productComment": "Everything is super, the size is suitable, delivery is fast and the goods arrived safely."
 }

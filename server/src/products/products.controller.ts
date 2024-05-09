@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -14,8 +15,14 @@ import {
 import { FilesInterceptor } from '@nestjs/platform-express'
 import { ProductDto } from './dto/product.dto'
 import { ProductsService } from './products.service'
-import { CommentType, ProductFavorite, ProductOption, ProductType } from 'interfaces/product.interface'
+import {
+  CommentType,
+  ProductFavorite,
+  ProductOption,
+  ProductType,
+} from 'interfaces/product.interface'
 import { CommentDto, DeleteCommentDto } from './dto/comment.dto'
+import { ObjectId } from 'mongoose'
 
 @Controller('products')
 export class ProductsController {
@@ -47,11 +54,14 @@ export class ProductsController {
   @Post('create')
   @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(FilesInterceptor('file'))
-  create(
-    @UploadedFiles() files: Express.Multer.File[],
-    @Body() productDto: ProductDto,
-  ): ProductType {
+  create(@UploadedFiles() files: Express.Multer.File[], @Body() productDto: ProductDto): ProductType {
     return this.productsService.createProduct(productDto, files)
+  }
+
+  @Delete('delete')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  delete(@Body('productid') productId: ObjectId) {
+    return this.productsService.deleteproduct(productId)
   }
 
   @Put('addInFavorite')
@@ -68,11 +78,7 @@ export class ProductsController {
 
   @Get('liked/list')
   @HttpCode(HttpStatus.OK)
-  likedList(
-    @Query('token') token: string,
-  ): Promise<
-    Omit<ProductType, 'collection' | 'color' | 'sizes' | 'comments'>[]
-  > {
+  likedList(@Query('token') token: string): Promise<Omit<ProductType, 'collection' | 'color' | 'sizes' | 'comments'>[]> {
     return this.productsService.getUserLikedProducts(token)
   }
 

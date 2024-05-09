@@ -6,7 +6,7 @@ import NewProductSlider from '@/components/NewProductSlider'
 import PromoVideo from '@/components/PromoVideo'
 import Title from '@/components/Title'
 import { ArrowIcon } from '@/components/icons'
-import basketballCard from '@/public/gifs/basketball.gif'
+import basketballCard from '@/public/gif/basketball.gif'
 import style from '@/styles/pages/home.module.scss'
 
 const Home = () => (

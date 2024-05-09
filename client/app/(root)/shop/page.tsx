@@ -9,8 +9,8 @@ import { usePagination } from '@/hooks/usePagination'
 import { filters } from '@/recoil'
 import style from '@/styles/pages/shop.module.scss'
 
-import { Skeleton } from './Skeleton'
 import NoData from './NoData'
+import { Skeleton } from './Skeleton'
 
 const Shop = () => {
   const value = useRecoilValue<FiltersList>(filters)

@@ -163,6 +163,7 @@ interface CyTestUser {
   password: string
   infos: TestUserInfos
   comment: string
+  productComment: string
 }
 
 interface TestUserInfos {

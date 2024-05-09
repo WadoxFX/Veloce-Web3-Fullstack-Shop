@@ -8,7 +8,7 @@ export const gender = atom<string | null>({
 
 export const profile = atom<UserProfile | null>({
   key: '',
-  default: undefined,
+  default: null,
 })
 
 export const fetchProfile = selector<UserProfile | {}>({

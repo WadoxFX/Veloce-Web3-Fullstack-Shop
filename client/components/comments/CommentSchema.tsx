@@ -33,7 +33,7 @@ const CommentSchema: React.FC<CommentItem> = ({ comment, productId }) => {
         <DrawStars quantity={5} grade={comment.grade} size={12} />
         <div>{convertDate(comment.createdAt)}</div>
       </div>
-      <p>{comment.content}</p>
+      <p className={style.comment_content}>{comment.content}</p>
     </li>
   )
 }
