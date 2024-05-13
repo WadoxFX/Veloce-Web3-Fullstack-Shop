@@ -1,0 +1,64 @@
+{
+  "compiler": {
+    "version": "0.8.22+commit.4fc1097e"
+  },
+  "language": "Solidity",
+  "output": {
+    "abi": [
+      {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      },
+      {
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+          {
+            "internalType": "address payable",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      }
+    ],
+    "devdoc": {
+      "kind": "dev",
+      "methods": {},
+      "version": 1
+    },
+    "userdoc": {
+      "kind": "user",
+      "methods": {},
+      "version": 1
+    }
+  },
+  "settings": {
+    "compilationTarget": {
+      "client/contracts/Shopping.sol": "Shopping"
+    },
+    "evmVersion": "shanghai",
+    "libraries": {},
+    "metadata": {
+      "bytecodeHash": "ipfs"
+    },
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "remappings": []
+  },
+  "sources": {
+    "client/contracts/Shopping.sol": {
+      "keccak256": "0x0bdceb45ec80d6dc903d795af83fe319e00d65ad43923db9f28a51ba3b3e4f92",
+      "license": "MIT",
+      "urls": [
+        "bzz-raw://c430194e5b2c59614de4537d0449c6de7e7f111224d6f6329fcfa16efcd2821c",
+        "dweb:/ipfs/QmNsdqcTg4uir8e3pT5Dum3VarfgTTzSinwYpfWu3V9Mqx"
+      ]
+    }
+  },
+  "version": 1
+}

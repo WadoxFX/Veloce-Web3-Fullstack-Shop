@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form'
 
 import { promoCodeSchema } from '@/@types/zod'
 import type { TPromoCodeSchema } from '@/@types/zod'
-import promoCodes from '@/promoCodes.json'
+import promoList from '@/promocodes.json'
 import style from '@/styles/pages/basket.module.scss'
 
 import { totalPriceCalc } from './totalPriceCalc'
@@ -24,7 +24,7 @@ const BasketAside: React.FC<BasketAsideProps> = ({ sum }) => {
 
   const onSubmit = handleSubmit(data => {
     const { promocode } = data
-    const code = promoCodes.codes.find((item: PromoCode) => item.code === promocode)
+    const code = promoList.codes.find((item: PromoCode) => item.code === promocode)
 
     if (code) setPromoCode(code)
   })

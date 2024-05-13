@@ -1,4 +1,4 @@
-import data from '../../promoCodes.json'
+import data from '../../promocodes.json'
 
 describe('Promo Code', () => {
   const { code, discount } = data.codes[0]
