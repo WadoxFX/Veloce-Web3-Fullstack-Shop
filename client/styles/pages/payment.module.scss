@@ -1,52 +1,160 @@
 .container {
   display: grid;
-  margin-top: 20px;
-  gap: 60px;
   grid-template-columns: auto 400px;
-  min-height: calc(100svh - 72px - 30px);
+  gap: 30px;
+  margin-top: 20px;
+  min-height: 100svh;
 
   form {
     display: flex;
     flex-direction: column;
-    max-width: 700px;
-    width: 100%;
-    gap: 46px;
+    gap: 24px;
 
-    .contact_details,
-    .delivery_address {
+    h1,
+    h2,
+    h3 {
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    hr {
+      border-bottom: 1px solid #dbdbdb;
+    }
+
+    input {
+      width: 100%;
+
+      &::placeholder {
+        color: #000;
+      }
+    }
+
+    .section {
       display: flex;
       flex-direction: column;
-      gap: 32px;
+      gap: 10px;
 
-      h1,
-      h2 {
-        padding: 20px;
-        font-weight: 400;
-        border-radius: 8px;
-        background: linear-gradient(
-          24deg,
-          rgba(148, 188, 233, 0.34) 0%,
-          rgba(238, 174, 202, 0.34) 100%
-        );
+      p {
+        color: var(--desc-color);
       }
+    }
 
-      .inputs_group {
+    .personal_data_inputs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .payment_method {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+
+      .method,
+      .active {
         display: flex;
         flex-direction: column;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        user-select: none;
+        border: 1px solid #dbdbdb;
+        gap: 6px;
+        font-size: 18px;
+        height: 400px;
+        border-radius: 12px;
+
+        &.active {
+          background: #f8f5fe;
+          border: 1px solid #d6c8ea;
+        }
+
+        input {
+          display: none;
+        }
+      }
+    }
+
+    .metaMask_method {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      .metaMask_stages {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+
+        .metaMask_stage {
+          width: 100%;
+          min-width: 260px;
+          height: 100%;
+          padding: 20px;
+          border-radius: 8px;
+          border: 1px solid #dbdbdb;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+
+          .stage_buy_product {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+          }
+
+          p {
+            color: var(--desc-color);
+            line-height: 1.4;
+          }
+        }
+
+        hr {
+          width: 100%;
+          border-bottom: 1px solid #dbdbdb;
+        }
+      }
+
+      .ethereum_rate {
+        display: flex;
+        align-items: center;
         gap: 24px;
+
+        .rate_item,
+        .ethereum_price_block {
+          display: flex;
+          width: max-content;
+          align-items: center;
+          border: 1px solid #97d4f0;
+          padding: 12px 26px 12px 14px;
+          box-shadow: 0px 4px 20px -16px rgba(0, 187, 255, 1);
+          border-radius: 12px;
+          font-weight: 200;
+          font-size: 42px;
+          gap: 12px;
+
+          &.rate_item {
+            border: 1px solid #dbdbdb;
+            box-shadow: none;
+          }
+        }
       }
     }
   }
 
   .statistic_container {
-    width: 100%;
+    height: 100%;
 
-    .statistic {
-      top: 92px;
-      gap: 20px;
+    aside {
+      position: sticky;
       display: flex;
       flex-direction: column;
-      position: sticky;
+      gap: 24px;
+      top: 92px;
+
+      hr {
+        border-bottom: 1px solid #dbdbdb;
+      }
 
       .statistic_infos {
         display: flex;
@@ -54,14 +162,10 @@
         gap: 12px;
       }
 
-      hr {
-        border-bottom: 1px solid var(--border-color);
-      }
-
+      .products_price,
       .products_promo_code,
       .products_delivery,
       .products_number,
-      .products_price,
       .products_total {
         display: flex;
         align-items: center;
@@ -70,34 +174,10 @@
         .meaning {
           color: var(--desc-color);
         }
-      }
 
-      ul {
-        display: flex;
-        overflow-y: auto;
-        gap: 10px;
-        width: 100%;
-        border: 1px solid var(--border-color);
-        border-radius: 12px;
-        padding: 12px;
-
-        &::-webkit-scrollbar {
-          height: 0;
-        }
-
-        li {
-          aspect-ratio: 1;
-          width: 100px;
-          height: 100%;
-          min-height: 100px;
-
-          img {
-            width: 100px;
-            min-height: 100px;
-            height: 100px;
-            aspect-ratio: 1;
-            object-fit: cover;
-            border-radius: 6px;
+        &.products_total {
+          .meaning {
+            color: var(--font-color-b);
           }
         }
       }
@@ -105,30 +185,17 @@
   }
 }
 
-@media only screen and (max-width: 1180px) {
-  .container {
-    gap: 32px;
-    grid-template-columns: auto 340px;
-  }
-}
-
 @media only screen and (max-width: 960px) {
   .container {
-    gap: 32px;
-    display: flex;
-    flex-direction: column;
-
-    .statistic_container {
-      order: 1;
-    }
-
     form {
-      max-width: 100%;
-      order: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
 
-      button {
-        margin-top: -20px;
-        max-width: 100%;
+      .payment_method {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
       }
     }
   }

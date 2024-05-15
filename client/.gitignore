@@ -13,6 +13,8 @@
 /.next/
 /out/
 
+contracts/artifacts
+
 # production
 /build
 

@@ -1,64 +1,263 @@
 {
-  "compiler": {
-    "version": "0.8.22+commit.4fc1097e"
-  },
-  "language": "Solidity",
-  "output": {
-    "abi": [
-      {
-        "inputs": [],
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-      },
-      {
-        "inputs": [],
-        "name": "owner",
-        "outputs": [
-          {
-            "internalType": "address payable",
-            "name": "",
-            "type": "address"
-          }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-      }
-    ],
-    "devdoc": {
-      "kind": "dev",
-      "methods": {},
-      "version": 1
-    },
-    "userdoc": {
-      "kind": "user",
-      "methods": {},
-      "version": 1
-    }
-  },
-  "settings": {
-    "compilationTarget": {
-      "client/contracts/Shopping.sol": "Shopping"
-    },
-    "evmVersion": "shanghai",
-    "libraries": {},
-    "metadata": {
-      "bytecodeHash": "ipfs"
-    },
-    "optimizer": {
-      "enabled": false,
-      "runs": 200
-    },
-    "remappings": []
-  },
-  "sources": {
-    "client/contracts/Shopping.sol": {
-      "keccak256": "0x0bdceb45ec80d6dc903d795af83fe319e00d65ad43923db9f28a51ba3b3e4f92",
-      "license": "MIT",
-      "urls": [
-        "bzz-raw://c430194e5b2c59614de4537d0449c6de7e7f111224d6f6329fcfa16efcd2821c",
-        "dweb:/ipfs/QmNsdqcTg4uir8e3pT5Dum3VarfgTTzSinwYpfWu3V9Mqx"
-      ]
-    }
-  },
-  "version": 1
+	"compiler": {
+		"version": "0.8.22+commit.4fc1097e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "buyer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "message",
+						"type": "string"
+					}
+				],
+				"name": "SuccessfulAccepted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "buyer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "message",
+						"type": "string"
+					}
+				],
+				"name": "SuccessfulDelivered",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "buyer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "message",
+						"type": "string"
+					}
+				],
+				"name": "SuccessfulPayment",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "buyer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "message",
+						"type": "string"
+					}
+				],
+				"name": "SuccessfulSent",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "currentState",
+				"outputs": [
+					{
+						"internalType": "enum Shopping.State",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_buyer",
+						"type": "address"
+					}
+				],
+				"name": "delivered",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getOrder",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "address payable",
+								"name": "buyer",
+								"type": "address"
+							},
+							{
+								"internalType": "string[]",
+								"name": "items",
+								"type": "string[]"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							},
+							{
+								"internalType": "bool",
+								"name": "paid",
+								"type": "bool"
+							},
+							{
+								"internalType": "enum Shopping.State",
+								"name": "state",
+								"type": "uint8"
+							}
+						],
+						"internalType": "struct Shopping.Order",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address payable",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string[]",
+						"name": "_items",
+						"type": "string[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_price",
+						"type": "uint256"
+					}
+				],
+				"name": "pay",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_buyer",
+						"type": "address"
+					}
+				],
+				"name": "received",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_buyer",
+						"type": "address"
+					}
+				],
+				"name": "sent",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"client/contracts/Shopping.sol": "Shopping"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"client/contracts/Shopping.sol": {
+			"keccak256": "0x6ea720de8971d00016a595d7b34a57060fea7044d1d502a8c554d3db53a18d63",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://45c63cb581e3c346791018b055f9d33a22bb75e12e4d2ebd71f0d66a6753b895",
+				"dweb:/ipfs/QmamdDGvpSdNKKK79KBFj422vZTMtBkw1uRzUiunsNcxLg"
+			]
+		}
+	},
+	"version": 1
 }

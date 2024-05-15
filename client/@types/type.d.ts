@@ -172,3 +172,25 @@ interface TestUserInfos {
   phone: string
   post: string
 }
+
+interface PaymentMethodProps {
+  method: string
+  address: string | undefined
+  onConnect: () => void
+  register: UseFormRegister<{
+    method: string
+  }>
+}
+
+interface ExchangeRates {
+  USD: number
+  ETH: number
+}
+
+interface EthereumRateProps {
+  sum: number
+}
+
+interface Ethereum {
+  request: (method: unknown) => Promise<unknown>
+}

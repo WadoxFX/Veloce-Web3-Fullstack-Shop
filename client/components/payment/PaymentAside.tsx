@@ -1,28 +1,25 @@
 'use client'
 
-import Image from 'next/image'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import React from 'react'
 
 import { useLocalStorage } from '@/hooks/useLocalStorage'
-import data from '@/promoCodes.json'
+import data from '@/promocodes.json'
 import style from '@/styles/pages/payment.module.scss'
 
-import { priceCalc } from './priceCalc'
-import { totalPriceCalc } from './totalPriceCalc'
+import { calcSum } from '../calcSum'
+import { totalPriceCalc } from '../totalPriceCalc'
+import { Button } from '../ui'
 
 let promoCode: PromoCode | undefined
 
 const PaymentAside = () => {
   const { data: products } = useLocalStorage('basket')
+  const router = useRouter()
   const searchParams = useSearchParams()
 
-  let sum: number = 0
+  const sum = calcSum(products)
   const delivery = sum >= 200 ? null : 20
-
-  for (let i = 0; products.length > i; i += 1) {
-    sum += priceCalc(products[i].price, products[i].discount || 0)
-  }
 
   if (searchParams) {
     promoCode = data.codes.find((item: PromoCode) => item.code === searchParams.get('promocode'))
@@ -30,7 +27,7 @@ const PaymentAside = () => {
 
   return (
     <div className={style.statistic_container}>
-      <aside className={style.statistic}>
+      <aside>
         <div className={style.statistic_infos}>
           <div className={style.products_price}>
             <div>Product price:</div>
@@ -63,21 +60,9 @@ const PaymentAside = () => {
           </div>
         </div>
 
-        {!!products.length && (
-          <ul>
-            {products.map((product: BasketProduct, id: number) => (
-              <li key={id}>
-                <Image
-                  src={process.env.SERVER_URL + product.image}
-                  width={100}
-                  height={100}
-                  alt={product.title}
-                  priority
-                />
-              </li>
-            ))}
-          </ul>
-        )}
+        <Button onClick={() => router.back()} size='large' variant='contained'>
+          ← Back
+        </Button>
       </aside>
     </div>
   )

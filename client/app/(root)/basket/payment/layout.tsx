@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import PaymentAside from '@/components/PaymentAside'
+import PaymentAside from '@/components/payment/PaymentAside'
 import style from '@/styles/pages/payment.module.scss'
 
 export const metadata: Metadata = {
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const PaymentLayout = ({ children }: Children) => (
   <div className={style.container}>
-    {children}
+    <div>{children}</div>
     <PaymentAside />
   </div>
 )
