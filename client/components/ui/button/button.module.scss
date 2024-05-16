@@ -6,6 +6,13 @@
   font-weight: 500;
   width: 100%;
   gap: 6px;
+
+  &:disabled {
+    opacity: 0.3;
+    color: #000;
+    border: none;
+    background: #bababa;
+  }
 }
 
 .text {

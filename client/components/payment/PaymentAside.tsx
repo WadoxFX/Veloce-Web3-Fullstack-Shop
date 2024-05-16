@@ -59,9 +59,10 @@ const PaymentAside = () => {
             ${totalPriceCalc(sum, sum >= 200 ? null : 20, promoCode?.discount)}
           </div>
         </div>
+        <hr />
 
         <Button onClick={() => router.back()} size='large' variant='contained'>
-          ← Back
+          Back
         </Button>
       </aside>
     </div>

@@ -130,13 +130,18 @@ export const commentSchema = z.object({
 
 export type TPaymentSchema = z.infer<typeof paymentSchema>
 export const paymentSchema = z.object({
-  email: z
-    .string()
-    .email()
-    .max(56, 'Email a valid username, no more than 99 characters')
-    .regex(email),
   phone: z.string().min(8, 'Must contain at least 10 digits').max(99, 'Must not exceed 99 digits'),
   username: z.string().min(2, 'Min 2 characters').max(99, 'Min 99 characters').regex(text),
   surname: z.string().min(2, 'Min 2 characters').max(99, 'Min 99 characters').regex(text),
   method: z.string(),
+  city: z
+    .string()
+    .min(1, 'City must contain at least 1 characters')
+    .max(99, 'City must contain at most 99 characters')
+    .regex(text),
+  post: z
+    .string()
+    .min(1, 'Post must contain at least 1 characters')
+    .max(99, 'Post must contain at most 99 characters')
+    .regex(text)
 })

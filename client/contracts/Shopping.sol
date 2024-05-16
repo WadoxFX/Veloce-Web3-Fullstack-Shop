@@ -45,30 +45,30 @@ contract Shopping {
         uint256 remainder = msg.value - _price;
         if(remainder > 0) payable(msg.sender).transfer(remainder);
         
-        uint256 id = orders[msg.sender].length + 1;
+        uint256 id = uuid();
         orders[msg.sender].push(Order(id, _productsId, _price, payable(msg.sender), Status.Paid, true));
 
         emit Payed(msg.sender, id, "Payment was successful");
     }
 
-    function send(address _buyer ,uint _id) external onlyOwner {
-        Order storage order = orders[_buyer][_id];
+    function send(address _buyer, uint256 _id) external onlyOwner {
+        Order storage order = findOrder(_buyer, _id);
         require(order.status == Status.Paid, "Order status must be paid");
 
         order.status = Status.Sent;
         emit Sent(_buyer, _id, "The item was sent to the post office");
     }
 
-    function delivered(address _buyer ,uint _id) external onlyOwner {
-        Order storage order = orders[_buyer][_id];
+    function delivered(address _buyer, uint256 _id) external onlyOwner {
+        Order storage order = findOrder(_buyer, _id);
         require(order.status == Status.Sent, "Order status must be send");
 
         order.status = Status.Delivered;
         emit Delivered(_buyer, _id, "The product was delivered to the post office");
     }
 
-    function accepted(address _buyer ,uint _id) external onlyOwner {
-        Order storage order = orders[_buyer][_id];
+    function accepted(address _buyer, uint256 _id) external onlyOwner {
+        Order storage order = findOrder(_buyer, _id);
         require(order.status == Status.Delivered, "Order status must be delivered");
 
         order.status = Status.Accepted;
@@ -77,8 +77,8 @@ contract Shopping {
         emit Accepted(_buyer, _id, "The order is accepted, the money is transferred to the seller's account");
     }
 
-    function rejected(address _buyer ,uint _id) external onlyOwner {
-        Order storage order = orders[_buyer][_id];
+    function rejected(address _buyer, uint256 _id) external onlyOwner {
+        Order storage order = findOrder(_buyer, _id);
         require(order.status == Status.Delivered, "Order status must be delivered");
 
         payable(_buyer).transfer(order.totalPrice);
@@ -88,14 +88,36 @@ contract Shopping {
         emit Rejected(_buyer, _id, "The amount of goods refunded to the buyer");
     }
 
+    function findOrder(address _user, uint256 _id) internal view returns(Order storage) {
+        Order[] storage userOrders = orders[_user];
+        for(uint256 i = 0; i < userOrders.length; i++) {
+            if(userOrders[i].id == _id) {
+                return userOrders[i];
+            }
+        }
+        revert("Order not found");
+    }
+
     function deleteOrder(address _buyer, uint256 _id) internal {
         Order[] storage userOrders = orders[_buyer];
-
-        userOrders[_id] = userOrders[userOrders.length - 1];
+        uint256 index;
+        for(uint256 i = 0; i < userOrders.length; i++) {
+            if(userOrders[i].id == _id) {
+                index = i;
+                break;
+            }
+        }
+        if (index < userOrders.length - 1) {
+            userOrders[index] = userOrders[userOrders.length - 1];
+        }
         userOrders.pop();
     }
 
-    function getTotalBalance() external view returns(uint256) {
+    function uuid() public view returns(uint256) {
+        return block.timestamp;
+    }
+
+    function getTotalBalance() external view onlyOwner returns(uint256) {
         return address(this).balance;
     }
 

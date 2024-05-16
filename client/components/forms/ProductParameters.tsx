@@ -24,7 +24,7 @@ const ProductParameters: React.FC<ProductParametersProps> = ({ product }) => {
       size: '',
     },
   })
-
+  
   const onSubmit = handleSubmit(size => {
     const { sizes, images, ...currentProduct } = product
 

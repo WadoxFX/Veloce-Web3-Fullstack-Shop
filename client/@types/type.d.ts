@@ -189,9 +189,25 @@ interface ExchangeRates {
 
 interface EthereumRateProps {
   sum: number
-  pay: (price: number) => void
+  rate: ExchangeRates
 }
 
 interface Ethereum {
   request: (method: unknown) => Promise<unknown>
+}
+
+interface PaymentFormProps {
+  userData: UserProfile | null
+  rate: ExchangeRates
+}
+
+interface ViewNewOrderProps {
+  order: any
+  loading: boolean
+}
+
+interface PayedStatus {
+  address?: string
+  orderId?: number
+  message?: string
 }

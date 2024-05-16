@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const PaymentLayout = ({ children }: Children) => (
   <div className={style.container}>
-    <div>{children}</div>
+    {children}
     <PaymentAside />
   </div>
 )
