@@ -189,6 +189,7 @@ interface ExchangeRates {
 
 interface EthereumRateProps {
   sum: number
+  pay: (price: number) => void
 }
 
 interface Ethereum {

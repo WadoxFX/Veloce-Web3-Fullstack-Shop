@@ -22,6 +22,7 @@ export const Button: React.FC<ButtonProps> = ({ children, variant, size, radius,
   <button
     className={clsx(style.button, style[variant || ''], style[size || ''], style[radius || ''])}
     onClick={disabled ? undefined : onClick}
+    disabled={disabled}
     {...props}
   >
     {loading ? 'Loading...' : children}

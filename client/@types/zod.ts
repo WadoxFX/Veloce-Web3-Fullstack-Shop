@@ -105,9 +105,7 @@ export const logInSchema = z.object({
 export type TSignUpSchema = z.infer<typeof signUpSchema>
 export const signUpSchema = z.object({
   username: z.string().min(2, 'Min 2 characters').max(99, 'Min 99 characters').regex(text),
-
   surname: z.string().min(2, 'Min 2 characters').max(99, 'Min 99 characters').regex(text),
-
   email: z
     .string()
     .email()
@@ -128,4 +126,17 @@ export const commentSchema = z.object({
     .min(6, 'Comment must contain at least 6 characters')
     .max(250, 'Comment must contain at most 250 characters'),
   grade: z.string(),
+})
+
+export type TPaymentSchema = z.infer<typeof paymentSchema>
+export const paymentSchema = z.object({
+  email: z
+    .string()
+    .email()
+    .max(56, 'Email a valid username, no more than 99 characters')
+    .regex(email),
+  phone: z.string().min(8, 'Must contain at least 10 digits').max(99, 'Must not exceed 99 digits'),
+  username: z.string().min(2, 'Min 2 characters').max(99, 'Min 99 characters').regex(text),
+  surname: z.string().min(2, 'Min 2 characters').max(99, 'Min 99 characters').regex(text),
+  method: z.string(),
 })

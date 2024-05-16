@@ -1,26 +1,32 @@
 'use client'
 
-import { ethers } from 'ethers'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { ethers, parseEther } from 'ethers'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
+import type { TPaymentSchema } from '@/@types/zod'
+import { paymentSchema } from '@/@types/zod'
 import { Input } from '@/components/ui'
+import shoppingABI from '@/contracts/Abi/shoppingABI.json'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import style from '@/styles/pages/payment.module.scss'
 
 import { calcSum } from '../calcSum'
+import { CheckIcon } from '../icons'
 
 import EthereumRate from './EthereumRate'
 import MetaMaskStages from './MetaMaskStages'
 import PaymentMethod from './PaymentMethod'
 
+const shoppingURL = '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
+
 const PaymentForm = () => {
-  const { data: products } = useLocalStorage('basket')
   const [signer, setSigner] = useState<ethers.JsonRpcSigner | null>(null)
-  const { register, handleSubmit, watch } = useForm({
-    defaultValues: {
-      method: 'Mail',
-    },
+  const [status, setStatus] = useState<string>('')
+  const { data: products } = useLocalStorage('basket')
+  const { register, handleSubmit, watch } = useForm<TPaymentSchema>({
+    resolver: zodResolver(paymentSchema),
   })
 
   const method: string = watch('method')
@@ -33,13 +39,29 @@ const PaymentForm = () => {
       await ethereum.request({ method: 'eth_requestAccounts' })
       const provider = new ethers.BrowserProvider(ethereum)
       const signer = await provider.getSigner()
-      return setSigner(signer)
+      setSigner(signer)
     }
 
     return null
   }
 
-  const onSubmit = handleSubmit(() => {})
+  const pay = async (price: number) => {
+    try {
+      const productsId: string[] = []
+
+      for (let i = 0; products.length > i; i += 1) productsId.push(products[i]._id)
+
+      const contract = new ethers.Contract(shoppingURL, shoppingABI, signer)
+      const ethPrice = parseEther(price.toString())
+
+      contract.on('Payed', (_, __, status: string) => setStatus(status))
+      await contract.pay(productsId, ethPrice, { value: ethPrice })
+    } catch (error) {
+      console.warn('Transaction cancelled')
+    }
+  }
+
+  const onSubmit = handleSubmit(data => console.log(data))
   return (
     <form onSubmit={onSubmit}>
       <div className={style.section}>
@@ -48,10 +70,10 @@ const PaymentForm = () => {
       </div>
 
       <div className={style.personal_data_inputs}>
-        <Input name='Username' placeholder='Username*' register={register} />
-        <Input name='Surname' placeholder='Surname*' register={register} />
-        <Input name='Email' placeholder='Email*' register={register} />
-        <Input name='Phone' placeholder='Phone*' register={register} />
+        <Input name='username' placeholder='Username*' register={register} />
+        <Input name='surname' placeholder='Surname*' register={register} />
+        <Input name='email' placeholder='Email*' register={register} />
+        <Input name='phone' placeholder='Phone*' register={register} />
       </div>
 
       <div className={style.section}>
@@ -80,7 +102,14 @@ const PaymentForm = () => {
             <h3>Currency Converter</h3>
             <p>Current price of Ethereum compared to the US dollar.</p>
           </div>
-          <EthereumRate sum={sum} />
+          <EthereumRate sum={sum} pay={pay} />
+
+          {status && (
+            <p className={style.status}>
+              <CheckIcon size={16} color='#00c9a7' />
+              <div>{status}</div>
+            </p>
+          )}
         </div>
       )}
     </form>

@@ -81,6 +81,30 @@
       flex-direction: column;
       gap: 24px;
 
+      .status {
+        display: flex;
+        align-items: center;
+        background: #e5f9f6;
+        color: #00c9a7;
+        width: max-content;
+        padding: 12px 16px;
+        font-weight: 500;
+        gap: 6px;
+        border-radius: 8px;
+
+        svg {
+          margin-bottom: 1px;
+        }
+      }
+
+      button {
+        width: max-content;
+
+        &:disabled {
+          opacity: 0.3;
+        }
+      }
+
       .metaMask_stages {
         display: flex;
         align-items: baseline;
@@ -127,7 +151,6 @@
           align-items: center;
           border: 1px solid #97d4f0;
           padding: 12px 26px 12px 14px;
-          box-shadow: 0px 4px 20px -16px rgba(0, 187, 255, 1);
           border-radius: 12px;
           font-weight: 200;
           font-size: 42px;
@@ -135,7 +158,6 @@
 
           &.rate_item {
             border: 1px solid #dbdbdb;
-            box-shadow: none;
           }
         }
       }
