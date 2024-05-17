@@ -21,7 +21,7 @@ import MetaMaskStages from './MetaMaskStages'
 import PaymentMethod from './PaymentMethod'
 import ViewNewOrder from './ViewNewOrder'
 
-const shoppingURL = '0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9'
+const shoppingURL = '0x5FbDB2315678afecb367f032d93F642f64180aa3'
 
 const PaymentForm: React.FC<PaymentFormProps> = ({ userData, rate }) => {
   const [signer, setSigner] = useState<ethers.JsonRpcSigner | null>(null)
@@ -89,6 +89,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ userData, rate }) => {
           orderId: Number(id),
         },
       })
+
+      setLoading(false)
     } catch (error) {
       console.warn(error)
     }
@@ -202,14 +204,14 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ userData, rate }) => {
           <Button disabled={!signer} size='medium' radius='rounded' variant='contained'>
             Pay
           </Button>
+
+          <ViewNewOrder loading={loading} order={null} />
           {status && (
             <div className={style.status}>
               <CheckIcon size={16} color='#00c9a7' />
               <div>{status.message}</div>
             </div>
           )}
-
-          <ViewNewOrder loading={loading} order={null} />
         </div>
       )}
     </form>
