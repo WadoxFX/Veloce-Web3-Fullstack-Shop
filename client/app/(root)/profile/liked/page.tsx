@@ -24,7 +24,7 @@ const Liked = async () => {
     <>
       <h1 className={style.title}>Your favorite products</h1>
       <ul className={style.liked_list}>
-        {likedList.map((product: LikedProduct, id: number) => (
+        {likedList.map((product: LikedProduct, index: number) => (
           <>
             <li className={style.liked_product} key={product._id}>
               <Link href={`/products/${product._id}`}>
@@ -42,7 +42,7 @@ const Liked = async () => {
                 <div>${priceCalc(product.price, product.discount || 0)}</div>
               </div>
             </li>
-            {id !== likedList.length - 1 && <hr />}
+            {index !== likedList.length - 1 && <hr />}
           </>
         ))}
       </ul>

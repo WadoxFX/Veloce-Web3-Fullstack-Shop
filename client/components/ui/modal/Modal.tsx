@@ -63,7 +63,7 @@ const ModalContent: React.FC<ModalContentProps> = ({ state, product, close }) =>
               <div className={style.price}>
                 {product.discount ? (
                   <>
-                    <div>${priceCalc(product.price, product.discount || 0)}</div>
+                    <div>${priceCalc(product.price, product.discount ?? 0)}</div>
                     <s className={style.old_price}>${product.price}</s>
                     <div className={style.discount}>-{product.discount}%</div>
                   </>

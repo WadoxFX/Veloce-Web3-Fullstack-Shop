@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ComponentProps } from 'react'
 import type { UseFieldArrayAppend, UseFieldArrayRemove, UseFormRegister } from 'react-hook-form'
 
 import { TrashIcon } from '@/components/icons'
@@ -6,7 +6,7 @@ import { TrashIcon } from '@/components/icons'
 import style from './inputSize.module.scss'
 
 type FieldsType = { id?: string; size: string; quantity: string }
-interface InputSizeProps {
+interface InputSizeProps extends ComponentProps<'input'> {
   register: UseFormRegister<any>
   remove: UseFieldArrayRemove
   append: UseFieldArrayAppend<

@@ -33,7 +33,7 @@ export const Accordion: React.FC<AccordionProps> = ({
   const addNewFilter = (element: string) => {
     setFilters((prev: FiltersList) => ({
       ...prev,
-      [filterType]: [...(prev[filterType] || []), element],
+      [filterType]: [...(prev[filterType] ?? []), element],
     }))
     setState(prev => ({ ...prev, delay: true }))
     setTimeout(() => {
@@ -45,7 +45,7 @@ export const Accordion: React.FC<AccordionProps> = ({
     setFilters((prev: FiltersList) => {
       const updated = {
         ...prev,
-        [filterType]: (prev[filterType] || []).filter((item: string) => item !== element),
+        [filterType]: (prev[filterType] ?? []).filter((item: string) => item !== element),
       }
 
       if (updated[filterType]?.length === 0) {
@@ -54,7 +54,7 @@ export const Accordion: React.FC<AccordionProps> = ({
 
       return updated
     })
-    
+
     setState(prev => ({ ...prev, delay: true }))
     setTimeout(() => {
       setState(prev => ({ ...prev, delay: false }))
@@ -75,7 +75,7 @@ export const Accordion: React.FC<AccordionProps> = ({
                 className={clsx(variant === 'color' && style[item.toLocaleLowerCase()])}
                 id={uuid + item}
                 type='checkbox'
-                checked={(filters[filterType] || []).includes(item)}
+                checked={(filters[filterType] ?? []).includes(item)}
                 onChange={e => (e.target.checked ? addNewFilter(item) : removeFilter(item))}
               />
               <label htmlFor={uuid + item}>{item}</label>

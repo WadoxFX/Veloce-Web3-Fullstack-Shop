@@ -1,18 +1,15 @@
 import clsx from 'clsx'
-import React from 'react'
+import React, { ComponentProps } from 'react'
 import type { UseFormRegister } from 'react-hook-form'
 
 import style from './textArea.module.scss'
 
-type TextAreaTypes = 'email' | 'password' | 'text' | 'number'
-interface TextAreaProps {
+interface TextAreaProps extends ComponentProps<'textarea'> {
   name: string
   register: UseFormRegister<any>
   title?: string
-  type?: TextAreaTypes
   desc?: string
   error?: string
-  placeholder?: string
 }
 
 export const TextArea: React.FC<TextAreaProps> = ({

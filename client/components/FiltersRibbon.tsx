@@ -19,7 +19,7 @@ const FiltersRibbon = () => {
         <h2>New Releases</h2>
         <Button variant='text' onClick={() => setState(prev => ({ ...prev, isOn: !prev.isOn }))}>
           {state.isOn ? 'Hide Filters' : 'Show Filters'}
-          <FilterIcon />
+          <FilterIcon size={24} />
         </Button>
         <RibbonOption />
       </div>

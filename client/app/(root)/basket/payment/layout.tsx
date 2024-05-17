@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 
-import PaymentAside from '@/components/payment/PaymentAside'
 import style from '@/styles/pages/payment.module.scss'
+
+import PaymentAside from './components/PaymentAside'
 
 export const metadata: Metadata = {
   title: 'Payment',

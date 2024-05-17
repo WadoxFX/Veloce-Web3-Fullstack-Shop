@@ -1,16 +1,13 @@
 import { api } from '../instance'
 
-export const createProduct = ({ params, config }: AxiosRequestConfig<FormData>) => {
-  return api.post<Product>('products/create', params, config)
-}
+export const createProduct = ({ params, config }: AxiosRequestConfig<FormData>) =>
+  api.post<Product>('products/create', params, config)
 
-export const addInFavorite = ({ params, config }: AxiosRequestConfig<GetProductAndUserIds>) => {
-  return api.put<ReqStatus>('products/addInFavorite', params, config)
-}
+export const addInFavorite = ({ params, config }: AxiosRequestConfig<GetProductAndUserIds>) =>
+  api.put<ReqStatus>('products/addInFavorite', params, config)
 
-export const removeFromFavorites = ({ params, config }: AxiosRequestConfig<GetProductAndUserIds>) => {
-  return api.put<ReqStatus>('products/removeFromFavorites', params, config)
-}
+export const removeFromFavorites = ({ params, config }: AxiosRequestConfig<GetProductAndUserIds>) =>
+  api.put<ReqStatus>('products/removeFromFavorites', params, config)
 
 export const getProducts = (requestConfig?: GetProductConfig) =>
   api.get<Products>('products', requestConfig?.config)

@@ -6,27 +6,27 @@ import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { logInSchema } from '@/@types/zod'
-import type { TLogInSchema } from '@/@types/zod'
-import { logIn } from '@/api/auth'
+import { signUpSchema } from '@/@types/zod'
+import type { TSignUpSchema } from '@/@types/zod'
+import { signUp } from '@/api/auth'
 import { Button, InputLabel } from '@/components/ui'
 
-import style from '../auth.module.scss'
+import style from '../../auth.module.scss'
 
-const LogInForm = () => {
+const SignUpForm = () => {
   const [error, setError] = useState<string>('')
   const router = useRouter()
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TLogInSchema>({
-    resolver: zodResolver(logInSchema),
+  } = useForm<TSignUpSchema>({
+    resolver: zodResolver(signUpSchema),
   })
 
   const onSubmit = handleSubmit(async data => {
     try {
-      await logIn({ params: data })
+      await signUp({ params: data })
       router.push('/')
     } catch (error: any) {
       setError(String(error.response.data.message))
@@ -35,13 +35,27 @@ const LogInForm = () => {
   return (
     <form className={style.form} onSubmit={onSubmit}>
       <header>
-        <h1>Log In</h1>
+        <h1>Sign Up</h1>
         <p>
-          Don&apos;t have an account? <Link href='/signup'>Click here</Link>
+          Already registered? <Link href='/login'>Click here</Link>
         </p>
       </header>
 
       <div className={style.inputs}>
+        <div className={style.inputs_line}>
+          <InputLabel
+            name='username'
+            label='Username'
+            register={register}
+            error={errors.username?.message}
+          />
+          <InputLabel
+            name='surname'
+            label='Surname'
+            register={register}
+            error={errors.surname?.message}
+          />
+        </div>
         <InputLabel
           type='email'
           name='email'
@@ -71,16 +85,16 @@ const LogInForm = () => {
         </div>
 
         <Button
-          onClick={() => router.push('/signup')}
+          onClick={() => router.push('/login')}
           type='button'
           variant='outlined'
           size='medium'
         >
-          Sign Up ➡️
+          Log In ➡️
         </Button>
       </div>
     </form>
   )
 }
 
-export default LogInForm
+export default SignUpForm

@@ -2,7 +2,7 @@ import React from 'react'
 
 import style from '@/styles/pages/payment.module.scss'
 
-import { BoxIcon, CoinIcon, ExchangeIcon } from '../icons'
+import { BoxIcon, CoinIcon, ExchangeIcon } from '@/components/icons'
 
 const MetaMaskStages = () => (
   <div className={style.metaMask_stages}>

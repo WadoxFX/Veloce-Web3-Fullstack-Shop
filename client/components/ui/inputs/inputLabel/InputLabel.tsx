@@ -1,13 +1,11 @@
-import React from 'react'
+import React, { ComponentProps } from 'react'
 import type { UseFormRegister } from 'react-hook-form'
 
 import style from './inputLabel.module.scss'
 
-type InputTypes = 'email' | 'password' | 'text' | 'number'
-interface InputLabelProps {
+interface InputLabelProps extends ComponentProps<'input'> {
   name: string
   label?: string
-  type?: InputTypes
   register: UseFormRegister<any>
   error?: string
 }

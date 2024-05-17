@@ -1,2 +1,2 @@
 export const priceCalc = (price: number, discount: number): number =>
-  price - Math.ceil((price * discount) / 100)
+  price - Math.ceil((price * discount ?? 0) / 100)

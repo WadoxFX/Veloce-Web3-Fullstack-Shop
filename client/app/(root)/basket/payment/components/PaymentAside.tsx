@@ -7,9 +7,9 @@ import { useLocalStorage } from '@/hooks/useLocalStorage'
 import data from '@/promocodes.json'
 import style from '@/styles/pages/payment.module.scss'
 
-import { calcSum } from '../calcSum'
-import { totalPriceCalc } from '../totalPriceCalc'
-import { Button } from '../ui'
+import { orderPrice } from '@/components/orderPrice'
+import { Button } from '@/components/ui'
+import { calcSum } from '@/components/calcSum'
 
 let promoCode: PromoCode | undefined
 
@@ -56,7 +56,7 @@ const PaymentAside = () => {
         <div className={style.products_total}>
           <div>Total:</div>
           <div className={style.meaning}>
-            ${totalPriceCalc(sum, sum >= 200 ? null : 20, promoCode?.discount)}
+            ${orderPrice(sum)}
           </div>
         </div>
         <hr />

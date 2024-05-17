@@ -3,7 +3,7 @@ import React from 'react'
 
 import style from '../auth.module.scss'
 
-import LogInForm from './LogInForm'
+import LogInForm from './components/LogInForm'
 
 export const metadata: Metadata = {
   title: 'Log In - Veloce',

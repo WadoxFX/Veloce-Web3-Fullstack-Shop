@@ -2,11 +2,11 @@ import { cookies } from 'next/headers'
 import React from 'react'
 
 import { getExchangeRates } from '@/api/currency'
-import PaymentForm from '@/components/payment/PaymentForm'
+import PaymentForm from './components/PaymentForm'
 
 const Payment = async () => {
   const cookie = cookies().get('token')
-  const rate = await getExchangeRates()
+  const rate = await getExchangeRates('USD')
 
   let data
   if (cookie) {

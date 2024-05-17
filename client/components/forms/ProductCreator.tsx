@@ -40,7 +40,7 @@ const ProductCreator = () => {
       const fd: FormData = new FormData()
 
       fd.append('sizes', JSON.stringify(sizes))
-      fd.append('gender', gender || '')
+      fd.append('gender', gender ?? '')
 
       for (const key in productData) {
         if (Object.prototype.hasOwnProperty.call(productData, key)) {

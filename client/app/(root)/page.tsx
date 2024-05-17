@@ -34,7 +34,7 @@ const Home = () => (
     </p>
 
     <div className={style.about_us}>
-      <ArrowIcon />
+      <ArrowIcon size={46} />
       <div className={style.about_us_content_container}>
         <h2>
           Let&apos;s get to know each other,

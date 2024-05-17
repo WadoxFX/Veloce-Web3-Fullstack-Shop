@@ -10,8 +10,9 @@ import type { TPromoCodeSchema } from '@/@types/zod'
 import promoList from '@/promocodes.json'
 import style from '@/styles/pages/basket.module.scss'
 
-import { totalPriceCalc } from './totalPriceCalc'
+export {} from '@/components/orderPrice'
 import { Button, Input } from './ui'
+import { orderPrice } from '@/components/orderPrice'
 
 const BasketAside: React.FC<BasketAsideProps> = ({ sum }) => {
   const [promoCode, setPromoCode] = useState<PromoCode | null>(null)
@@ -62,7 +63,7 @@ const BasketAside: React.FC<BasketAsideProps> = ({ sum }) => {
             <hr />
             <div className={style.price}>
               <div>Total</div>
-              <div>${totalPriceCalc(sum, delivery, promoCode?.discount)}</div>
+              <div>${orderPrice(sum)}</div>
             </div>
             <hr />
           </div>

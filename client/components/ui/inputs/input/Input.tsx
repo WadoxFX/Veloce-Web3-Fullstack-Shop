@@ -1,16 +1,14 @@
 import clsx from 'clsx'
-import React from 'react'
+import React, { ComponentProps } from 'react'
 import type { UseFormRegister } from 'react-hook-form'
 
 import style from './input.module.scss'
 
-type InputTypes = 'email' | 'password' | 'text' | 'number'
-interface InputProps {
+interface InputProps extends ComponentProps<'input'> {
   name: string
   defaultValue?: string
   register: UseFormRegister<any>
   title?: string
-  type?: InputTypes
   desc?: string
   error?: string
   placeholder?: string
@@ -21,7 +19,7 @@ export const Input: React.FC<InputProps> = ({ register, name, desc, title, error
     {title && <h3>{title}</h3>}
     {desc && <p>{desc}</p>}
     <input
-      id={name}
+      data-test-id={name}
       className={clsx(clsx(style.input, { [style.error_input]: !!error }))}
       {...(register && register(name))}
       {...props}

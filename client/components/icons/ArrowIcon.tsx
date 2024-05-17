@@ -1,10 +1,10 @@
 import React from 'react'
 
-export const ArrowIcon = () => (
+export const ArrowIcon: React.FC<IconProps> = ({ size }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="46"
-    height="46"
+    width={size}
+    height={size}
     viewBox="0 0 20 20"
   >
     <g>

@@ -24,7 +24,7 @@ const BasketItem: React.FC<BasketItemProps> = ({ product, id, clear }) => (
       <div className={style.product_stats}>
         <div className={style.product_header}>
           <h3>{product.title}</h3>
-          <div>${priceCalc(product.price, product.discount || 0)}</div>
+          <div>${priceCalc(product.price, product.discount ?? 0)}</div>
         </div>
         <p>{product.gender} Shoes</p>
         <p>Size: {product.size}</p>

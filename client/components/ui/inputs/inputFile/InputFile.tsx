@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import React from 'react'
+import React, { ComponentProps } from 'react'
 import type { UseFormRegister, UseFormResetField } from 'react-hook-form'
 
 import { Button } from '@/components/ui'
@@ -9,7 +9,7 @@ import { usePreview } from '@/hooks/usePreview'
 
 import style from './inputFile.module.scss'
 
-interface InputFileProps {
+interface InputFileProps extends ComponentProps<'input'> {
   name: string
   multiple?: boolean
   resetField: UseFormResetField<any>

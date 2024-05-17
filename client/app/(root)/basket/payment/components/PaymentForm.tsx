@@ -13,13 +13,14 @@ import shoppingABI from '@/contracts/Abi/shoppingABI.json'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import style from '@/styles/pages/payment.module.scss'
 
-import { calcSum } from '../calcSum'
-import { CheckIcon } from '../icons'
+import { calcSum } from '@/components/calcSum'
+import { CheckIcon } from '@/components/icons'
 
 import EthereumRate from './EthereumRate'
 import MetaMaskStages from './MetaMaskStages'
 import PaymentMethod from './PaymentMethod'
 import ViewNewOrder from './ViewNewOrder'
+import { orderPrice } from '@/components/orderPrice'
 
 const shoppingURL = '0x5FbDB2315678afecb367f032d93F642f64180aa3'
 
@@ -64,7 +65,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ userData, rate }) => {
   const pay = async () => {
     if (contract) {
       try {
-        const ethPrice = parseEther((sum / rate.USD).toString())
+        const ethPrice = parseEther((orderPrice(sum, 0) / rate.USD).toString())
         contract.on('Payed', async (_, orderId, message) => setStatus({ orderId, message }))
         await contract.pay(productsId, ethPrice, { value: ethPrice })
       } catch (error) {

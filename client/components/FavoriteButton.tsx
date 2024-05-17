@@ -53,7 +53,7 @@ const FavoriteButton: React.FC<FavoriteProps> = ({ productId, favoriteList }) =>
       onClick={handlerFavorite}
     >
       Favorite
-      <HeartIcon size={16} contained={!favoriteList.includes(value?._id || '')} />
+      <HeartIcon size={16} contained={!favoriteList.includes(value?._id ?? '')} />
     </Button>
   )
 }

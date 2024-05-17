@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react'
 
 import style from '@/components/footer/footer.module.scss'
@@ -9,16 +7,16 @@ import BackButton from './BackButton'
 const Footer = () => (
   <footer className={style.footer}>
     <div className={style.footer_title}>
-      {Array.from('VELOCE').map((item, id) => (
+      {Array.from('VELOCE').map((item: string, index: number) => (
         <svg
-          key={id}
+          key={index}
           width='300'
           height='320'
           viewBox='0 0 100 100'
           xmlns='http://www.w3.org/2000/svg'
         >
           <text
-            x={[-1, 4, 7, -4, 4, 10][id]}
+            x={[-1, 4, 7, -4, 4, 10][index]}
             y='100'
             fontFamily='Arial'
             fontSize='130'

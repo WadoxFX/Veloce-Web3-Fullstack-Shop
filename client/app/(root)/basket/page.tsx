@@ -8,15 +8,14 @@ import { priceCalc } from '@/components/priceCalc'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import style from '@/styles/pages/basket.module.scss'
 
-import Sceleton from './Sceleton'
+import Skeleton from './Skeleton'
+import { calcSum } from '@/components/calcSum'
 
 const Basket = () => {
   const { data, loading, clear } = useLocalStorage('basket')
-  if (loading) return <Sceleton />
+  if (loading) return <Skeleton />
 
-  let sum: number = 0
-  for (let i = 0; data.length > i; i += 1) sum += priceCalc(data[i].price, data[i].discount || 0)
-
+  const sum = calcSum(data)
   return (
     <div className={style.container}>
       <ul className={style.products_list}>

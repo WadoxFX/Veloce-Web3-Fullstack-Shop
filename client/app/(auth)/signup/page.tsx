@@ -3,7 +3,7 @@ import React from 'react'
 
 import style from '../auth.module.scss'
 
-import SignUpForm from './SignUpForm'
+import SignUpForm from './components/SignUpForm'
 
 export const metadata: Metadata = {
   title: 'Sign Up - Veloce',
