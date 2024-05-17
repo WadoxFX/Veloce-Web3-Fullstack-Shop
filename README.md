@@ -126,6 +126,24 @@ After installation, an extension with the MetaMask logo should appear in the upp
 ![](./assets/m4.png)
 ![](./assets/m5.png)
 
-Copy one of the private keys
+Now let's get a test currency
 
-![](./assets/hardhat%20result.png)
+![](./assets/m6.png)
+![](./assets/m7.png)
+
+Copy any private key
+
+![](./assets/m8.png)
+![](./assets/m9.png)
+
+Everything is ready, our balance is 10,000 ETH
+
+![](./assets/m10.png)
+
+## Config
+
+Create a .env file on the server and add 2 variable names to it whose names must be strictly observed
+```js
+DB_LINK = //Your link to mongoDB
+JWT_SECRET_KEY = // Any key, for example 123456 (Do not use for real projects because it is very simple, use a password generator)
+```
