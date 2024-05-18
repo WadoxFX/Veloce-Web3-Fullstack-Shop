@@ -18,14 +18,17 @@ type GetProductAndUserIds = GetUserId & {
 }
 
 interface GetOrderParams {
+  productIds: string[]
+  paid?: boolean
   city: string
   method: string
+  price: number
   phone: string
   post: string
   surname: string
   username: string
-  address: string | undefined
-  orderId: number | undefined
+  address?: string
+  orderId?: number
 }
 
 interface ReqStatus {

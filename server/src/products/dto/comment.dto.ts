@@ -1,6 +1,6 @@
 import { Types } from 'mongoose'
 
-export class CommentDto {
+export class AddCommentDto {
   productId: Types.ObjectId
   creator: Types.ObjectId
   grade: number

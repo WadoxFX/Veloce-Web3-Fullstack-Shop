@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form'
 
 import { logInSchema } from '@/@types/zod'
 import type { TLogInSchema } from '@/@types/zod'
-import { logIn } from '@/api/auth'
+import { login } from '@/api/auth'
 import { Button, InputLabel } from '@/components/ui'
 
 import style from '../../auth.module.scss'
@@ -26,7 +26,7 @@ const LogInForm = () => {
 
   const onSubmit = handleSubmit(async data => {
     try {
-      await logIn({ params: data })
+      login({ params: data })
       router.push('/')
     } catch (error: any) {
       setError(String(error.response.data.message))
@@ -60,7 +60,7 @@ const LogInForm = () => {
       </div>
 
       <div className={style.controllers}>
-        <Button variant='contained' size='medium'>
+        <Button data-test-id='loginBotton' variant='contained' size='medium'>
           Log In
         </Button>
 

@@ -1,4 +1,4 @@
-import { Date, ObjectId, Types } from 'mongoose'
+import { Date, Mongoose, ObjectId, Types } from 'mongoose'
 
 export interface ProductSize {
   size: string
@@ -29,6 +29,10 @@ export interface Comment {
   createdAt: Date
 }
 
+export type LikedList = Omit<
+  ProductType,
+  'collection' | 'color' | 'sizes' | 'comments'
+>[]
 export interface ProductType {
   _id: Types.ObjectId
   title: string

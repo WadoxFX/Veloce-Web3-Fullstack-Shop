@@ -7,7 +7,7 @@ import { priceCalc } from '../priceCalc'
 import style from './productSchema.module.scss'
 
 export const ProductSchema: React.FC<{ product: Product }> = ({ product }) => (
-  <li id='product'>
+  <li data-test-id='product'>
     <Link href={`/products/${product._id}`} className={style.product}>
       <Image
         src={process.env.SERVER_URL + product.images[0]}

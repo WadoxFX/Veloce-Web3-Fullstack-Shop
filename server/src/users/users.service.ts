@@ -1,11 +1,11 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import { UserType } from 'interfaces/user.interface'
+import { ProductFavorite } from '../products/interfaces'
+import { UserDto, UserProfileEditDto } from './dto'
+import { User } from './schemas/user.schema'
+import { UserType } from './interfaces'
 import { Model, Types } from 'mongoose'
-import { User } from 'src/utils/schemas/user.schema'
-import { UserDto, UserProfileEditDto } from './dto/user.dto'
 import { hashSync } from 'bcrypt'
-import { ProductFavorite } from 'interfaces/product.interface'
 
 @Injectable()
 export class UsersService {
@@ -51,41 +51,20 @@ export class UsersService {
       { new: true },
     )
 
-    if (!user)
-      throw new HttpException('User is not found', HttpStatus.NOT_FOUND)
-
-    return options
+    return user
   }
 
   async addInLikedList(ids: ProductFavorite) {
-    const user = await this.userModel.findByIdAndUpdate(
+    return await this.userModel.findByIdAndUpdate(
       ids.userId,
       { $addToSet: { likedList: ids.productId } },
       { new: true },
     )
-
-    if (!user)
-      throw new HttpException('User is not found', HttpStatus.NOT_FOUND)
   }
 
   async removeFromLikedList(ids: ProductFavorite) {
-    const user = await this.userModel.findByIdAndUpdate(ids.userId, {
+    return await this.userModel.findByIdAndUpdate(ids.userId, {
       $pull: { likedList: ids.productId },
     })
-
-    if (!user)
-      throw new HttpException('User is not found', HttpStatus.NOT_FOUND)
-  }
-
-  async getUserLikedProducts(id: string) {
-    const user = await this.userModel.findById(id).select('likedList')
-
-    if (!user) {
-      throw new HttpException('User is not found', HttpStatus.NOT_FOUND)
-    }
-
-    const likedProducts = await this.userModel.find({ _id: user.likedList })
-
-    return likedProducts
   }
 }

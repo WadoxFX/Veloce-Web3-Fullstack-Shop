@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   HttpCode,
+  HttpException,
   HttpStatus,
   Param,
   Post,
@@ -12,85 +13,162 @@ import {
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt'
 import { FilesInterceptor } from '@nestjs/platform-express'
-import { ProductDto } from './dto/product.dto'
+import { ProductDto, AddCommentDto, DeleteCommentDto } from './dto'
 import { ProductsService } from './products.service'
 import {
-  CommentType,
+  LikedList,
   ProductFavorite,
   ProductOption,
+  ProductSize,
   ProductType,
-} from 'interfaces/product.interface'
-import { CommentDto, DeleteCommentDto } from './dto/comment.dto'
+} from './interfaces'
+import { UsersService } from 'src/users/users.service'
 import { ObjectId } from 'mongoose'
+import * as fs from 'fs'
 
 @Controller('products')
 export class ProductsController {
-  constructor(private productsService: ProductsService) {}
+  constructor(
+    private productsService: ProductsService,
+    private usersService: UsersService,
+    private jwtService: JwtService,
+  ) {}
+
+  @Post('create')
+  @HttpCode(HttpStatus.CREATED)
+  @UseInterceptors(FilesInterceptor('file'))
+  async create(@UploadedFiles() files: Express.Multer.File[], @Body() productDto: ProductDto): Promise<ProductType> {
+    const images: string[] = files.map((file) => file.path)
+    const sizes: ProductSize[] = JSON.parse(productDto.sizes)
+
+    const newProduct = await this.productsService.createProduct(productDto, images, sizes)
+    if (!newProduct) {
+      throw new HttpException(
+        'There were errors while creating the product',
+        HttpStatus.CONFLICT,
+      )
+    }
+
+    return newProduct
+  }
+
+  @Delete('delete')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async delete(@Body('productid') productId: ObjectId): Promise<void> {
+    const product: ProductType = await this.productsService.findProductById(productId)
+
+    if (!product) {
+      throw new HttpException('Product not found', HttpStatus.NOT_FOUND)
+    }
+
+    if (product.images.length) {
+      for (let i = 0; product.images.length > i; i++) {
+        await fs.promises.unlink(product.images[i])
+      }
+    }
+
+    await this.productsService.deleteProduct(productId)
+  }
 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
-  product(@Param('id') id: string): Promise<ProductType> {
-    return this.productsService.findProduct(id)
+  product(@Param('id') id: ObjectId): Promise<ProductType> {
+    return this.productsService.findProductById(id, {
+      path: 'comments',
+      options: { sort: { createdAt: 1 } },
+    })
   }
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  productsList(@Query() params: ProductOption): Promise<ProductType[]> {
-    return this.productsService.findProducts(
+  async productsList(@Query() params: ProductOption): Promise<ProductType[]> {
+    const products = await this.productsService.findProducts(
       params.page,
       params.limit,
       params.filters,
       params.filters?.option,
     )
+
+    if (!products) {
+      throw new HttpException('Products not found', HttpStatus.NOT_FOUND)
+    }
+
+    return products
   }
 
   @Get('new/list')
   @HttpCode(HttpStatus.OK)
-  newProductsList(): Promise<ProductType[]> {
-    return this.productsService.findNewProducts()
-  }
+  async newProductsList(): Promise<ProductType[]> {
+    const products = await this.productsService.findNewProducts()
 
-  @Post('create')
-  @HttpCode(HttpStatus.CREATED)
-  @UseInterceptors(FilesInterceptor('file'))
-  create(@UploadedFiles() files: Express.Multer.File[], @Body() productDto: ProductDto): ProductType {
-    return this.productsService.createProduct(productDto, files)
-  }
+    if (!products) {
+      throw new HttpException('Products not found', HttpStatus.NOT_FOUND)
+    }
 
-  @Delete('delete')
-  @HttpCode(HttpStatus.NO_CONTENT)
-  delete(@Body('productid') productId: ObjectId) {
-    return this.productsService.deleteproduct(productId)
+    return products
   }
 
   @Put('addInFavorite')
-  @HttpCode(HttpStatus.OK)
-  addInFavorite(@Body() ids: ProductFavorite) {
-    return this.productsService.addInFavorite(ids)
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async addInFavorite(@Body() ids: ProductFavorite): Promise<void> {
+    const product = await this.productsService.addInFavorite(ids)
+    if (!product) {
+      throw new HttpException('Product not found', HttpStatus.NOT_FOUND)
+    }
+
+    const user = await this.usersService.addInLikedList(ids)
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND)
+    }
   }
 
   @Put('removeFromFavorites')
-  @HttpCode(HttpStatus.OK)
-  removeFromFavorites(@Body() ids: ProductFavorite) {
-    return this.productsService.removeFromFavorites(ids)
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async removeFromFavorites(@Body() ids: ProductFavorite): Promise<void> {
+    const product = await this.productsService.removeFromFavorites(ids)
+    if (!product) {
+      throw new HttpException('Product not found', HttpStatus.NOT_FOUND)
+    }
+
+    const user = await this.usersService.removeFromLikedList(ids)
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND)
+    }
   }
 
   @Get('liked/list')
   @HttpCode(HttpStatus.OK)
-  likedList(@Query('token') token: string): Promise<Omit<ProductType, 'collection' | 'color' | 'sizes' | 'comments'>[]> {
-    return this.productsService.getUserLikedProducts(token)
+  async likedList(@Query('token') token: string): Promise<LikedList> {
+    const { id } = await this.jwtService.verifyAsync(token)
+
+    const user = await this.usersService.findById(id)
+    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND)
+
+    return await this.productsService.getUserLikedProducts(user.likedList)
   }
 
   @Put('addComment')
-  @HttpCode(HttpStatus.OK)
-  addComment(@Body() commentDto: CommentDto): Promise<CommentType> {
-    return this.productsService.addComment(commentDto)
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async addComment(@Body() addCommentDto: AddCommentDto): Promise<void> {
+    const product = await this.productsService.addComment(addCommentDto)
+
+    if (!product) {
+      throw new HttpException(
+        'Failed to create a comment, product not found or deleted',
+        HttpStatus.NOT_FOUND,
+      )
+    }
   }
 
   @Put('deleteComment')
-  @HttpCode(HttpStatus.OK)
-  deleteComment(@Body() deleteCommentDto: DeleteCommentDto) {
-    return this.productsService.deleteComment(deleteCommentDto)
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async deleteComment(@Body() deleteCommentDto: DeleteCommentDto) {
+    const product = await this.productsService.deleteComment(deleteCommentDto)
+
+    if (!product) {
+      throw new HttpException('Product not found', HttpStatus.NOT_FOUND)
+    }
   }
 }

@@ -28,7 +28,7 @@ const Account = () => {
   if (isLoading) return <div>...</div>
 
   return (
-    <Link id='userIcon' href={`/profile/${value?._id}`} aria-label='Your account'>
+    <Link data-test-id="user_icon" href={`/profile/${value?._id}`} aria-label='Your account'>
       <UserIcon size={24} />
     </Link>
   )

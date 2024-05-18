@@ -74,7 +74,7 @@ const SignUpForm = () => {
       </div>
 
       <div className={style.controllers}>
-        <Button variant='contained' size='medium'>
+        <Button data-test-id='signupBotton' variant='contained' size='medium'>
           Log In
         </Button>
 

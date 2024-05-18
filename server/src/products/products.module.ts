@@ -4,9 +4,9 @@ import { ProductsService } from './products.service'
 import { MulterModule } from '@nestjs/platform-express'
 import { diskStorage } from 'multer'
 import { MongooseModule } from '@nestjs/mongoose'
-import { Product, ProductSchema } from 'src/utils/schemas/product.schema'
+import { Product, ProductSchema } from 'src/products/schemas/product.schema'
 import { UsersService } from 'src/users/users.service'
-import { User, UserSchema } from 'src/utils/schemas/user.schema'
+import { User, UserSchema } from 'src/users/schemas/user.schema'
 import { JwtModule } from '@nestjs/jwt'
 import { ConfigModule } from '@nestjs/config'
 
@@ -19,7 +19,7 @@ import { ConfigModule } from '@nestjs/config'
     MulterModule.register({
       storage: diskStorage({
         destination: './uploads',
-        filename: (req, file, cd) => {
+        filename: (_, file, cd) => {
           cd(null, Date.now() + '-' + file.originalname)
         },
       }),

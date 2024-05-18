@@ -15,9 +15,9 @@ describe('Log In', () => {
 
   it('Filling out data and logging in', () => {
     cy.url().should('include', '/login')
-    cy.get('input#email').type(user.email)
-    cy.get('input#password').type(user.password)
-    cy.get('button').contains('Log In').click()
+    cy.get('[data-test-id="email"]').type(user.email)
+    cy.get('[data-test-id="password"]').type(user.password)
+    cy.get('[data-test-id="loginBotton"]').click()
 
     cy.wait('@ReqLogin').then(xhr => expect(xhr.response?.statusCode).to.eq(200))
     cy.wait('@ReqProfile').then(xhr => expect(xhr.response?.statusCode).to.eq(200))

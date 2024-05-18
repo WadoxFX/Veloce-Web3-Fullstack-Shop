@@ -50,6 +50,7 @@ const FavoriteButton: React.FC<FavoriteProps> = ({ productId, favoriteList }) =>
       variant='outlined'
       loading={isLoading}
       disabled={isLoading}
+      data-test-id="favorite"
       onClick={handlerFavorite}
     >
       Favorite

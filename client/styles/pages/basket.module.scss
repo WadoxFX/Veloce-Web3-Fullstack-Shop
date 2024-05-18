@@ -21,14 +21,13 @@ $aside: 400px;
   display: grid;
   grid-template-columns: auto $aside;
   gap: 60px;
-  margin-top: 20px;
   min-height: calc(100svh - 72px - 30px);
 
   .statistic {
     width: $aside;
 
     aside {
-      top: 92px;
+      top: 72px;
       position: sticky;
 
       form {

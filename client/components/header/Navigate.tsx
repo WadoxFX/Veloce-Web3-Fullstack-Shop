@@ -10,7 +10,9 @@ const Navigate = () => (
         <Link href='/'>Home</Link>
       </li>
       <li>
-        <Link href='/shop'>Shop</Link>
+        <Link data-test-id='Shop' href='/shop'>
+          Shop
+        </Link>
       </li>
     </ul>
   </nav>

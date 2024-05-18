@@ -12,7 +12,7 @@ interface InputLabelProps extends ComponentProps<'input'> {
 
 export const InputLabel: React.FC<InputLabelProps> = ({ name, label, register, error, ...props }) => (
   <div className={style.container}>
-    <input placeholder=' ' id={name} {...(register && register(name))} {...props} />
+    <input data-test-id={name} placeholder=' ' {...(register && register(name))} {...props} />
     {label && <label htmlFor={name}>{label}</label>}
     {error && <p className={style.error}>{error}</p>}
   </div>

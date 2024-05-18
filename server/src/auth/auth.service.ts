@@ -2,10 +2,11 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { compareSync } from 'bcrypt'
 import { Response } from 'express'
-import { Token, UserType } from 'interfaces/user.interface'
+import { Token, UserType } from 'src/users/interfaces'
 import { UserDto } from 'src/users/dto/user.dto'
 import { UsersService } from 'src/users/users.service'
 import { CookieService } from 'src/utils/services/cookie.service'
+import { LoginDto } from './dto'
 
 @Injectable()
 export class AuthService {
@@ -15,7 +16,7 @@ export class AuthService {
     private cookieService: CookieService,
   ) {}
 
-  async logIn(email: string, password: string, res: Response): Promise<Token> {
+  async login(email: string, password: string) {
     const user = await this.usersService.findOne(email)
 
     if (!user) {
@@ -26,15 +27,11 @@ export class AuthService {
     }
 
     const validPassword = compareSync(password, user.password)
-
     if (!validPassword) {
       throw new HttpException('Incorrect password', HttpStatus.CONFLICT)
     }
 
-    const token: string = this.jwtService.sign({ id: user._id })
-    this.cookieService.save('token', token, res)
-
-    return { token }
+    return user
   }
 
   async signUp(userDto: UserDto, res: Response): Promise<Token> {
@@ -56,19 +53,14 @@ export class AuthService {
   }
 
   async profile(id: string): Promise<UserType> {
-    const user = await this.usersService.findById(id)
-
-    if (!user) throw new HttpException('User not found', HttpStatus.NOT_FOUND)
-
-    return user
+    return await this.usersService.findById(id)
   }
 
-  async deleteAccount(userDto: Omit<UserDto, 'username' | 'surname'>) {
-    const { _id, password } = await this.usersService.findOne(userDto.email)
-
+  async deleteAccount(loginDto: LoginDto) {
+    const { _id, password } = await this.usersService.findOne(loginDto.email)
     if (!_id) throw new HttpException('User not found', HttpStatus.NOT_FOUND)
 
-    const validPassword = compareSync(userDto.password, password)
+    const validPassword = compareSync(loginDto.password, password)
     if (!validPassword) {
       throw new HttpException('Incorrect password', HttpStatus.CONFLICT)
     }

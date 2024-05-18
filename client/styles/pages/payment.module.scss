@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: auto 400px;
   gap: 30px;
-  margin-top: 20px;
   min-height: 100svh;
 
   form {
@@ -160,6 +159,57 @@
         }
       }
     }
+
+    .order_container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .order {
+        display: grid;
+        align-items: center;
+        grid-template-columns: auto max-content;
+        justify-content: space-between;
+
+        .order_info {
+          display: flex;
+          align-items: center;
+          gap: 32px;
+
+          .buyer {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            .fullname {
+              display: flex;
+            }
+          }
+
+          .price,
+          data {
+            color: var(--desc-color);
+          }
+
+          .paid,
+          .not_paid {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            background: #ebfcf2;
+            color: #3aa271;
+            gap: 6px;
+            font-weight: 500;
+            border-radius: 9999px;
+
+            &.not_paid {
+              background: #fcebeb;
+              color: #a23a3a;
+            }
+          }
+        }
+      }
+    }
   }
 
   .statistic_container {
@@ -170,7 +220,7 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
-      top: 92px;
+      top: 72px;
 
       hr {
         border-bottom: 1px solid #dbdbdb;
@@ -202,10 +252,6 @@
         }
       }
     }
-  }
-
-  .new_order {
-    
   }
 }
 

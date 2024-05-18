@@ -201,13 +201,32 @@ interface PaymentFormProps {
   rate: ExchangeRates
 }
 
-interface ViewNewOrderProps {
-  order: any
-  loading: boolean
-}
-
 interface PayedStatus {
   address?: string
   orderId?: number
   message?: string
+}
+
+interface Order {
+  _id: string
+  city: string
+  method: string
+  price: number
+  post: string
+  buyer: Buyer
+  paid?: boolean
+  address?: string
+  orderId?: number
+  createdAt: Date
+}
+
+interface Buyer {
+  username: string
+  surname: string
+  phone: string
+}
+
+interface ViewNewOrderProps {
+  order: Order | null
+  loading: boolean
 }

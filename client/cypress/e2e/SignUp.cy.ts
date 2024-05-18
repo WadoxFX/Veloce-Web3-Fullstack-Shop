@@ -9,11 +9,11 @@ describe('Sign Up', () => {
   })
 
   it('Registration', () => {
-    cy.get('input#username').type(user.username)
-    cy.get('input#surname').type(user.surname)
-    cy.get('input#email').type(user.email)
-    cy.get('input#password').type(user.password)
-    cy.contains('Log In').click()
+    cy.get('[data-test-id="username"]').type(user.username)
+    cy.get('[data-test-id="surname"]').type(user.surname)
+    cy.get('[data-test-id="email"]').type(user.email)
+    cy.get('[data-test-id="password"]').type(user.password)
+    cy.get('[data-test-id="signupBotton"]').click()
 
     cy.wait('@ReqRegister').then(xhr => {
       expect(xhr.response?.statusCode).to.eq(201)
@@ -22,10 +22,10 @@ describe('Sign Up', () => {
     cy.url().should('include', '/')
     cy.getCookie('token').should('exist')
 
-    cy.get('a#userIcon').click()
+    cy.get('[data-test-id="user_icon"]').click()
     cy.url().should('include', '/profile')
-    cy.get('input#username').should('include.value', user.username)
-    cy.get('input#surname').should('include.value', user.surname)
+    cy.get('[data-test-id="username"]').should('include.value', user.username)
+    cy.get('[data-test-id="surname"]').should('include.value', user.surname)
   })
 
   after(() => cy.deleteAccount(user.email, user.password))

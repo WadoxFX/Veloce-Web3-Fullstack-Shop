@@ -74,7 +74,7 @@ const ProfileForm: React.FC<{ userData: User; userId: string }> = ({ userData, u
         error={errors.city?.message}
       />
 
-      <Button variant='contained' size='medium'>
+      <Button data-test-id='save_profile' variant='contained' size='medium'>
         Save Profile
       </Button>
     </form>

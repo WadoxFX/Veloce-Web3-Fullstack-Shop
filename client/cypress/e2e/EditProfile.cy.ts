@@ -15,17 +15,17 @@ describe('Edit Profile', () => {
 
   it('Changing your account information', () => {
     // Visit the "profile" page
-    cy.get('a#userIcon').click()
+    cy.get('[data-test-id="user_icon"]').click()
     cy.url().should('include', '/profile')
 
     // Clear old data with new content about the user
-    cy.get('input#username').clear().type('newUsername')
-    cy.get('input#surname').clear().type('newSurname')
-    cy.get('input#phone').clear().type('1234567890')
-    cy.get('input#country').clear().type('Ukraine')
-    cy.get('input#city').clear().type('Rivne')
-    cy.contains('Save Profile').click()
-    cy.wait('@ReqEditProfile').then(xhr => expect(xhr.response?.statusCode).to.eq(200))
+    cy.get('[data-test-id="username"]').clear().type('newUsername')
+    cy.get('[data-test-id="surname"]').clear().type('newSurname')
+    cy.get('[data-test-id="phone"]').clear().type('1234567890')
+    cy.get('[data-test-id="country"]').clear().type('Ukraine')
+    cy.get('[data-test-id="city"]').clear().type('Rivne')
+    cy.get('[data-test-id="save_profile"]').click()
+    cy.wait('@ReqEditProfile').then(xhr => expect(xhr.response?.statusCode).to.eq(204))
   })
 
   after(() => cy.deleteAccount(user.email, user.password))

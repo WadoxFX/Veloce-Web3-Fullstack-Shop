@@ -1,6 +1,6 @@
 import { api } from '../instance'
 
-export const logIn = ({
+export const login = ({
   params,
   config,
 }: AxiosRequestConfig<Omit<AuthData, 'username' | 'surname'>>) => {

@@ -12,9 +12,7 @@ import { Button, Input } from '@/components/ui'
 import shoppingABI from '@/contracts/Abi/shoppingABI.json'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 import style from '@/styles/pages/payment.module.scss'
-
 import { calcSum } from '@/components/calcSum'
-import { CheckIcon } from '@/components/icons'
 
 import EthereumRate from './EthereumRate'
 import MetaMaskStages from './MetaMaskStages'
@@ -27,8 +25,8 @@ const shoppingURL = '0x5FbDB2315678afecb367f032d93F642f64180aa3'
 const PaymentForm: React.FC<PaymentFormProps> = ({ userData, rate }) => {
   const [signer, setSigner] = useState<ethers.JsonRpcSigner | null>(null)
   const [contract, setContract] = useState<ethers.Contract | null>(null)
+  const [order, setOrder] = useState<Order | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
-  const [status, setStatus] = useState<PayedStatus | null>(null)
   const { data: products } = useLocalStorage('basket')
   const {
     register,
@@ -43,7 +41,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ userData, rate }) => {
   })
 
   const method: string = watch('method')
-  const productsId: string[] = products.map(product => product._id)
+  const productIds: string[] = products.map(product => product._id)
   const sum = calcSum(products)
 
   const onConnect = async () => {
@@ -63,14 +61,13 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ userData, rate }) => {
   }
 
   const pay = async () => {
-    if (contract) {
+    if (contract && signer) {
       try {
         const ethPrice = parseEther((orderPrice(sum, 0) / rate.USD).toString())
-        contract.on('Payed', async (_, orderId, message) => setStatus({ orderId, message }))
-        await contract.pay(productsId, ethPrice, { value: ethPrice })
-      } catch (error) {
+        await contract.pay(productIds, ethPrice, { value: ethPrice })
+      } catch (error: any) {
         setLoading(false)
-        console.warn('Transaction cancelled')
+        throw new Error('Transaction cancelled')
       }
     }
   }
@@ -81,16 +78,22 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ userData, rate }) => {
 
     try {
       if (method === 'MetaMask') await pay()
-
       const id = await contract?.uuid()
-      await createNewOrder({
+
+      const order = await createNewOrder({
         params: {
           ...data,
-          address: signer?.address,
-          orderId: Number(id),
+          productIds,
+          price: orderPrice(sum),
+          ...(method === 'MetaMask' && {
+            address: signer?.address,
+            orderId: Number(id),
+            paid: true,
+          }),
         },
       })
 
+      setOrder(await order.data)
       setLoading(false)
     } catch (error) {
       console.warn(error)
@@ -202,19 +205,17 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ userData, rate }) => {
             />
           </div>
 
-          <Button disabled={!signer} size='medium' radius='rounded' variant='contained'>
+          <Button
+            disabled={!signer || !products.length || !!loading}
+            size='medium'
+            radius='rounded'
+            variant='contained'
+          >
             Pay
           </Button>
-
-          <ViewNewOrder loading={loading} order={null} />
-          {status && (
-            <div className={style.status}>
-              <CheckIcon size={16} color='#00c9a7' />
-              <div>{status.message}</div>
-            </div>
-          )}
         </div>
       )}
+      <ViewNewOrder loading={loading} order={order} />
     </form>
   )
 }
