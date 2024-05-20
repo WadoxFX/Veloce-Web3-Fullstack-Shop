@@ -9,6 +9,10 @@ interface GetParams {
   id: string
 }
 
+interface GetAuthToken {
+  token: string
+}
+
 interface GetUserId {
   userId: string
 }
@@ -40,4 +44,8 @@ interface AuthData {
   surname: string
   email: string
   password: string
+}
+
+interface GetOrderId {
+  orderId: string
 }

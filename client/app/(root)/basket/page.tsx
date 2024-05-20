@@ -2,14 +2,13 @@
 
 import React from 'react'
 
-import BasketAside from '@/components/BasketAside'
-import BasketItem from '@/components/BasketItem'
-import { priceCalc } from '@/components/priceCalc'
-import { useLocalStorage } from '@/hooks/useLocalStorage'
-import style from '@/styles/pages/basket.module.scss'
-
-import Skeleton from './Skeleton'
 import { calcSum } from '@/components/calcSum'
+import { useLocalStorage } from '@/hooks/useLocalStorage'
+
+import style from './basket.module.scss'
+import BasketAside from './components/BasketAside'
+import BasketItem from './components/BasketItem'
+import Skeleton from './components/Skeleton'
 
 const Basket = () => {
   const { data, loading, clear } = useLocalStorage('basket')

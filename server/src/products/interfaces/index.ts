@@ -17,7 +17,7 @@ export interface FiltersType {
 export interface ProductOption {
   limit: number
   page: number
-  filters?: FiltersType
+  options?: FiltersType
 }
 
 export type Comments = Comment[]

@@ -1,35 +1,31 @@
-import { getProducts } from '@/api/products'
-import { useEffect, useState, useCallback } from 'react'
+import { api } from '@/api/instance'
+import { useCallback, useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 
-export const usePagination = (limit: number, filters: FiltersList) => {
-  const [data, setData] = useState<Products>([])
+export const usePagination = <T extends unknown[]>(url: string, limit: number, options?: FiltersList) => {
+  const [data, setData] = useState<T>([] as unknown as T)
   const [page, setPage] = useState<number>(1)
-  const [blocker, setBlocker] = useState(false)
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [blocker, setBlocker] = useState<boolean>(false)
   const { inView, ref } = useInView({ threshold: 0 })
 
   useEffect(() => {
     setPage(1)
-    setData([])
+    setData([] as unknown as T)
     setBlocker(false)
-  }, [filters])
+  }, [options])
 
-  const fetchProducts = useCallback(async () => {
-    const products = await getProducts({ config: { params: { limit, page, filters } } }).then(
-      data => data.data,
-    )
-    setData(prev => [...prev, ...products])
-    setIsLoading(false)
+  const getData = useCallback(async () => {
+    const data = await api.get<T>(url, { params: { limit, page, options } }).then(res => res.data)
+
+    setData(prev => [...prev, ...data] as T)
     setPage(page + 1)
-    if (!products.length) setBlocker(true)
-  }, [limit, page, filters])
+
+    if (!data.length) setBlocker(true)
+  }, [limit, page, options])
 
   useEffect(() => {
-    if (inView && !blocker) {
-      fetchProducts()
-    }
-  }, [inView, fetchProducts])
+    if (inView && !blocker) getData()
+  }, [inView, getData])
 
-  return { data, isLoading, blocker, ref }
+  return { data, blocker, ref }
 }

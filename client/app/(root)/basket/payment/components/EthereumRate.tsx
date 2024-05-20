@@ -1,9 +1,9 @@
 import React from 'react'
 
-import style from '@/styles/pages/payment.module.scss'
-
 import { EthereumIcon, ExchangeArrowIcon } from '@/components/icons'
 import { orderPrice } from '@/components/orderPrice'
+
+import style from '../payment.module.scss'
 
 const EthereumRate: React.FC<EthereumRateProps> = ({ sum, rate }) => (
   <div className={style.ethereum_rate}>

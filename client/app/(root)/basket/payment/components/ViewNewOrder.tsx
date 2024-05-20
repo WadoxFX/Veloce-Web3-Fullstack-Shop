@@ -1,20 +1,15 @@
+import clsx from 'clsx'
 import React from 'react'
 
-import style from '@/styles/pages/payment.module.scss'
 import { AvatarIcon, CheckMarkIcon, CrossIcon } from '@/components/icons'
-import clsx from 'clsx'
+import { orderDate } from '@/components/orderDate'
+
+import style from '../payment.module.scss'
 
 const ViewNewOrder: React.FC<ViewNewOrderProps> = ({ loading, order }) => {
   if (loading && !order) return <p>Loading...</p>
-
-  const { username, surname } = order?.buyer || {}
-
-  const orderDate = (date: Date) => {
-    const unixDate = new Date(date)
-    const option = Intl.DateTimeFormat('ua', { month: 'short', day: 'numeric', year: 'numeric' })
-    return option.format(unixDate)
-  }
-
+  const { username, surname } = order?.buyer ?? {}
+  
   return (
     order && (
       <div className={style.order_container}>

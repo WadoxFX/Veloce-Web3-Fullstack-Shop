@@ -8,19 +8,18 @@ import { useForm } from 'react-hook-form'
 import type { TPaymentSchema } from '@/@types/zod'
 import { paymentSchema } from '@/@types/zod'
 import { createNewOrder } from '@/api/orders'
+import { calcSum } from '@/components/calcSum'
+import { orderPrice } from '@/components/orderPrice'
 import { Button, Input } from '@/components/ui'
 import shoppingABI from '@/contracts/Abi/shoppingABI.json'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
-import style from '@/styles/pages/payment.module.scss'
-import { calcSum } from '@/components/calcSum'
+
+import style from '../payment.module.scss'
 
 import EthereumRate from './EthereumRate'
 import MetaMaskStages from './MetaMaskStages'
 import PaymentMethod from './PaymentMethod'
 import ViewNewOrder from './ViewNewOrder'
-import { orderPrice } from '@/components/orderPrice'
-
-const shoppingURL = '0x5FbDB2315678afecb367f032d93F642f64180aa3'
 
 const PaymentForm: React.FC<PaymentFormProps> = ({ userData, rate }) => {
   const [signer, setSigner] = useState<ethers.JsonRpcSigner | null>(null)
@@ -51,7 +50,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ userData, rate }) => {
       await ethereum.request({ method: 'eth_requestAccounts' })
       const provider = new ethers.BrowserProvider(ethereum)
       const signer = await provider.getSigner()
-      const contract = new ethers.Contract(shoppingURL, shoppingABI, signer)
+      const contract = new ethers.Contract(process.env.CONTRACT_URL ?? '', shoppingABI, signer)
 
       setSigner(signer)
       setContract(contract)

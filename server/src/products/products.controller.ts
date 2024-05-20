@@ -84,11 +84,11 @@ export class ProductsController {
   @Get()
   @HttpCode(HttpStatus.OK)
   async productsList(@Query() params: ProductOption): Promise<ProductType[]> {
+    const { page, limit, options } = params
+
     const products = await this.productsService.findProducts(
-      params.page,
-      params.limit,
-      params.filters,
-      params.filters?.option,
+      page, limit, options,
+      options?.option,
     )
 
     if (!products) {

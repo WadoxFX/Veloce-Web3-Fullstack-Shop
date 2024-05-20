@@ -9,8 +9,8 @@ import type { TProductSizeSchema } from '@/@types/zod'
 import { productSizeSchema } from '@/@types/zod'
 import style from '@/styles/pages/product.module.scss'
 
-import { basketLocalStorage } from '../basketLocalStorage'
-import { Modal } from '../ui'
+import { basketLocalStorage } from '../../../../../components/basketLocalStorage'
+import { Modal } from '../../../../../components/ui'
 
 const ProductParameters: React.FC<ProductParametersProps> = ({ product }) => {
   const {
@@ -24,7 +24,7 @@ const ProductParameters: React.FC<ProductParametersProps> = ({ product }) => {
       size: '',
     },
   })
-  
+
   const onSubmit = handleSubmit(size => {
     const { sizes, images, ...currentProduct } = product
 

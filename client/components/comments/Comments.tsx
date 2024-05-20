@@ -7,8 +7,8 @@ import { useToggle } from '@/hooks/useToggle'
 
 import CommentSchema from './CommentSchema'
 import CreateComment from './CreateComment'
-import style from './comments.module.scss'
 import { calcGrade } from './calcGrade'
+import style from './comments.module.scss'
 
 interface CommentsProps {
   comments?: ProductComments

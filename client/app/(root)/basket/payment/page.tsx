@@ -2,15 +2,16 @@ import { cookies } from 'next/headers'
 import React from 'react'
 
 import { getExchangeRates } from '@/api/currency'
+
 import PaymentForm from './components/PaymentForm'
 
 const Payment = async () => {
-  const cookie = cookies().get('token')
+  const authToken = cookies().get('token')
   const rate = await getExchangeRates('USD')
 
   let data
-  if (cookie) {
-    const url = `${process.env.SERVER_URL}auth/profile?token=${cookie?.value}`
+  if (authToken) {
+    const url = `${process.env.SERVER_URL}auth/profile?token=${authToken?.value}`
     const res = await fetch(url, { cache: 'no-cache' })
     data = await res.json()
   }

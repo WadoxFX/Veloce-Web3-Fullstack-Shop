@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Order } from './schemas/order.schema'
-import { Model } from 'mongoose'
+import { Model, ObjectId } from 'mongoose'
 import { OrderDto } from './dto'
 import { MailOrder, ContractOrder } from './interfaces'
 
@@ -16,5 +16,17 @@ export class OrdersService {
       ...orderData,
       buyer: { username, surname, phone },
     }).save()
+  }
+
+  findOrders(limit = 0, page = 0) {
+    return this.orderModule
+      .find()
+      .limit(limit)
+      .sort({ createdAt: -1 })
+      .skip((page - 1) * limit)
+  }
+
+  deleteOrder(orderId: ObjectId) {
+    return this.orderModule.findByIdAndDelete(orderId)
   }
 }

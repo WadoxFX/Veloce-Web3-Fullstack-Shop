@@ -13,16 +13,16 @@ import NoData from './NoData'
 import { Skeleton } from './Skeleton'
 
 const Shop = () => {
-  const value = useRecoilValue<FiltersList>(filters)
-  const { data, isLoading, blocker, ref } = usePagination(4, value)
+  const filterOptions = useRecoilValue<FiltersList>(filters)
+  const { data, blocker, ref } = usePagination<Products>('products', 3, filterOptions)
 
-  if (isLoading) return <Skeleton preloader={ref} />
   if (!data.length && blocker) return <NoData />
+  if (!data.length) return <Skeleton preloader={ref} />
 
   return (
     <div className={style.product_container}>
       <ul className={style.products_list}>
-        {data.map((product: Product) => (
+        {data.map(product => (
           <ProductSchema product={product} key={product._id} />
         ))}
       </ul>

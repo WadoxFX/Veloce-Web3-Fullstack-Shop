@@ -2,11 +2,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-import style from '@/styles/pages/basket.module.scss'
+import { TrashIcon } from '@/components/icons'
+import { priceCalc } from '@/components/priceCalc'
+import { Button } from '@/components/ui'
 
-import { TrashIcon } from './icons'
-import { priceCalc } from './priceCalc'
-import { Button } from './ui'
+import style from '../basket.module.scss'
 
 const BasketItem: React.FC<BasketItemProps> = ({ product, id, clear }) => (
   <li className={style.product}>

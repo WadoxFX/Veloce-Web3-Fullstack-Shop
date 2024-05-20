@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import React from 'react'
 
-import ProductCreator from '@/components/forms/ProductCreator'
+import ProductCreator from '../components/form/ProductCreator'
 
 export const metadata: Metadata = {
   title: 'Create Product - Veloce',

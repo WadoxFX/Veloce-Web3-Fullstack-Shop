@@ -1,6 +1,6 @@
 import React from 'react'
 
-import style from '@/styles/pages/basket.module.scss'
+import style from './basket.module.scss'
 
 const loading = () => (
   <div className={style.preloader}>

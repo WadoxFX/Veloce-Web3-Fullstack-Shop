@@ -1,4 +1,4 @@
-import React, { ComponentProps } from 'react'
+import type { ComponentProps } from 'react'
 import type { UseFormRegister } from 'react-hook-form'
 
 import style from './inputLabel.module.scss'

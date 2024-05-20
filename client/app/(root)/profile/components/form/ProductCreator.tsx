@@ -8,9 +8,8 @@ import { useRecoilValue } from 'recoil'
 import { productSchema } from '@/@types/zod'
 import type { TProductSchema } from '@/@types/zod'
 import { createProduct } from '@/api/products'
+import { Button, Input, InputFile, InputSize, TextArea } from '@/components/ui'
 import { gender as activeGender } from '@/recoil'
-
-import { Button, Input, InputFile, InputSize, TextArea } from '../ui'
 
 import GenderSelector from './GenderSelector'
 import style from './productCreator.module.scss'

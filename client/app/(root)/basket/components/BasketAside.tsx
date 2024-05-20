@@ -7,12 +7,11 @@ import { useForm } from 'react-hook-form'
 
 import { promoCodeSchema } from '@/@types/zod'
 import type { TPromoCodeSchema } from '@/@types/zod'
-import promoList from '@/promocodes.json'
-import style from '@/styles/pages/basket.module.scss'
-
-export {} from '@/components/orderPrice'
-import { Button, Input } from './ui'
 import { orderPrice } from '@/components/orderPrice'
+import { Button, Input } from '@/components/ui'
+import promoList from '@/promocodes.json'
+
+import style from '../basket.module.scss'
 
 const BasketAside: React.FC<BasketAsideProps> = ({ sum }) => {
   const [promoCode, setPromoCode] = useState<PromoCode | null>(null)

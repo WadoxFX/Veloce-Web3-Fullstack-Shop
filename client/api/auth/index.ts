@@ -13,3 +13,6 @@ export const signUp = ({ params, config }: AxiosRequestConfig<AuthData>) => {
 
 export const profile = (requestConfig?: GetUserConfig) =>
   api.get<UserProfile>('auth/profile', requestConfig?.config)
+
+export const profileByToken = ({ params, config }: AxiosRequestConfig<GetAuthToken>) =>
+  api.get<UserProfile>(`auth/profile?token=${params.token}`, config)

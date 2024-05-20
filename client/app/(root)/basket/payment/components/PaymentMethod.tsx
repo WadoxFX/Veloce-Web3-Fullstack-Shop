@@ -4,7 +4,8 @@ import React, { useId } from 'react'
 
 import mailCarIcon from '@/public/mailCar.svg'
 import metaMaskIcon from '@/public/metamask.svg'
-import style from '@/styles/pages/payment.module.scss'
+
+import style from '../payment.module.scss'
 
 const methods = [
   { method: 'Mail', icon: mailCarIcon },
@@ -15,9 +16,8 @@ const PaymentMethod: React.FC<PaymentMethodProps> = ({ method, address, onConnec
   const uid = useId()
   return (
     <div className={style.payment_method}>
-      {methods.map((item, id: number) => (
+      {methods.map(item => (
         <label
-          key={id}
           htmlFor={uid + item.method}
           onKeyDown={e => e.stopPropagation()}
           onClick={item.method === 'MetaMask' ? onConnect : undefined}

@@ -13,7 +13,7 @@ interface NavItem {
   title: string
   link: string
   icon: string
-  alt?: string
+  role?: string
 }
 
 type LikedProducts = LikedProduct[]
@@ -207,6 +207,7 @@ interface PayedStatus {
   message?: string
 }
 
+type Orders = Order[]
 interface Order {
   _id: string
   city: string
@@ -229,4 +230,9 @@ interface Buyer {
 interface ViewNewOrderProps {
   order: Order | null
   loading: boolean
+}
+
+interface NavItemListProps {
+  navItams: NavItems
+  userRole: string
 }

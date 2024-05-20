@@ -5,9 +5,10 @@ import { getProduct } from '@/api/products'
 import FavoriteButton from '@/components/FavoriteButton'
 import Slider from '@/components/Slider'
 import Comments from '@/components/comments/Comments'
-import ProductParameters from '@/components/forms/ProductParameters'
 import { priceCalc } from '@/components/priceCalc'
 import style from '@/styles/pages/product.module.scss'
+
+import ProductParameters from '../../profile/components/form/ProductParameters'
 
 export async function generateMetadata({ params: { id } }: Params): Promise<Metadata> {
   const product: Product = await getProduct({ params: { id } }).then(res => res.data)

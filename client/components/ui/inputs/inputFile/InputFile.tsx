@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import React, { ComponentProps } from 'react'
+import type { ComponentProps } from 'react'
 import type { UseFormRegister, UseFormResetField } from 'react-hook-form'
 
 import { Button } from '@/components/ui'

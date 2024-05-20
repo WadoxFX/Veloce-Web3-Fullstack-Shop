@@ -1,5 +1,4 @@
-import Sidebar from '@/components/sidebar/Sidebar'
-
+import Sidebar from './components/sidebar/Sidebar'
 import style from './profile.module.scss'
 
 const ProfileLayout = ({ children }: Children) => (

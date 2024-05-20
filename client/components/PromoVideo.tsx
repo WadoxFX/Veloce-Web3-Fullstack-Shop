@@ -7,16 +7,17 @@ import style from '@/styles/pages/home.module.scss'
 
 const PromoVideo = () => {
   const ref = useRef<HTMLDivElement>(null)
+
   const { scrollYProgress } = useScroll({
     target: ref,
     layoutEffect: false,
     offset: ['0 1', '1.33 1'],
   })
 
-  const scaleProgress = useTransform(scrollYProgress, [0.04, 0.35], [0.65, 1])
+  const scaleProgress = useTransform(scrollYProgress, [-0.5, 0.35], [0.60, 1])
 
   return (
-    <motion.div className={style.promo_video_container} style={{ scale: scaleProgress }}>
+    <motion.div ref={ref} className={style.promo_video_container} style={{ scale: scaleProgress }}>
       <video preload='none' autoPlay muted loop>
         <source src='/video/promo.mp4 ' type='video/mp4' />
         Your browser does not support the video tag.

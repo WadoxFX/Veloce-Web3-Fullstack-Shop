@@ -1,9 +1,9 @@
 import clsx from 'clsx'
-import React, { ComponentProps } from 'react'
+import type { ComponentProps } from 'react'
 
 import style from './button.module.scss'
 
-type ButtonVariant = 'text' | 'outlined' | 'contained' | 'defold'
+type ButtonVariant = 'text' | 'outlined' | 'contained'
 type ButtonSize = 'small' | 'medium' | 'large'
 type ButtonRadius = 'rounded' | 'round' | 'defold'
 interface ButtonProps extends ComponentProps<'button'> {
@@ -11,14 +11,14 @@ interface ButtonProps extends ComponentProps<'button'> {
   variant?: ButtonVariant
   size?: ButtonSize
   radius?: ButtonRadius
-  loading?: boolean
+  loadint?: boolean
 }
 
 export const Button: React.FC<ButtonProps> = ({ children, variant, size, radius, loading, ...props }) => (
   <button    
     className={clsx(
       style.button,
-      style[variant ?? 'defold'],
+      style[variant],
       style[size ?? 'small'],
       style[radius ?? 'defold'],
     )}

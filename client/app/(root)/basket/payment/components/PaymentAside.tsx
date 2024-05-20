@@ -3,13 +3,13 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import React from 'react'
 
-import { useLocalStorage } from '@/hooks/useLocalStorage'
-import data from '@/promocodes.json'
-import style from '@/styles/pages/payment.module.scss'
-
+import { calcSum } from '@/components/calcSum'
 import { orderPrice } from '@/components/orderPrice'
 import { Button } from '@/components/ui'
-import { calcSum } from '@/components/calcSum'
+import { useLocalStorage } from '@/hooks/useLocalStorage'
+import data from '@/promocodes.json'
+
+import style from '../payment.module.scss'
 
 let promoCode: PromoCode | undefined
 

@@ -124,4 +124,18 @@ contract Shopping {
     function getMyOrders() external view returns(Order[] memory) {
         return orders[msg.sender];
     }
+
+    function getOrderStatus(address _buyer, uint256 _id) external view returns(string memory) {
+        Order storage order = findOrder(_buyer, _id);
+        return statusToString(order.status);
+    }
+
+    function statusToString(Status _status) internal pure returns(string memory) {
+        if (_status == Status.Paid) return "Paid";
+        if (_status == Status.Sent) return "Sent";
+        if (_status == Status.Delivered) return "Delivered";
+        if (_status == Status.Accepted) return "Accepted";
+        if (_status == Status.Rejected) return "Rejected";
+        return "";
+    }
 }

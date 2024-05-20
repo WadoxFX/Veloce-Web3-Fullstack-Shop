@@ -6,7 +6,8 @@ import React from 'react'
 
 import { getLikedProducts } from '@/api/products'
 import { priceCalc } from '@/components/priceCalc'
-import style from '@/styles/pages/liked.module.scss'
+
+import style from './liked.module.scss'
 
 export const metadata: Metadata = {
   title: 'Favorite List ❤️ - Veloce',

@@ -15,6 +15,17 @@
       gap: 24px;
       margin: 0;
     }
+
+    .orders {
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100svh - 120px);
+      gap: 24px;
+
+      hr {
+        border-bottom: 1px solid var(--border-color);
+      }
+    }
   }
 }
 
