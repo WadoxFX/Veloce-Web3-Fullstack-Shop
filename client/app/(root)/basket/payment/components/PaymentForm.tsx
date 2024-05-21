@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ethers, parseEther } from 'ethers'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import type { TPaymentSchema } from '@/@types/zod'
@@ -24,9 +24,15 @@ import ViewNewOrder from './ViewNewOrder'
 const PaymentForm: React.FC<PaymentFormProps> = ({ userData, rate }) => {
   const [signer, setSigner] = useState<ethers.JsonRpcSigner | null>(null)
   const [contract, setContract] = useState<ethers.Contract | null>(null)
+  const [products, setProducts] = useState<BasketProducts>([])
   const [order, setOrder] = useState<Order | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
-  const { data: products } = useLocalStorage('basket')
+  const { data } = useLocalStorage('basket')
+
+  useEffect(() => {
+    setProducts(data)
+  }, [data])
+
   const {
     register,
     handleSubmit,
@@ -72,30 +78,34 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ userData, rate }) => {
   }
 
   const onSubmit = handleSubmit(async data => {
-    if (!products.length) throw new Error('No Products')
-    setLoading(true)
+    if (products.length) {
+      setLoading(true)
 
-    try {
-      if (method === 'MetaMask') await pay()
-      const id = await contract?.uuid()
+      try {
+        if (method === 'MetaMask') await pay()
+        const id = await contract?.uuid()
 
-      const order = await createNewOrder({
-        params: {
-          ...data,
-          productIds,
-          price: orderPrice(sum),
-          ...(method === 'MetaMask' && {
-            address: signer?.address,
-            orderId: Number(id),
-            paid: true,
-          }),
-        },
-      })
+        const order = await createNewOrder({
+          params: {
+            ...data,
+            productIds,
+            price: orderPrice(sum),
+            ...(method === 'MetaMask' && {
+              address: signer?.address,
+              orderId: Number(id),
+              paid: true,
+            }),
+          },
+        })
 
-      setOrder(await order.data)
-      setLoading(false)
-    } catch (error) {
-      console.warn(error)
+        localStorage.removeItem('basket')
+
+        setProducts([])
+        setOrder(await order.data)
+        setLoading(false)
+      } catch (error) {
+        console.warn(error)
+      }
     }
   })
 
@@ -165,7 +175,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ userData, rate }) => {
             />
           </div>
 
-          <Button size='medium' radius='rounded' variant='contained'>
+          <Button disabled={!products.length} size='medium' radius='rounded' variant='contained'>
             Confirm Order
           </Button>
         </>

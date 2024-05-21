@@ -3,12 +3,12 @@
 import React from 'react'
 import { useRecoilState } from 'recoil'
 
+import { FilterIcon } from '@/components/icons'
+import { Button } from '@/components/ui'
 import { filterAsideState } from '@/recoil'
 import style from '@/styles/pages/shop.module.scss'
 
 import RibbonOption from './RibbonOption'
-import { FilterIcon } from './icons'
-import { Button } from './ui'
 
 const FiltersRibbon = () => {
   const [state, setState] = useRecoilState<FilterAsideState>(filterAsideState)

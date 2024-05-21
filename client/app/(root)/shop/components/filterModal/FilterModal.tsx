@@ -5,13 +5,14 @@ import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useRecoilState } from 'recoil'
 
-import Filters from '@/components/Filters'
 import { CloseIcon } from '@/components/icons'
 import { filterAsideState } from '@/recoil'
 
+import Filters from '../Filters'
+
 import style from './filterModal.module.scss'
 
-export const FilterModal = () => {
+const FilterModal = () => {
   const [innerWidth, setInnerWidth] = useState<number>(0)
   const [state, setState] = useRecoilState<FilterAsideState>(filterAsideState)
 
@@ -20,14 +21,17 @@ export const FilterModal = () => {
     handleResize()
 
     window.addEventListener('resize', handleResize)
+
+    if (state.isOn && innerWidth <= 960) {
+      document.body.setAttribute('no_scroll', '')
+    } else {
+      document.body.removeAttribute('no_scroll')
+    }
+
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   if (typeof window === 'undefined') return null
-
-  if (state.isOn && innerWidth <= 960) document.body.setAttribute('no_scroll', '')
-  else document.body.removeAttribute('no_scroll')
-
   return createPortal(
     <AnimatePresence>
       {!!state.isOn && innerWidth <= 960 && (
@@ -52,3 +56,5 @@ export const FilterModal = () => {
     document.body,
   )
 }
+
+export default FilterModal

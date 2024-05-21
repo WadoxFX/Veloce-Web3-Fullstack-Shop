@@ -4,13 +4,13 @@ import clsx from 'clsx'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 
-import { ProductSchema } from '@/components/ProductSchema'
+import { ProductSchema } from '@/app/(root)/shop/components/ProductSchema'
 import { usePagination } from '@/hooks/usePagination'
 import { filters } from '@/recoil'
 import style from '@/styles/pages/shop.module.scss'
 
-import NoData from './NoData'
-import { Skeleton } from './Skeleton'
+import NoData from './components/NoData'
+import { Skeleton } from './components/Skeleton'
 
 const Shop = () => {
   const filterOptions = useRecoilValue<FiltersList>(filters)

@@ -8,7 +8,7 @@ import { Button } from '@/components/ui'
 
 import style from '../basket.module.scss'
 
-const BasketItem: React.FC<BasketItemProps> = ({ product, id, clear }) => (
+const BasketItem: React.FC<BasketItemProps> = ({ product, id, onClear }) => (
   <li className={style.product}>
     <Link href={`/products/${product._id}`}>
       <Image
@@ -31,7 +31,7 @@ const BasketItem: React.FC<BasketItemProps> = ({ product, id, clear }) => (
         <p>Color: {product.color}</p>
       </div>
       <div>
-        <Button variant='text' onClick={() => clear(id)}>
+        <Button variant='text' onClick={() => onClear(id)}>
           <TrashIcon color='#000' size={24} />
         </Button>
       </div>

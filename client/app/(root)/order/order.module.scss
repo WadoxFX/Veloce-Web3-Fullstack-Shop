@@ -1,14 +1,60 @@
-.container {
+.form_container {
   display: flex;
-  min-height: calc(100svh - 92px);
+  align-items: center;
+  justify-content: center;
+  height: calc(100svh - 142px);
 
   form {
     gap: 12px;
-    width: 400px;
-    margin: auto;
+    width: 100%;
+    max-width: 400px;
     display: grid;
     align-items: start;
-    justify-content: center;
     grid-template-columns: auto max-content;
+  }
+}
+
+.container {
+  min-height: calc(100svh - 92px);
+
+  .content_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 46px;
+
+      button {
+        width: max-content;
+      }
+
+      .order,
+      .order_infos,
+      .order_delivery {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        gap: 12px;
+        margin-bottom: 12px;
+
+        hr {
+          width: 16px;
+          border-bottom: 1px solid #000;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  .container {
+    .content_container {
+      height: auto;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto max-content;
+    }
   }
 }

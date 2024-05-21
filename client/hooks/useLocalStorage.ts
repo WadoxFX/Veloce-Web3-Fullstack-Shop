@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 
 export const useLocalStorage = (key: string) => {
-  const [loading, setLoading] = useState<boolean>(true)
   const [data, setData] = useState<BasketProducts>([])
 
   useEffect(() => {
@@ -10,17 +9,14 @@ export const useLocalStorage = (key: string) => {
     if (localData) {
       const loaderData = JSON.parse(localData)
       setData(loaderData)
-      return setLoading(false)
     }
-
-    setLoading(false)
   }, [key])
 
-  const clear = (id: number) => {
+  const onClear = (id: number) => {
     const newData = data.filter((_, index) => index !== id)
     setData(newData)
     localStorage.setItem(key, JSON.stringify(newData))
   }
 
-  return { data, loading, clear }
+  return { data, onClear }
 }

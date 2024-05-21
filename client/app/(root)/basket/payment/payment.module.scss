@@ -251,6 +251,38 @@
   }
 }
 
+.loading {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .delivery_location,
+  .personal_data {
+    height: 180px;
+    border-radius: 12px;
+    background: var(--sceleton-back);
+  }
+
+  .methods {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+
+    .method {
+      height: 400px;
+      border-radius: 12px;
+      background: var(--sceleton-back);
+    }
+  }
+
+  .bask_button {
+    width: 160px;
+    height: 52px;
+    border-radius: 16px;
+    background: var(--sceleton-back);
+  }
+}
+
 @media only screen and (max-width: 1346px) {
   .container {
     form {
@@ -315,6 +347,12 @@
           }
         }
       }
+    }
+  }
+
+  .loading {
+    .methods {
+      grid-template-columns: 1fr;
     }
   }
 }

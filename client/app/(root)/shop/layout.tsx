@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 
-import FilterAside from '@/components/FilterAside'
-import FiltersRibbon from '@/components/FiltersRibbon'
-import { FilterModal } from '@/components/ui'
 import style from '@/styles/pages/shop.module.scss'
+
+import FilterAside from './components/FilterAside'
+import FiltersRibbon from './components/FiltersRibbon'
+import FilterModal from './components/filterModal/FilterModal'
 
 export const metadata: Metadata = {
   title: 'Shop - Veloce',

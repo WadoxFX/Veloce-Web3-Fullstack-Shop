@@ -118,7 +118,7 @@ interface FiltersList {
 interface BasketItemProps {
   product: BasketProduct
   id: number
-  clear: (id: number) => void
+  onClear: (id: number) => void
 }
 
 type Prices = Price[]
@@ -215,6 +215,10 @@ interface Order {
   price: number
   post: string
   buyer: Buyer
+  productIds: {
+    _id: string
+    images: string[]
+  }[]
   paid?: boolean
   address?: string
   orderId?: number

@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-import { priceCalc } from '../priceCalc'
+import { priceCalc } from '@/components/priceCalc'
 
 import style from './productSchema.module.scss'
 

@@ -1,11 +1,11 @@
 import clsx from 'clsx'
+import Link from 'next/link'
 import React from 'react'
 
-import { AvatarIcon, CheckMarkIcon, CrossIcon } from '@/components/icons'
+import { CheckMarkIcon, CrossIcon } from '@/components/icons'
 import { orderDate } from '@/components/orderDate'
 
 import style from '../payment.module.scss'
-import Link from 'next/link'
 
 const ViewNewOrder: React.FC<ViewNewOrderProps> = ({ loading, order }) => {
   if (loading && !order) return <p>Loading...</p>

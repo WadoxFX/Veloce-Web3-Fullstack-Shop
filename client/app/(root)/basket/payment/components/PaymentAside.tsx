@@ -7,7 +7,7 @@ import { calcSum } from '@/components/calcSum'
 import { orderPrice } from '@/components/orderPrice'
 import { Button } from '@/components/ui'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
-import data from '@/promocodes.json'
+import promocodes from '@/promocodes.json'
 
 import style from '../payment.module.scss'
 
@@ -17,12 +17,11 @@ const PaymentAside = () => {
   const { data: products } = useLocalStorage('basket')
   const router = useRouter()
   const searchParams = useSearchParams()
-
   const sum = calcSum(products)
-  const delivery = sum >= 200 ? null : 20
 
   if (searchParams) {
-    promoCode = data.codes.find((item: PromoCode) => item.code === searchParams.get('promocode'))
+    const { codes } = promocodes
+    promoCode = codes.find((item: PromoCode) => item.code === searchParams.get('promocode'))
   }
 
   return (
@@ -43,7 +42,7 @@ const PaymentAside = () => {
 
           <div className={style.products_delivery}>
             <div>Delivery:</div>
-            <div className={style.meaning}>{sum <= 200 ? `$${delivery}` : 'Free'}</div>
+            <div className={style.meaning}>{sum <= 200 ? '$20' : 'Free'}</div>
           </div>
 
           <div className={style.products_number}>
@@ -55,9 +54,7 @@ const PaymentAside = () => {
 
         <div className={style.products_total}>
           <div>Total:</div>
-          <div className={style.meaning}>
-            ${orderPrice(sum)}
-          </div>
+          <div className={style.meaning}>${orderPrice(sum)}</div>
         </div>
         <hr />
 

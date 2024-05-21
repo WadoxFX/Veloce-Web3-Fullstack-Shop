@@ -1,11 +1,11 @@
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 
+import { Accordion } from '@/components/ui'
 import { filterAsideState } from '@/recoil'
 import style from '@/styles/pages/shop.module.scss'
 
 import { genders, colors, collections, sizes } from './filterItems'
-import { Accordion } from './ui'
 
 const Filters = () => {
   const state = useRecoilValue<FilterAsideState>(filterAsideState)

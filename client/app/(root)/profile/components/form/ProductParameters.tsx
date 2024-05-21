@@ -7,10 +7,9 @@ import { useForm } from 'react-hook-form'
 
 import type { TProductSizeSchema } from '@/@types/zod'
 import { productSizeSchema } from '@/@types/zod'
+import { basketLocalStorage } from '@/components/basketLocalStorage'
+import { Modal } from '@/components/ui'
 import style from '@/styles/pages/product.module.scss'
-
-import { basketLocalStorage } from '../../../../../components/basketLocalStorage'
-import { Modal } from '../../../../../components/ui'
 
 const ProductParameters: React.FC<ProductParametersProps> = ({ product }) => {
   const {

@@ -9,7 +9,7 @@ import { createPortal } from 'react-dom'
 
 import { useToggle } from '@/hooks/useToggle'
 
-import { BasketIcon, CloseIcon } from '../icons'
+import { BasketIcon, CloseIcon, GlassIcon } from '../icons'
 
 import Account from './Account'
 import Navigate from './Navigate'
@@ -21,11 +21,15 @@ interface BurgerMenuProps {
 }
 
 const BurgerMenu: React.FC<BurgerMenuProps> = ({ open, close }) => {
+  useEffect(() => {
+    if (open) {
+      document.body.setAttribute('no_scroll', '')
+    } else {
+      document.body.removeAttribute('no_scroll')
+    }
+  }, [open])
+
   if (typeof window === 'undefined') return null
-
-  if (open) document.body.setAttribute('no_scroll', '')
-  else document.body.removeAttribute('no_scroll')
-
   return createPortal(
     <AnimatePresence>
       {open && (
@@ -71,8 +75,11 @@ const Header = () => {
 
       <div className={style.account_container}>
         <Account />
+        <Link href='/order' aria-label='Find your order'>
+          <GlassIcon size={24} />
+        </Link>
         <Link href='/basket' aria-label='Your added items to cart'>
-          <BasketIcon size={36} />
+          <BasketIcon size={30} />
         </Link>
         <button aria-label='Open burger menu' className={style.burger} onClick={toggle}>
           <span />

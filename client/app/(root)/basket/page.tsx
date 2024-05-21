@@ -25,7 +25,7 @@ const Basket = () => {
           </div>
         )}
         {data.map((product: BasketProduct, id: number) => (
-          <BasketItem product={product} id={id} clear={clear} key={id} />
+          <BasketItem product={product} id={id} onClear={clear} key={id} />
         ))}
       </ul>
       <BasketAside sum={sum} />

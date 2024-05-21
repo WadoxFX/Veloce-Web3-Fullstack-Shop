@@ -21,7 +21,7 @@ export type OrderDocument = HydratedDocument<Order>
 
 @Schema()
 export class Order {
-  @Prop({ type: [String], required: true, trim: true })
+  @Prop({ type: [String], required: true, trim: true, ref: 'Product' })
   productIds: string[]
 
   @Prop({ type: Boolean, default: false })

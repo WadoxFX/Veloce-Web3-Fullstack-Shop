@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 
 import { CheckIcon, CloseIcon } from '@/components/icons'
@@ -19,20 +19,25 @@ interface ModalProps {
 
 interface ModalContentProps {
   state: boolean
-  close: () => void
+  onClose: () => void
   product: BasketProduct
 }
 
-const ModalContent: React.FC<ModalContentProps> = ({ state, product, close }) => {
+const ModalContent: React.FC<ModalContentProps> = ({ state, product, onClose }) => {
   const router = useRouter()
+
+  useEffect(() => {
+    if (state) {
+      document.body.setAttribute('no_scroll', '')
+    } else {
+      document.body.removeAttribute('no_scroll')
+    }
+  }, [state])
+
   if (typeof window === 'undefined') return null
-
-  if (state) document.body.setAttribute('no_scroll', '')
-  else document.body.removeAttribute('no_scroll')
-
   return createPortal(
     state && (
-      <div role='button' onClick={close} onKeyDown={close} tabIndex={0} className={style.overlay}>
+      <div role='button' onClick={onClose} onKeyDown={onClose} tabIndex={0} className={style.overlay}>
         <div
           role='button'
           onClick={e => e.stopPropagation()}
@@ -45,7 +50,7 @@ const ModalContent: React.FC<ModalContentProps> = ({ state, product, close }) =>
               <CheckIcon size={16} />
               <div>Added to Bag</div>
             </div>
-            <Button variant='text' onClick={close}>
+            <Button variant='text' onClick={onClose}>
               <CloseIcon size={16} />
             </Button>
           </div>
@@ -100,7 +105,7 @@ export const Modal: React.FC<ModalProps> = ({ children, product }) => {
         {children}
       </Button>
 
-      <ModalContent product={product} state={isOn} close={toggle} />
+      <ModalContent product={product} state={isOn} onClose={toggle} />
     </>
   )
 }

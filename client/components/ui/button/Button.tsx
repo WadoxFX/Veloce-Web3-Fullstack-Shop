@@ -8,10 +8,10 @@ type ButtonSize = 'small' | 'medium' | 'large'
 type ButtonRadius = 'rounded' | 'round' | 'defold'
 interface ButtonProps extends ComponentProps<'button'> {
   children: React.ReactNode
-  variant?: ButtonVariant
+  variant: ButtonVariant
   size?: ButtonSize
   radius?: ButtonRadius
-  loadint?: boolean
+  loading?: boolean
 }
 
 export const Button: React.FC<ButtonProps> = ({ children, variant, size, radius, loading, ...props }) => (

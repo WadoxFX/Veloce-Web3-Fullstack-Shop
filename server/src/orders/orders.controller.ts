@@ -61,7 +61,7 @@ export class OrdersController {
   @Get(':orderId')
   @HttpCode(HttpStatus.OK)
   async getOrder(@Param('orderId') orderId: ObjectId) {
-    const order = await this.orderService.findOrder(orderId)
+    const order = await this.orderService.findOrder(orderId, { path: 'productIds', select: 'images' })
 
     if (!order) {
       throw new HttpException('Order not found', HttpStatus.CONFLICT)

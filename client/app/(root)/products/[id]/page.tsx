@@ -3,9 +3,9 @@ import React from 'react'
 
 import { getProduct } from '@/api/products'
 import FavoriteButton from '@/components/FavoriteButton'
-import Slider from '@/components/Slider'
 import Comments from '@/components/comments/Comments'
 import { priceCalc } from '@/components/priceCalc'
+import Slider from '@/components/slider/Slider'
 import style from '@/styles/pages/product.module.scss'
 
 import ProductParameters from '../../profile/components/form/ProductParameters'

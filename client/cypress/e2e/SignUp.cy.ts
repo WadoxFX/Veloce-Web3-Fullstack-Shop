@@ -13,7 +13,7 @@ describe('Sign Up', () => {
     cy.get('[data-test-id="surname"]').type(user.surname)
     cy.get('[data-test-id="email"]').type(user.email)
     cy.get('[data-test-id="password"]').type(user.password)
-    cy.get('[data-test-id="signupBotton"]').click()
+    cy.get('[data-test-id="signupButton"]').click()
 
     cy.wait('@ReqRegister').then(xhr => {
       expect(xhr.response?.statusCode).to.eq(201)
