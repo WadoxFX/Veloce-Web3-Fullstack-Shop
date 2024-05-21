@@ -20,7 +20,7 @@ Cypress.Commands.add('login', (email: string, password: string) => {
   cy.url().should('include', '/login')
   cy.get('[data-test-id="email"]').type(email)
   cy.get('[data-test-id="password"]').type(password)
-  cy.get('[data-test-id="loginBotton"]').click()
+  cy.get('[data-test-id="loginButton"]').click()
 
   cy.wait('@ReqLogin').then(xhr => expect(xhr.response?.statusCode).to.eq(200))
   cy.wait('@ReqProfile').then(xhr => expect(xhr.response?.statusCode).to.eq(200))

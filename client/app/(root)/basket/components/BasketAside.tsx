@@ -34,8 +34,8 @@ const BasketAside: React.FC<BasketAsideProps> = ({ sum }) => {
       <aside>
         <form onSubmit={onSubmit}>
           <div className={style.promo_code}>
-            <Input name='promocode' placeholder='Test code: WELCOME24' register={register} />
-            <Button size='small' radius='rounded' variant='outlined'>
+            <Input data-test-id="promocode_input" name='promocode' placeholder='Test code: WELCOME24' register={register} />
+            <Button data-test-id="use_promocode" size='small' radius='rounded' variant='outlined'>
               Use
             </Button>
           </div>
@@ -47,7 +47,7 @@ const BasketAside: React.FC<BasketAsideProps> = ({ sum }) => {
               </div>
 
               {promoCode && (
-                <div className={style.promo_code_discount}>
+                <div data-test-id="promo_code_discount" className={style.promo_code_discount}>
                   <div>Code:</div>
                   <div className={style.meaning}>{promoCode.discount}%</div>
                 </div>

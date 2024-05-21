@@ -20,7 +20,7 @@ const Comments: React.FC<CommentsProps> = ({ comments, productId }) => {
   const stars = comments?.length ? calcGrade(comments) : 0
 
   return (
-    <div className={style.comments_accordeon}>
+    <div className={style.comments_accordeon} data-test-id="comments_accordeon">
       <button onClick={toggle}>
         <div>Reviews {`(${comments?.length})`}</div>
 

@@ -5,10 +5,10 @@ describe('Promo Code', () => {
 
   it('Promo code activation', () => {
     cy.visit('/basket')
-    cy.get('input#promocode').type(code)
-    cy.contains('Use').click()
-    cy.get('[class*="promo_code_discount"]').should('be.visible')
-    cy.get('[class*="promo_code_discount"] [class*="meaning"]').should(
+    cy.get('[data-test-id="promocode_input"]').type(code)
+    cy.get('[data-test-id="use_promocode"]').click()
+    cy.get('[data-test-id="promo_code_discount"]').should('be.visible')
+    cy.get('[data-test-id="promo_code_discount"] [class*="meaning"]').should(
       'include.text',
       `${discount}%`,
     )

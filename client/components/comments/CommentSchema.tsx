@@ -24,7 +24,7 @@ const CommentSchema: React.FC<CommentItem> = ({ comment, productId }) => {
       <div className={style.comment_title}>
         <div>User: #{comment.creator.slice(0, 10)}</div>
         {profileData?._id === comment.creator && (
-          <button aria-label='Delete comment' onClick={() => handlerDeleteComment(profileData._id)}>
+          <button data-test-id="delete_comment" aria-label='Delete comment' onClick={() => handlerDeleteComment(profileData._id)}>
             <TrashIcon size={18} />
           </button>
         )}
@@ -33,7 +33,9 @@ const CommentSchema: React.FC<CommentItem> = ({ comment, productId }) => {
         <DrawStars quantity={5} grade={comment.grade} size={12} />
         <div>{convertDate(comment.createdAt)}</div>
       </div>
-      <p className={style.comment_content}>{comment.content}</p>
+      <p className={style.comment_content} data-test-id='comment_content'>
+        {comment.content}
+      </p>
     </li>
   )
 }

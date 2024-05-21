@@ -38,7 +38,7 @@ const CreateComment: React.FC<CreateCommentProps> = ({ productId }) => {
   return value?._id ? (
     <form onSubmit={onSubmit}>
       <div className={style.select_grade}>
-        <select {...register('grade')}>
+        <select data-test-id='select_grade' {...register('grade')}>
           <option value='5'>5</option>
           <option value='4'>4</option>
           <option value='3'>3</option>
@@ -47,12 +47,13 @@ const CreateComment: React.FC<CreateCommentProps> = ({ productId }) => {
         </select>
       </div>
       <InputLabel
+        data-test-id='comment'
         name='comment'
         label='Your comment'
         register={register}
         error={errors.comment?.message}
       />
-      <button>Send</button>
+      <button data-test-id="send_comment">Send</button>
     </form>
   ) : (
     <p className={style.worning}>
