@@ -6,6 +6,7 @@ import {
   HttpCode,
   HttpException,
   HttpStatus,
+  Param,
   Post,
   Query,
 } from '@nestjs/common'
@@ -55,5 +56,17 @@ export class OrdersController {
     }
 
     return orders
+  }
+
+  @Get(':orderId')
+  @HttpCode(HttpStatus.OK)
+  async getOrder(@Param('orderId') orderId: ObjectId) {
+    const order = await this.orderService.findOrder(orderId)
+
+    if (!order) {
+      throw new HttpException('Order not found', HttpStatus.CONFLICT)
+    }
+
+    return order
   }
 }

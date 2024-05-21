@@ -15,31 +15,32 @@ const methods = [
 const PaymentMethod: React.FC<PaymentMethodProps> = ({ method, address, onConnect, register }) => {
   const uid = useId()
   return (
-    <div className={style.payment_method}>
-      {methods.map(item => (
-        <label
-          htmlFor={uid + item.method}
-          onKeyDown={e => e.stopPropagation()}
-          onClick={item.method === 'MetaMask' ? onConnect : undefined}
-          className={clsx(style.method, method === item.method && style.active)}
-        >
-          <input
-            id={uid + item.method}
-            tabIndex={0}
-            value={item.method}
-            {...register('method' as string)}
-            role='button'
-            type='radio'
-          />
-          <Image src={item.icon} width={100} height={100} alt={item.method} priority />
-          <div>
-            {item.method === 'MetaMask' && address
-              ? `Account: ${address.slice(0, 7)}...${address.slice(38 - 1)}`
-              : item.method}
-          </div>
-        </label>
+    <ul className={style.payment_method}>
+      {methods.map((item, index) => (
+        <li key={index}>
+          <label
+            htmlFor={uid + item.method}
+            onClick={item.method === 'MetaMask' ? onConnect : undefined}
+            className={clsx(style.method, method === item.method && style.active)}
+          >
+            <input
+              id={uid + item.method}
+              tabIndex={0}
+              value={item.method}
+              {...register('method' as string)}
+              role='button'
+              type='radio'
+            />
+            <Image src={item.icon} width={100} height={100} alt={item.method} priority />
+            <div>
+              {item.method === 'MetaMask' && address
+                ? `Account: ${address.slice(0, 7)}...${address.slice(38 - 1)}`
+                : item.method}
+            </div>
+          </label>
+        </li>
       ))}
-    </div>
+    </ul>
   )
 }
 

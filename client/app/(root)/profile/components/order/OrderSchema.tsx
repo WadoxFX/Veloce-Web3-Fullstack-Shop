@@ -7,6 +7,7 @@ import shoppingABI from '@/contracts/Abi/shoppingABI.json'
 import style from './orderSchema.module.scss'
 import { ethers } from 'ethers'
 import { deleteOrder } from '@/api/orders'
+import Link from 'next/link'
 
 type OrderStatuses = 'send' | 'delivered' | 'accepted' | 'rejected'
 
@@ -76,90 +77,85 @@ const OrderSchema: React.FC<{ order: Order }> = memo(({ order }) => {
     setInView(false)
   }
 
+  if (!inView) return <i>Order Deleted</i>
+
   return (
-    <>
-      {' '}
-      <div className={style.order}>
-        {inView ? (
-          <>
-            <div className={style.order_logo} />
-            <div className={style.info_container}>
-              <div className={style.order_info}>
-                <div className={style.order_status}>
-                  <div className={style.parameter}>
-                    id: <div className={style.meaning}>{order._id}</div>
-                  </div>
-                  <div className={clsx(order.paid ? style.paid : style.not_paid)}>
-                    {order.paid ? (
-                      <>
-                        <CheckMarkIcon size={12} color='#3aa271' /> Paid
-                      </>
-                    ) : (
-                      <>
-                        <CrossIcon size={12} color='#a23a3a' />
-                        Not Paid
-                      </>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              <div className={style.infos}>
-                <div>
-                  {order.buyer.username} {order.buyer.surname}
-                </div>
-                <div className={style.parameter}>
-                  Price: <div className={style.meaning}>${order.price}</div>
-                </div>
-                {order.method === 'MetaMask' ? (
-                  <div className={style.parameter}>
-                    Status: <div className={style.meaning}>{loading ? 'Loading...' : status}</div>
-                  </div>
-                ) : (
-                  <div className={style.parameter}>
-                    Method: <div className={style.meaning}>{order.method}</div>
-                  </div>
-                )}
-              </div>
-
-              <div className={style.order_statistic}>
-                <div className={style.parameter}>
-                  City: <div className={style.meaning}>{order.city}</div> Post:
-                  <div className={style.meaning}>{order.post}</div>
-                </div>
-
-                {order.method === 'MetaMask' ? (
-                  <select
-                    className={style.controller}
-                    onChange={e => onSetStatus(e.target.value as OrderStatuses)}
-                  >
-                    <option disabled={status !== 'Paid'} value={'send'}>
-                      Send
-                    </option>
-                    <option disabled={status !== 'Sent'} value={'delivered'}>
-                      Delivered
-                    </option>
-                    <option disabled={status !== 'Delivered'} value={'accepted'}>
-                      Accepted
-                    </option>
-                    <option disabled={status !== 'Delivered'} value={'rejected'}>
-                      Rejected
-                    </option>
-                  </select>
-                ) : (
-                  <button onClick={onDeleteOrder}>
-                    <TrashIcon size={18} />
-                  </button>
-                )}
-              </div>
+    <div className={style.order}>
+      <div className={style.order_logo} />
+      <div className={style.info_container}>
+        <div className={style.order_info}>
+          <div className={style.order_status}>
+            <Link
+              href={{ pathname: '/order', query: { orderId: order._id } }}
+              className={style.parameter}
+            >
+              Id: <div className={style.meaning}>{order._id}</div>
+            </Link>
+            <div className={clsx(order.paid ? style.paid : style.not_paid)}>
+              {order.paid ? (
+                <>
+                  <CheckMarkIcon size={12} color='#3aa271' /> Paid
+                </>
+              ) : (
+                <>
+                  <CrossIcon size={12} color='#a23a3a' />
+                  Not Paid
+                </>
+              )}
             </div>
-          </>
-        ) : (
-          <div>Order Deleted</div>
-        )}
+          </div>
+        </div>
+
+        <div className={style.infos}>
+          <div>
+            {order.buyer.username} {order.buyer.surname}
+          </div>
+          <div className={style.parameter}>
+            Price: <div className={style.meaning}>${order.price}</div>
+          </div>
+          {order.method === 'MetaMask' ? (
+            <div className={style.parameter}>
+              Status: <div className={style.meaning}>{loading ? 'Loading...' : status}</div>
+            </div>
+          ) : (
+            <div className={style.parameter}>
+              Method: <div className={style.meaning}>{order.method}</div>
+            </div>
+          )}
+        </div>
+
+        <div className={style.order_statistic}>
+          <div className={style.parameter}>
+            City: <div className={style.meaning}>{order.city}</div> Post:
+            <div className={style.meaning}>{order.post}</div>
+          </div>
+
+          {order.method === 'MetaMask' ? (
+            <select
+              className={style.controller}
+              onChange={e => onSetStatus(e.target.value as OrderStatuses)}
+            >
+              <option disabled={status !== 'Paid'} value={'send'}>
+                Send
+              </option>
+              <option disabled={status !== 'Sent'} value={'delivered'}>
+                Delivered
+              </option>
+              <option disabled={status !== 'Delivered'} value={'accepted'}>
+                Accepted
+              </option>
+              <option disabled={status !== 'Delivered'} value={'rejected'}>
+                Rejected
+              </option>
+            </select>
+          ) : (
+            <button onClick={onDeleteOrder}>
+              <TrashIcon size={18} />
+            </button>
+          )}
+        </div>
       </div>
-      {message && <i>{message}</i>}
-    </>
+    </div>
   )
 })
 

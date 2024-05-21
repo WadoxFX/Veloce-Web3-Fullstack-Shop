@@ -5,26 +5,28 @@ import { AvatarIcon, CheckMarkIcon, CrossIcon } from '@/components/icons'
 import { orderDate } from '@/components/orderDate'
 
 import style from '../payment.module.scss'
+import Link from 'next/link'
 
 const ViewNewOrder: React.FC<ViewNewOrderProps> = ({ loading, order }) => {
   if (loading && !order) return <p>Loading...</p>
   const { username, surname } = order?.buyer ?? {}
-  
+
   return (
     order && (
-      <div className={style.order_container}>
+      <Link
+        href={{ pathname: '/order', query: { orderId: order._id } }}
+        className={style.order_container}
+      >
         <hr />
         <div className={style.order}>
-          <div>Id: {order._id}</div>
+          <div className={style.order_id}>Id: {order._id.slice(0, 12)}...</div>
 
           <div className={style.order_info}>
-            <div className={style.buyer}>
-              <AvatarIcon size={42} />
-              <div className={style.fullname}>
-                <div>{username?.[0]}.</div>
-                <div>{surname}</div>
-              </div>
+            <div className={style.fullname}>
+              <div>{username?.[0]}.</div>
+              <div>{surname}</div>
             </div>
+
             <div className={style.price}>USD ${order.price}</div>
             <data>{orderDate(order.createdAt)}</data>
             <div className={clsx(order.paid ? style.paid : style.not_paid)}>
@@ -42,7 +44,7 @@ const ViewNewOrder: React.FC<ViewNewOrderProps> = ({ loading, order }) => {
           </div>
         </div>
         <hr />
-      </div>
+      </Link>
     )
   )
 }

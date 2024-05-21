@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  min-height: calc(100svh - 92px);
+
+  form {
+    gap: 12px;
+    width: 400px;
+    margin: auto;
+    display: grid;
+    align-items: start;
+    justify-content: center;
+    grid-template-columns: auto max-content;
+  }
+}

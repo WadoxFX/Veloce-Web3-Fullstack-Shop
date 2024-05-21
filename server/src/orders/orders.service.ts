@@ -26,6 +26,10 @@ export class OrdersService {
       .skip((page - 1) * limit)
   }
 
+  findOrder(orderId: ObjectId) {
+    return this.orderModule.findById(orderId)
+  }
+
   deleteOrder(orderId: ObjectId) {
     return this.orderModule.findByIdAndDelete(orderId)
   }

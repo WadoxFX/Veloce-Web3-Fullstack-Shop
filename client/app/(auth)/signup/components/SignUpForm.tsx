@@ -26,7 +26,7 @@ const SignUpForm = () => {
 
   const onSubmit = handleSubmit(async data => {
     try {
-      signUp({ params: data })
+      await signUp({ params: data })
       router.push('/')
     } catch (error: any) {
       setError(String(error.response.data.message))

@@ -13,7 +13,7 @@ import { Button, InputLabel } from '@/components/ui'
 
 import style from '../../auth.module.scss'
 
-const LogInForm = () => {
+const LoginForm = () => {
   const [error, setError] = useState<string>('')
   const router = useRouter()
   const {
@@ -26,12 +26,13 @@ const LogInForm = () => {
 
   const onSubmit = handleSubmit(async data => {
     try {
-      login({ params: data })
+      await login({ params: data })
       router.push('/')
     } catch (error: any) {
       setError(String(error.response.data.message))
     }
   })
+
   return (
     <form className={style.form} onSubmit={onSubmit}>
       <header>
@@ -60,7 +61,7 @@ const LogInForm = () => {
       </div>
 
       <div className={style.controllers}>
-        <Button data-test-id='loginBotton' variant='contained' size='medium'>
+        <Button data-test-id='loginButton' variant='contained' size='medium'>
           Log In
         </Button>
 
@@ -83,4 +84,4 @@ const LogInForm = () => {
   )
 }
 
-export default LogInForm
+export default LoginForm

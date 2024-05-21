@@ -46,6 +46,8 @@ interface AuthData {
   password: string
 }
 
+type LoginData = Omit<AuthData, 'username' | 'surname'>
+
 interface GetOrderId {
   orderId: string
 }

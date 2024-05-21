@@ -3,19 +3,19 @@ import React from 'react'
 
 import style from '../auth.module.scss'
 
-import LogInForm from './components/LogInForm'
+import LoginForm from './components/LoginForm'
 
 export const metadata: Metadata = {
-  title: 'Log In - Veloce',
-  keywords: 'Log In, login, authorization, Veloce, auth, shop auth',
+  title: 'Login - Veloce',
+  keywords: 'Login, login, authorization, Veloce, auth, shop auth',
   description: 'Authorization to log into your account',
 }
 
-const LogIn = () => (
+const Login = () => (
   <div className={style.container}>
     <div className={style.picture} />
-    <LogInForm />
+    <LoginForm />
   </div>
 )
 
-export default LogIn
+export default Login
