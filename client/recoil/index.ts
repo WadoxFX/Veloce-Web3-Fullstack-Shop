@@ -7,19 +7,15 @@ export const gender = atom<string | null>({
 })
 
 export const profile = atom<UserProfile | null>({
-  key: '',
+  key: 'profile',
   default: null,
 })
 
-export const fetchProfile = selector<UserProfile | {}>({
+export const fetchProfile = selector<UserProfile | null>({
   key: 'fetchProfile',
   get: async ({ get }) => {
-    try {
-      const res = await getProfileData()
-      return res.data as UserProfile
-    } catch (error) {
-      return {}
-    }
+    const res = await getProfileData()
+    return res.data || null
   },
 })
 

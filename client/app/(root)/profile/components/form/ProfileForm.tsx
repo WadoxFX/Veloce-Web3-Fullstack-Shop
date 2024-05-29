@@ -9,7 +9,7 @@ import type { TAboutMeSchema } from '@/@types/zod'
 import { editProfile } from '@/api/users'
 import { Button, Input } from '@/components/ui'
 
-import { revalidateProfile } from './action'
+import { revalidateProfile } from '../../action'
 
 const ProfileForm: React.FC<{ userData: User; userId: string }> = ({ userData, userId }) => {
   const {

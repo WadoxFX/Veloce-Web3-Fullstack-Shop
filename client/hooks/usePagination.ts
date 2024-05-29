@@ -9,22 +9,24 @@ export const usePagination = <T extends unknown[]>(url: string, limit: number, o
   const { inView, ref } = useInView({ threshold: 0 })
 
   useEffect(() => {
-    setPage(1)
-    setData([] as unknown as T)
     setBlocker(false)
+    setData([] as unknown as T)
+    setPage(1)
   }, [options])
 
   const getData = useCallback(async () => {
     const data = await api.get<T>(url, { params: { limit, page, options } }).then(res => res.data)
 
     setData(prev => [...prev, ...data] as T)
+    if (!data.length) setBlocker(true)
     setPage(page + 1)
 
-    if (!data.length) setBlocker(true)
   }, [limit, page, options])
 
   useEffect(() => {
-    if (inView && !blocker) getData()
+    if (inView && !blocker) {
+      getData()
+    }
   }, [inView, getData])
 
   return { data, blocker, ref }

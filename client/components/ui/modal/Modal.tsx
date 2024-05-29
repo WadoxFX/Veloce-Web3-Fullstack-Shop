@@ -34,10 +34,18 @@ const ModalContent: React.FC<ModalContentProps> = ({ state, product, onClose }) 
     }
   }, [state])
 
+  const onEnableScrolling = () => document.body.removeAttribute('no_scroll')
+
   if (typeof window === 'undefined') return null
   return createPortal(
     state && (
-      <div role='button' onClick={onClose} onKeyDown={onClose} tabIndex={0} className={style.overlay}>
+      <div
+        role='button'
+        onClick={onClose}
+        onKeyDown={onClose}
+        tabIndex={0}
+        className={style.overlay}
+      >
         <div
           role='button'
           onClick={e => e.stopPropagation()}
@@ -79,13 +87,23 @@ const ModalContent: React.FC<ModalContentProps> = ({ state, product, onClose }) 
             </div>
           </div>
           <div className={style.controlers}>
-            <Button onClick={() => router.push('/basket')} size='medium' variant='outlined'>
+            <Button
+              size='medium'
+              variant='outlined'
+              onClick={() => {
+                router.push('/basket')
+                onEnableScrolling()
+              }}
+            >
               View Bag
             </Button>
             <Button
               size='medium'
               variant='contained'
-              onClick={() => router.push('/basket/payment')}
+              onClick={() => {
+                router.push('/basket/payment')
+                onEnableScrolling()
+              }}
             >
               Checkout
             </Button>

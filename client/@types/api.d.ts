@@ -28,7 +28,6 @@ interface GetOrderParams {
   method: string
   price: number
   phone: string
-  post: string
   surname: string
   username: string
   address?: string

@@ -21,7 +21,8 @@ const OrderSchema: React.FC<{ order: Order }> = memo(({ order }) => {
   const getStatus = async (contract?: ethers.Contract | null) => {
     try {
       if (contract) {
-        setStatus(await contract.getOrderStatus(order.address, order.orderId))
+        const status: string = await contract.getOrderStatus(order.address, order.orderId)
+        setStatus(status)
         setLoading(false)
       }
     } catch (error) {
@@ -124,8 +125,8 @@ const OrderSchema: React.FC<{ order: Order }> = memo(({ order }) => {
 
           <div className={style.order_statistic}>
             <div className={style.parameter}>
-              City: <div className={style.meaning}>{order.city}</div> Post:
-              <div className={style.meaning}>{order.post}</div>
+              City: <div className={style.meaning}>{order.city}</div> Mail:
+              <div className={style.meaning}>{order.mail}</div>
             </div>
 
             {order.method === 'MetaMask' ? (

@@ -37,7 +37,7 @@ export class Order {
   city: string
 
   @Prop({ type: String, required: true, trim: true })
-  post: string
+  mail: string
 
   @Prop({ type: String, required: true, trim: true })
   method: string

@@ -1,0 +1,15 @@
+.address {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  max-height: 300px;
+
+  .addres {
+    background: #eee;
+    padding: 10px 14px;
+    border-radius: 8px;
+    width: fit-content;
+    margin-right: 12px;
+  }
+}
