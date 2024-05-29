@@ -56,7 +56,8 @@ export const aboutMeSchema = z.object({
   city: z
     .string()
     .min(1, 'City must contain at least 1 characters')
-    .max(99, 'City must contain at most 99 characters'),
+    .max(99, 'City must contain at most 99 characters')
+    .regex(text),
 
   country: z
     .string()
@@ -136,10 +137,11 @@ export const paymentSchema = z.object({
   city: z
     .string()
     .min(1, 'City must contain at least 1 characters')
-    .max(99, 'City must contain at most 99 characters'),
-  mail: z
+    .max(99, 'City must contain at most 99 characters')
+    .regex(text),
+  post: z
     .string()
     .min(1, 'Post must contain at least 1 characters')
-    .max(4, 'Post must contain at most 4 characters')
+    .max(99, 'Post must contain at most 99 characters')
     .regex(text)
 })

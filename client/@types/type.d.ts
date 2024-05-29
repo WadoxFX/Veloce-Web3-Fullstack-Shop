@@ -211,9 +211,9 @@ type Orders = Order[]
 interface Order {
   _id: string
   city: string
-  mail: string,
   method: string
   price: number
+  post: string
   buyer: Buyer
   productIds: {
     _id: string
@@ -239,28 +239,4 @@ interface ViewNewOrderProps {
 interface NavItemListProps {
   navItams: NavItems
   userRole: string
-}
-
-type AddressDelivery = AddresDelivery[]
-interface AddresDelivery {
-  AddressDeliveryAllowed: boolean
-  Area: string
-  DeliveryCity: string
-  MainDescription: string
-  ParentRegionCode: string
-  ParentRegionTypes: string
-  Present: string
-  Ref: string
-  Region: string
-  RegionTypes: string
-  RegionTypesCode: string
-  SettlementTypeCode: string
-  StreetsAvailability: boolean
-  Warehouses: number
-}
-
-interface MailOfficesProps {
-  city: string
-  mail: string
-  onSetDeliveryInfo: (inputType: 'city' | 'mail', value: string) => void
 }

@@ -15,7 +15,7 @@ const Sidebar = async () => {
   const user = await profileByToken({ params: { token: token!.value } }).then(res => res.data)
 
   const navItams: NavItems = [
-    { title: 'About Me', link: '/profile', icon: userIcon },
+    { title: 'About Me', link: `/profile/${user._id ?? '../'}`, icon: userIcon },
     { title: 'Liked List', link: '/profile/liked', icon: heardIcon },
     { title: 'User Orders', link: '/profile/orders', icon: orderIcon, role: 'Admin' },
     { title: 'New Product', link: '/profile/create', icon: plusIcon },

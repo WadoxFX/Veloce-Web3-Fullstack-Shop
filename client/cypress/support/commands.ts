@@ -14,6 +14,7 @@ Cypress.Commands.add('signup', user => {
 
 Cypress.Commands.add('login', (email: string, password: string) => {
   cy.intercept('/auth/login').as('ReqLogin')
+  cy.intercept('/auth/profile').as('ReqProfile')
 
   cy.visit('/login')
   cy.url().should('include', '/login')
@@ -22,6 +23,7 @@ Cypress.Commands.add('login', (email: string, password: string) => {
   cy.get('[data-test-id="loginButton"]').click()
 
   cy.wait('@ReqLogin').then(xhr => expect(xhr.response?.statusCode).to.eq(200))
+  cy.wait('@ReqProfile').then(xhr => expect(xhr.response?.statusCode).to.eq(200))
   cy.url().should('include', '/')
   cy.getCookie('token').should('exist')
 })

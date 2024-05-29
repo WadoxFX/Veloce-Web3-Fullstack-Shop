@@ -9,7 +9,6 @@ import type { TPaymentSchema } from '@/@types/zod'
 import { paymentSchema } from '@/@types/zod'
 import { createNewOrder } from '@/api/orders'
 import { calcSum } from '@/components/calcSum'
-import MailOffices from '@/components/mailOffices/MailOffices'
 import { orderPrice } from '@/components/orderPrice'
 import { Button, Input } from '@/components/ui'
 import shoppingABI from '@/contracts/Abi/shoppingABI.json'
@@ -38,7 +37,6 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ userData, rate }) => {
     register,
     handleSubmit,
     watch,
-    setValue,
     formState: { errors },
   } = useForm<TPaymentSchema>({
     resolver: zodResolver(paymentSchema),
@@ -79,16 +77,13 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ userData, rate }) => {
     }
   }
 
-  const onSetDeliveryInfo = (inputType: 'city' | 'mail', value: string) =>
-    setValue(inputType, value)
-
   const onSubmit = handleSubmit(async data => {
     if (products.length) {
       setLoading(true)
 
       try {
         if (method === 'MetaMask') await pay()
-        const id = method === 'MetaMask' ? await contract?.uuid() : null
+        const id = await contract?.uuid()
 
         const order = await createNewOrder({
           params: {
@@ -139,7 +134,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ userData, rate }) => {
         <Input
           name='phone'
           placeholder='Phone*'
-          defaultValue={userData?.infos?.phone}
+          defaultValue={userData?.infos.phone}
           error={errors.phone?.message}
           register={register}
         />
@@ -168,14 +163,14 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ userData, rate }) => {
             <Input
               name='city'
               placeholder='City*'
-              defaultValue={userData?.infos?.city}
+              defaultValue={userData?.infos.city}
               error={errors.city?.message}
               register={register}
             />
             <Input
-              name='mail'
-              placeholder='Mail number*'
-              error={errors.mail?.message}
+              name='post'
+              placeholder='Post*'
+              error={errors.post?.message}
               register={register}
             />
           </div>
@@ -207,14 +202,14 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ userData, rate }) => {
             <Input
               name='city'
               placeholder='City*'
-              defaultValue={userData?.infos?.city}
+              defaultValue={userData?.infos.city}
               error={errors.city?.message}
               register={register}
             />
             <Input
-              name='mail'
-              placeholder='Mail number*'
-              error={errors.mail?.message}
+              name='post'
+              placeholder='Post*'
+              error={errors.post?.message}
               register={register}
             />
           </div>
@@ -229,13 +224,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ userData, rate }) => {
           </Button>
         </div>
       )}
-
       <ViewNewOrder loading={loading} order={order} />
-      <MailOffices
-        city={watch('city')}
-        mail={watch('mail')}
-        onSetDeliveryInfo={onSetDeliveryInfo}
-      />
     </form>
   )
 }

@@ -3,7 +3,7 @@ export class OrderDto {
   orderId?: string
   phone: string
   city: string
-  mail: string
+  post: string
   price: number
   surname: string
   username: string

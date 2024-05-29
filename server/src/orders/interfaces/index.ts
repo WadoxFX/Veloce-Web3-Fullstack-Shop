@@ -4,9 +4,9 @@ export interface MailOrder {
   productIds: string[]
   paid: boolean
   city: string
-  mail: string
   method: string
   price: number
+  post: string
   buyer: Buyer
   createdAt: Date
 }
@@ -15,9 +15,9 @@ export interface ContractOrder {
   productIds: string[]
   paid: boolean
   city: string
-  mail: string
   method: string
   price: number
+  post: string
   address: string
   orderId: number
   buyer: Buyer

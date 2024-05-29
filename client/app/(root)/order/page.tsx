@@ -98,7 +98,6 @@ const Order = () => {
                 <div>Proce: ${order.price}</div>
                 <div>Count: {order.productIds.length}</div>
                 <div>Status: {order.paid ? 'Paid' : 'Not paid'}</div>
-                <div>Phone: {order.buyer.phone}</div>
                 {order.address && <div>Buyer Address: {order.address}</div>}
               </div>
 
@@ -110,7 +109,7 @@ const Order = () => {
                 </div>
 
                 <div>City: {order.city}</div>
-                <div>Mail: №{order.mail}</div>
+                <div>Post: #{order.post}</div>
               </div>
             </div>
           </div>

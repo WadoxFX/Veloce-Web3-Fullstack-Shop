@@ -10,6 +10,7 @@ describe('Log In', () => {
 
     cy.visit('/login')
     cy.intercept('/auth/login').as('ReqLogin')
+    cy.intercept('/auth/profile').as('ReqProfile')
   })
 
   it('Filling out data and logging in', () => {
@@ -19,6 +20,7 @@ describe('Log In', () => {
     cy.get('[data-test-id="loginButton"]').click()
 
     cy.wait('@ReqLogin').then(xhr => expect(xhr.response?.statusCode).to.eq(200))
+    cy.wait('@ReqProfile').then(xhr => expect(xhr.response?.statusCode).to.eq(200))
     cy.url().should('include', '/')
     cy.getCookie('token').should('exist')
   })
