@@ -13,8 +13,6 @@
 /.next/
 /out/
 
-/contracts/*
-!/contracts/Shopping.sol
 
 # production
 /build
